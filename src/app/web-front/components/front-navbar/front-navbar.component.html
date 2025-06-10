@@ -1,19 +1,32 @@
 <div
-  class="navbar bg-accent shadow-sm font-merriweather h-25 fixed top-0 left-0 w-full z-50"
+  class="navbar bg-accent shadow-sm font-merriweather h-25 fixed top-0 left-0 w-full z-50 text-base-content"
 >
   <div class="navbar-start justify-center">
-    <ul class="menu menu-horizontal gap-5">
+    <ul class="menu menu-horizontal gap-5 text-xl">
       <li>
-        <a routerLink="/about">Nosotros</a>
+        <a
+          class="hover:underline"
+          routerLink="/about"
+          routerLinkActive="text-primary underline"
+          >Nosotros</a
+        >
       </li>
-      <li><a routerLink="/events">Eventos</a></li>
+      <li>
+        <a
+          class="hover:underline"
+          routerLink="/about"
+          routerLinkActive="text-primary underline"
+          routerLink="/events"
+          >Eventos</a
+        >
+      </li>
     </ul>
   </div>
   <div class="navbar-center hidden sm:flex w-50 h-20 relative">
     <a
       class="block w-full h-full relative focus:outline-none"
       (click)="navigateHome()"
-      aria-label="Ir a inicio"
+      aria-label="Inicio"
       style="cursor: pointer"
     >
       <svg
@@ -24,8 +37,8 @@
         xmlns="http://www.w3.org/2000/svg"
         class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-20"
         [ngClass]="{
+          'animate-normal': !isTitleFullScreen(),
           'animate-scale-center': isTitleFullScreen(),
-          'animate-normal': !isTitleFullScreen()
         }"
       >
         <path
@@ -44,9 +57,25 @@
     </a>
   </div>
   <div class="navbar-end justify-center">
-    <ul class="menu menu-horizontal gap-5">
-      <li><a routerLink="/menu">Menú</a></li>
-      <li><a routerLink="/reservations">Reservas</a></li>
+    <ul class="menu menu-horizontal gap-5 text-xl">
+      <li>
+        <a
+          class="hover:underline"
+          routerLink="/about"
+          routerLinkActive="text-primary underline"
+          routerLink="/menu"
+          >Menú</a
+        >
+      </li>
+      <li>
+        <a
+          class="hover:underline"
+          routerLink="/about"
+          routerLinkActive="text-primary underline"
+          routerLink="/reservations"
+          >Reservas</a
+        >
+      </li>
     </ul>
   </div>
 </div>

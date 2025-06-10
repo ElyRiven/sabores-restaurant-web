@@ -1,11 +1,16 @@
 import { NgClass } from '@angular/common';
 import { Component, inject, signal, computed } from '@angular/core';
-import { Router, RouterLink, NavigationEnd } from '@angular/router';
+import {
+  Router,
+  RouterLink,
+  NavigationEnd,
+  RouterLinkActive,
+} from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
   selector: 'front-navbar',
-  imports: [RouterLink, NgClass],
+  imports: [RouterLink, RouterLinkActive, NgClass],
   templateUrl: './front-navbar.component.html',
 })
 export class FrontNavbarComponent {
