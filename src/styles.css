@@ -27,6 +27,36 @@
   --font-merriweather: merriweather, "sans-serif";
   --font-jakarta: jakarta, "sans-serif";
   --font-lobster: lobster, "sans-serif";
+
+  --animate-scale-center: scale-up-center 0.8s
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  --animate-normal: scale-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+  @keyframes scale-up-center {
+    0% {
+      color: oklch(0.6846 0.2063 37.64);
+      transform: translateY(0) scale(1);
+      transform-origin: 50% 0%;
+    }
+    100% {
+      color: oklch(100% 0 0);
+      transform: translateY(50vh) scale(3);
+      transform-origin: 50% 0%;
+    }
+  }
+
+  @keyframes scale-down {
+    0% {
+      color: oklch(100% 0 0);
+      transform: translateY(50vh) scale(3);
+      transform-origin: 50% 0%;
+    }
+    100% {
+      color: oklch(0.6846 0.2063 37.64);
+      transform: translateY(0) scale(1);
+      transform-origin: 50% 0%;
+    }
+  }
 }
 
 /** DaisyUI Custon Theme Configurations */
