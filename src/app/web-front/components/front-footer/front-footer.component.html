@@ -1,59 +1,215 @@
-<footer
-  class="footer footer-horizontal footer-center bg-accent text-base-content rounded p-10"
->
-  <nav class="grid grid-flow-col gap-4">
-    <a class="link link-hover">About us</a>
-    <a class="link link-hover">Contact</a>
-    <a class="link link-hover">Jobs</a>
-    <a class="link link-hover">Press kit</a>
-  </nav>
-  <nav>
-    <div class="grid grid-flow-col gap-4">
-      <a>
+<footer class="bg-accent p-10">
+  <!-- Cards de información -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
+    <!-- Dirección -->
+    <div
+      class="flex items-center justify-center mx-auto md:items-start md:justify-start gap-3"
+    >
+      <div class="flex items-start pt-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width="30"
+          height="30"
           viewBox="0 0 24 24"
-          class="fill-current"
+          fill="currentColor"
+          class="text-primary"
         >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path
-            d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
-          ></path>
+            d="M18.364 4.636a9 9 0 0 1 .203 12.519l-.203 .21l-4.243 4.242a3 3 0 0 1 -4.097 .135l-.144 -.135l-4.244 -4.243a9 9 0 0 1 12.728 -12.728zm-6.364 3.364a3 3 0 1 0 0 6a3 3 0 0 0 0 -6z"
+          />
         </svg>
-      </a>
-      <a>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          class="fill-current"
+      </div>
+      <div class="flex flex-col gap-2">
+        <span class="font-bold text-lg text-base-content leading-tight"
+          >Dirección</span
         >
-          <path
-            d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"
-          ></path>
-        </svg>
-      </a>
-      <a>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          class="fill-current"
+        <span class="text-sm text-left text-secondary-content leading-tight"
+          >Av. ABC1234578799 y Calle<br />ASDNCHSHSGAIK</span
         >
-          <path
-            d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
-          ></path>
-        </svg>
-      </a>
+      </div>
     </div>
-  </nav>
-  <aside>
-    <p>
-      E Copyright © new Date().getFullYear() - All right reserved by ACM
-      Industries Ltd
-    </p>
-  </aside>
+    <!-- Contacto -->
+    <div
+      class="flex items-center justify-center mx-auto md:items-start md:justify-start gap-3"
+    >
+      <div class="flex items-start pt-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="text-primary"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path
+            d="M9 3a1 1 0 0 1 .877 .519l.051 .11l2 5a1 1 0 0 1 -.313 1.16l-.1 .068l-1.674 1.004l.063 .103a10 10 0 0 0 3.132 3.132l.102 .062l1.005 -1.672a1 1 0 0 1 1.113 -.453l.115 .039l5 2a1 1 0 0 1 .622 .807l.007 .121v4c0 1.657 -1.343 3 -3.06 2.998c-8.579 -.521 -15.418 -7.36 -15.94 -15.998a3 3 0 0 1 2.824 -2.995l.176 -.005h4z"
+          />
+        </svg>
+      </div>
+      <div class="flex flex-col gap-2">
+        <span class="font-bold text-lg text-base-content leading-tight"
+          >Contacto</span
+        >
+        <span class="text-sm text-left text-secondary-content leading-tight"
+          >Celular: 0987654321<br />Mail: sabores&#64;gmail.com</span
+        >
+      </div>
+    </div>
+    <!-- Horarios -->
+    <div
+      class="flex items-center justify-center mx-auto md:items-start md:justify-start gap-3"
+    >
+      <div class="flex items-start pt-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="text-primary"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path
+            d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-5 2.66a1 1 0 0 0 -.993 .883l-.007 .117v5l.009 .131a1 1 0 0 0 .197 .477l.087 .1l3 3l.094 .082a1 1 0 0 0 1.226 0l.094 -.083l.083 -.094a1 1 0 0 0 0 -1.226l-.083 -.094l-2.707 -2.708v-4.585l-.007 -.117a1 1 0 0 0 -.993 -.883z"
+          />
+        </svg>
+      </div>
+      <div class="flex flex-col gap-2">
+        <span class="font-bold text-lg text-base-content leading-tight"
+          >Horarios</span
+        >
+        <span class="text-sm text-left text-secondary-content leading-tight"
+          >Lun - Sáb: 10am - 20pm<br />Dom: Cerrado</span
+        >
+      </div>
+    </div>
+    <!-- Síguenos -->
+    <div
+      class="flex items-center justify-center mx-auto md:items-start md:justify-start gap-3"
+    >
+      <span class="font-bold text-lg text-base-content mb-2">Síguenos</span>
+      <div class="flex gap-3">
+        <a
+          href="#"
+          class="border border-primary rounded-full p-2 hover:bg-primary hover:text-white transition-colors"
+          aria-label="Facebook"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="#FF6B2C"
+              stroke-width="2"
+              fill="none"
+            />
+            <path
+              d="M10 17v-5H8v-2h2V8.5A2.5 2.5 0 0 1 12.5 6H15v2h-1.5A.5.5 0 0 0 13 8.5V10h2l-.5 2H13v5h-3z"
+              fill="#FF6B2C"
+            />
+          </svg>
+        </a>
+        <a
+          href="#"
+          class="border border-primary rounded-full p-2 hover:bg-primary hover:text-white transition-colors"
+          aria-label="Twitter"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="#FF6B2C"
+              stroke-width="2"
+              fill="none"
+            />
+            <path
+              d="M8 15c6 0 9-5 9-9 0-.14 0-.28-.01-.42A6.48 6.48 0 0 0 19 3.5a6.5 6.5 0 0 1-1.89.52A3.28 3.28 0 0 0 18.5 2a6.56 6.56 0 0 1-2.08.8A3.28 3.28 0 0 0 12 2c-1.8 0-3.28 1.47-3.28 3.28 0 .26.03.52.08.76A9.32 9.32 0 0 1 3 2.5a3.28 3.28 0 0 0 1.02 4.37A3.28 3.28 0 0 1 2.64 6v.04c0 1.58 1.12 2.9 2.62 3.2a3.28 3.28 0 0 1-1.48.06c.42 1.3 1.64 2.25 3.08 2.28A6.57 6.57 0 0 1 2 17.5c.46.3.98.48 1.54.48"
+              fill="#FF6B2C"
+            />
+          </svg>
+        </a>
+        <a
+          href="#"
+          class="border border-primary rounded-full p-2 hover:bg-primary hover:text-white transition-colors"
+          aria-label="Instagram"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="#FF6B2C"
+              stroke-width="2"
+              fill="none"
+            />
+            <rect x="8" y="8" width="8" height="8" rx="2" fill="#FF6B2C" />
+            <circle cx="16.5" cy="7.5" r="1.5" fill="#FFF5E1" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Divisor -->
+  <hr class="border-t-2 border-primary my-4" />
+  <!-- Copyright y Diseño -->
+  <div class="flex flex-col items-center gap-1">
+    <span class="text-md text-primary flex items-center gap-1">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="icon icon-tabler icons-tabler-filled icon-tabler-copyright"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-2.34 5.659a4.016 4.016 0 0 0 -5.543 .23a3.993 3.993 0 0 0 0 5.542a4.016 4.016 0 0 0 5.543 .23a1 1 0 0 0 -1.32 -1.502c-.81 .711 -2.035 .66 -2.783 -.116a1.993 1.993 0 0 1 0 -2.766a2.016 2.016 0 0 1 2.783 -.116a1 1 0 0 0 1.32 -1.501z"
+        />
+      </svg>
+      Copyright <span class="font-bold">Sabores - Restaurant</span>
+    </span>
+    <span class="text-m text-primary flex items-center gap-1 flex-wrap"
+      >Designed with
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="text-pink-600"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z"
+        />
+      </svg>
+      by
+      <a href="#" class="underline hover:text-base-content">Ellie</a></span
+    >
+  </div>
 </footer>
