@@ -17,7 +17,9 @@ export class FrontNavbarComponent {
   #router = inject(Router);
 
   currentPath = signal(this.#router.url);
-  hasScrolled = signal(false);
+  hasScrolled = signal<boolean>(false);
+
+  isMobileMenuOpen = false;
 
   isTitleFullScreen = computed(() => {
     return (
@@ -38,7 +40,7 @@ export class FrontNavbarComponent {
     });
   }
 
-  navigateHome() {
-    this.#router.navigateByUrl('/');
+  mobileMenuInteraction() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 }
