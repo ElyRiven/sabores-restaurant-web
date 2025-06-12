@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import WebFrontLayoutComponent from './layouts/web-front-layout/web-front-layout.component';
 import { PlaceholderComponent } from './components/placeholder.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 export const WebFrontRoutes: Routes = [
   {
@@ -10,7 +11,7 @@ export const WebFrontRoutes: Routes = [
       {
         path: '',
         // TODO: Create components for each route
-        component: PlaceholderComponent,
+        component: HomePageComponent,
       },
       {
         path: 'menu',
