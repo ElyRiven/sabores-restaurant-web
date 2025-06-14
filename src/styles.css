@@ -1,3 +1,13 @@
+/** Swiper Custom Styles */
+.swiper-button-prev,
+.swiper-button-next {
+  color: oklch(100% 0 0) !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: oklch(0.6846 0.2063 37.64) !important;
+}
+
 /** Tailwind Configurations */
 @import "tailwindcss";
 

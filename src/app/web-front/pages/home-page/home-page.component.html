@@ -146,3 +146,76 @@
   </div>
 </div>
 <!-- End Description Section -->
+<!-- Entries Carousel -->
+<div class="py-2 bg-accent w-full h-full text-primary-content md:py-5 lg:py-10">
+  <!-- Slider main container -->
+  <div class="swiper w-full h-85" #swiperDiv>
+    <!-- Navigation Buttons -->
+    <!-- ! Los botones personalizados funcionan colocandolos aquí. Si están debajo de las slides, no aparecen ni te dejan interactuar -->
+    <div
+      class="swiper-button-prev-custom absolute top-25 -left-2 flex items-center justify-center w-10 h-10 rounded-full bg-primary z-50"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="text-primary-content"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M5 12l14 0" />
+        <path d="M5 12l6 6" />
+        <path d="M5 12l6 -6" />
+      </svg>
+    </div>
+    <div
+      class="swiper-button-next-custom absolute flex items-center justify-center w-10 h-10 rounded-full bg-primary z-50"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="text-primary-content"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M5 12l14 0" />
+        <path d="M13 18l6 -6" />
+        <path d="M13 6l6 6" />
+      </svg>
+    </div>
+
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper h-70">
+      <!-- Slides -->
+      @for (entry of entries; track $index) {
+      <div class="swiper-slide flex flex-col items-center shadow-lg w-88">
+        <img
+          [src]="entry.image"
+          alt="Plato"
+          class="w-88 h-50 object-cover mx-auto mb-4"
+        />
+        <h2 class="text-base-content font-bold text-lg mb-2 text-center">
+          {{ entry.name | titlecase }}
+        </h2>
+        <p class="text-secondary-content text-lg text-center">
+          {{ entry.description | titlecase }}
+        </p>
+      </div>
+      }
+    </div>
+    <!-- Pagination Bullets (Default) -->
+    <div class="swiper-pagination"></div>
+  </div>
+</div>
+<!-- End Entries Carousel -->

@@ -5,7 +5,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      //"@fonts": ["./public/assets/fonts/*"]
+      "@front/*": ["./src/app/web-front/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
