@@ -8,11 +8,13 @@ import {
 } from '@angular/core';
 
 import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+import 'swiper/css/effect-coverflow';
 
 import { MenuService } from '@front/services/menu.service';
 
@@ -41,16 +43,32 @@ export class HomePageComponent implements AfterViewInit {
       // Optional parameters
       direction: 'horizontal',
       loop: true,
-      slidesPerView: 3,
+      slidesPerView: 1,
       centeredSlides: true,
       spaceBetween: 20,
+      grabCursor: true,
+      effect: 'coverflow',
 
-      modules: [Navigation, Pagination],
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+      },
+
+      breakpoints: {
+        768: {
+          slidesPerView: 3,
+        },
+      },
+
+      modules: [Navigation, Pagination, EffectCoverflow],
 
       // If we need pagination
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
+        dynamicBullets: true,
       },
 
       // Navigation arrows
