@@ -17,10 +17,11 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/effect-coverflow';
 
 import { MenuService } from '@front/services/menu.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
-  imports: [TitleCasePipe],
+  imports: [TitleCasePipe, RouterLink],
   templateUrl: './home-page.component.html',
 })
 export class HomePageComponent implements AfterViewInit {

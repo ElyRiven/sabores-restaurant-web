@@ -147,7 +147,7 @@
 </div>
 <!-- End Description Section -->
 <!-- Entries Carousel -->
-<div class="py-7 bg-accent w-full h-88 text-primary-content lg:py-10">
+<div class="py-7 bg-accent w-full h-88 mt-15 text-primary-content lg:py-10">
   <div class="px-12 relative md:px-22">
     <!-- Slider main container -->
     <div class="swiper" #swiperDiv>
@@ -177,8 +177,8 @@
       <div class="swiper-pagination"></div>
     </div>
     <!-- Navigation Buttons -->
-    <div
-      class="swiper-button-prev-custom absolute top-1/2 left-1 md:left-8 transform -translate-y-1/2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-primary"
+    <a
+      class="swiper-button-prev-custom absolute top-1/2 left-1 md:left-8 transform -translate-y-1/2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-primary cursor-pointer"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -197,9 +197,9 @@
         <path d="M5 12l6 6" />
         <path d="M5 12l6 -6" />
       </svg>
-    </div>
-    <div
-      class="swiper-button-next-custom absolute top-1/2 right-1 md:right-8 transform -translate-y-1/2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-primary"
+    </a>
+    <a
+      class="swiper-button-next-custom absolute top-1/2 right-1 md:right-8 transform -translate-y-1/2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-primary cursor-pointer"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -218,7 +218,38 @@
         <path d="M13 18l6 -6" />
         <path d="M13 6l6 6" />
       </svg>
-    </div>
+    </a>
   </div>
 </div>
 <!-- End Entries Carousel -->
+<!-- Reservation Section -->
+<div
+  class="flex items-center justify-center w-full p-4 overflow-hidden md:p-10 lg:p-20"
+>
+  <div class="relative flex items-center justify-center w-315 h-150">
+    <img
+      class="w-full h-full object-cover"
+      src="/assets/photos/front/reservation-hero.webp"
+      alt="Reservaciones"
+    />
+    <div class="absolute inset-0 bg-base-content opacity-50"></div>
+  </div>
+  <div class="absolute flex flex-col items-center p-6">
+    <h2 class="font-lobster text-6xl text-primary-content mt-2">
+      Reservaciones
+    </h2>
+    <p
+      class="font-jakarta text-2xl text-primary-content text-center drop-shadow my-20"
+    >
+      Disfruta de una experiencia única de sabores<br />
+      y excelencia en servicio con nosotros
+    </p>
+    <button
+      routerLink="/reservations"
+      class="btn btn-primary bg-primary-content text-base-content font-jakarta px-6 py-2 mb-2 cursor-pointer rounded-full shadow hover:bg-primary hover:text-primary-content"
+    >
+      Reservar
+    </button>
+  </div>
+</div>
+<!-- End Reservation Section -->
