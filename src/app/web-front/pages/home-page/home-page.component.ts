@@ -21,13 +21,13 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
-  imports: [TitleCasePipe, RouterLink],
+  imports: [RouterLink],
   templateUrl: './home-page.component.html',
 })
 export class HomePageComponent implements AfterViewInit {
   #menuService = inject(MenuService);
 
-  public entries = this.#menuService.getEntries();
+  public entries = this.#menuService.getPlatesByCategory('entry');
 
   public swiper: Swiper | undefined = undefined;
   public swiperDiv = viewChild.required<ElementRef>('swiperDiv');
