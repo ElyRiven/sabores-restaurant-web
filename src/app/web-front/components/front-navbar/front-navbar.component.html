@@ -124,11 +124,38 @@
     <!-- Modal deslizante -->
     <div class="fixed right-0 top-0 h-full w-64 bg-accent text-base-content">
       <nav class="mt-16 flex flex-col gap-6 px-8">
-        <a routerLink="/">Inicio</a>
-        <a routerLink="/about">Nosotros</a>
-        <a routerLink="/events">Eventos</a>
-        <a routerLink="/menu">Menú</a>
-        <a routerLink="/reservations">Reservas</a>
+        <a
+          routerLink="/"
+          [ngClass]="{ 'text-primary underline': currentPath() === '/' }"
+          (click)="mobileMenuInteraction()"
+          >Inicio</a
+        >
+        <a
+          routerLink="/about"
+          [ngClass]="{ 'text-primary underline': currentPath() === '/about' }"
+          (click)="mobileMenuInteraction()"
+          >Nosotros</a
+        >
+        <a
+          routerLink="/events"
+          [ngClass]="{ 'text-primary underline': currentPath() === '/events' }"
+          (click)="mobileMenuInteraction()"
+          >Eventos</a
+        >
+        <a
+          routerLink="/menu"
+          [ngClass]="{ 'text-primary underline': currentPath() === '/menu' }"
+          (click)="mobileMenuInteraction()"
+          >Menú</a
+        >
+        <a
+          routerLink="/reservations"
+          [ngClass]="{
+            'text-primary underline': currentPath() === '/reservations'
+          }"
+          (click)="mobileMenuInteraction()"
+          >Reservas</a
+        >
       </nav>
     </div>
   </div>
