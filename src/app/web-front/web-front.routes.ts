@@ -4,6 +4,7 @@ import { PlaceholderComponent } from './components/placeholder.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MenuPageComponent } from './pages/menu-page/menu-page.component';
 import { ReservationsPageComponent } from './pages/reservations-page/reservations-page.component';
+import { EventsPageComponent } from './pages/events-page/events-page.component';
 
 export const WebFrontRoutes: Routes = [
   {
@@ -24,8 +25,7 @@ export const WebFrontRoutes: Routes = [
       },
       {
         path: 'events',
-        // TODO: Create components for each route
-        component: PlaceholderComponent,
+        component: EventsPageComponent,
       },
       {
         path: 'about',
