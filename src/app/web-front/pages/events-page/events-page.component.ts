@@ -22,5 +22,7 @@ export class EventsPageComponent implements OnInit {
 
   onCategoryChange(category: Category) {
     this.selectedCategory.set(category);
+
+    this.eventsArray.set(this.#eventService.getEventsByCategory(category));
   }
 }
