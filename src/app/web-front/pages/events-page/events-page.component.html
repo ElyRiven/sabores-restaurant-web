@@ -36,3 +36,39 @@
   </div>
 </div>
 <!-- End Description Section -->
+<!-- Category Selection -->
+<div class="flex justify-center mx-4 my-4 md:mx-10 md:justify-start lg:mx-20">
+  <div class="dropdown font-jakarta">
+    <div tabindex="0" role="button" class="btn btn-primary m-1">
+      {{ selectedCategory() | categoryTitle }}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M6 9l6 6l6 -6" />
+      </svg>
+    </div>
+    <ul
+      tabindex="0"
+      class="dropdown-content menu bg-base-100 rounded-box z-1 w-full p-2 shadow-sm"
+    >
+      @for (category of categoryList; track $index) {
+      <li class="text-secondary-content">
+        <a (click)="onCategoryChange(category)">{{
+          category | categoryTitle
+        }}</a>
+      </li>
+      }
+    </ul>
+  </div>
+</div>
+<!-- End Category Selection -->
