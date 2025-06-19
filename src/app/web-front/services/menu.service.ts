@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Plate } from '@front/interfaces/plate.interface';
+import { MenuCategory, Plate } from '@front/interfaces/plate.interface';
 
 const menuArray: Plate[] = [
   {
@@ -133,7 +133,7 @@ export class MenuService {
     return menuArray;
   }
 
-  getPlatesByCategory(category: string): Plate[] {
+  getPlatesByCategory(category: MenuCategory): Plate[] {
     return menuArray.filter((plate) => plate.category === category);
   }
 }
