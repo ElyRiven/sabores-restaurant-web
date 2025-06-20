@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   inject,
@@ -15,14 +16,15 @@ import { Autoplay, FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import { Address } from '@front/interfaces/address.interface';
 import { AddressService } from '@front/services/address.service';
-import { NgClass } from '@angular/common';
+
+import mapboxgl, { LngLat } from 'mapbox-gl';
 
 @Component({
   selector: 'app-about-page',
   imports: [],
   templateUrl: './about-page.component.html',
 })
-export class AboutPageComponent implements OnInit {
+export class AboutPageComponent implements OnInit, AfterViewInit {
   #chefService = inject(ChefService);
   #addressService = inject(AddressService);
 
@@ -41,7 +43,10 @@ export class AboutPageComponent implements OnInit {
   public selectedAddress = signal<Address | undefined>(undefined);
 
   public swiper: Swiper | undefined = undefined;
+  public map = signal<mapboxgl.Map | undefined>(undefined);
+
   public swiperDiv = viewChild.required<ElementRef>('swiperDiv');
+  public mapDiv = viewChild.required<ElementRef>('mapDiv');
 
   ngOnInit(): void {
     const defaultAddress: Address = this.#addressService.getAddressById(1);
@@ -52,6 +57,18 @@ export class AboutPageComponent implements OnInit {
     this.selectedAddress.set(defaultAddress);
 
     this.swiperInit();
+  }
+
+  ngAfterViewInit() {
+    if (!this.mapDiv()?.nativeElement) return;
+
+    const element = this.mapDiv().nativeElement;
+
+    const map = new mapboxgl.Map({
+      container: element,
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [0, 0],
+    });
   }
 
   swiperInit() {
