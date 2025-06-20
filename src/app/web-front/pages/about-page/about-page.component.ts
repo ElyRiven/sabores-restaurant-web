@@ -3,6 +3,7 @@ import {
   ElementRef,
   inject,
   OnInit,
+  signal,
   viewChild,
 } from '@angular/core';
 import { Chef } from '@front/interfaces/chef.interface';
@@ -12,6 +13,9 @@ import Swiper from 'swiper';
 import { Autoplay, FreeMode } from 'swiper/modules';
 
 import 'swiper/css';
+import { Address } from '@front/interfaces/address.interface';
+import { AddressService } from '@front/services/address.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-about-page',
@@ -20,6 +24,7 @@ import 'swiper/css';
 })
 export class AboutPageComponent implements OnInit {
   #chefService = inject(ChefService);
+  #addressService = inject(AddressService);
 
   public chefsArray: Chef[] | undefined = undefined;
   public aboutImages: string[] = [
@@ -33,11 +38,18 @@ export class AboutPageComponent implements OnInit {
     '/assets/photos/front/misc10.webp',
   ];
 
+  public selectedAddress = signal<Address | undefined>(undefined);
+
   public swiper: Swiper | undefined = undefined;
   public swiperDiv = viewChild.required<ElementRef>('swiperDiv');
 
   ngOnInit(): void {
+    const defaultAddress: Address = this.#addressService.getAddressById(1);
+
+    console.log({ defaultAddress });
+
     this.chefsArray = this.#chefService.getChefs();
+    this.selectedAddress.set(defaultAddress);
 
     this.swiperInit();
   }
@@ -70,5 +82,11 @@ export class AboutPageComponent implements OnInit {
 
       modules: [Autoplay, FreeMode],
     });
+  }
+
+  onAddressChange(id: number) {
+    const newAddress = this.#addressService.getAddressById(id);
+
+    this.selectedAddress.set(newAddress);
   }
 }
