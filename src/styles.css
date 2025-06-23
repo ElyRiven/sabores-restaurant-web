@@ -1,1 +1,184 @@
-/* You can add global styles to this file, and also import other style files */
+/** Swiper Custom Styles */
+.swiper-button-prev,
+.swiper-button-next {
+  color: oklch(100% 0 0) !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: oklch(0.6846 0.2063 37.64) !important;
+}
+
+/** Tailwind Configurations */
+@import "tailwindcss";
+
+/** Merriweather font configuration */
+@font-face {
+  font-family: merriweather;
+  src: url("../public/assets/fonts/merriweather/Merriweather-VariableFont_opsz,wdth,wght.ttf")
+    format("woff2");
+}
+
+/** Plus Jakarta Sans font configuration */
+@font-face {
+  font-family: jakarta;
+  src: url("../public/assets/fonts/plus-jakarta-sans/PlusJakartaSans-VariableFont_wght.ttf")
+    format("woff2");
+}
+
+/** Lobster Two font configuration */
+@font-face {
+  font-family: lobster;
+  src: url("../public/assets/fonts/lobster-two/LobsterTwo-Regular.ttf")
+    format("woff2");
+}
+
+/** Tailwind Fonts and Animations */
+@theme {
+  --font-merriweather: merriweather, "sans-serif";
+  --font-jakarta: jakarta, "sans-serif";
+  --font-lobster: lobster, "sans-serif";
+
+  --hero-size: calc(100vh - 100px);
+
+  --animate-scale-center: scale-up-center 0.8s
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  --animate-normal: scale-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  --animate-scale-mobile: scale-up-mobile 0.8s
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  --animate-normal-mobile: scale-down-mobile 0.8s
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+  --animate-slidein-right: slide-in-right 0.5s
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  --animate-slideout-right: slide-out-right 1s
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+  --animate-fadeIn: fadeIn 0.5s ease-in-out;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scale-up-center {
+    0% {
+      color: oklch(0.6846 0.2063 37.64);
+      transform: translateY(0) scale(1);
+      transform-origin: 50% 0%;
+    }
+    100% {
+      color: oklch(100% 0 0);
+      transform: translateY(50vh) scale(3);
+      transform-origin: 50% 0%;
+    }
+  }
+
+  @keyframes scale-down {
+    0% {
+      color: oklch(100% 0 0);
+      transform: translateY(50vh) scale(3);
+      transform-origin: 50% 0%;
+    }
+    100% {
+      color: oklch(0.6846 0.2063 37.64);
+      transform: translateY(0) scale(1);
+      transform-origin: 50% 0%;
+    }
+  }
+
+  @keyframes scale-up-mobile {
+    0% {
+      color: oklch(0.6846 0.2063 37.64);
+      transform: translateY(0) scale(1);
+      transform-origin: 50% 0%;
+    }
+    100% {
+      color: oklch(100% 0 0);
+      transform: translate(calc(100vw / 2 - 50%), 50vh) scale(2.5);
+      transform-origin: 50% 0%;
+    }
+  }
+
+  @keyframes scale-down-mobile {
+    0% {
+      color: oklch(100% 0 0);
+      transform: translate(calc(100vw / 2 - 50%), 50vh) scale(2.5);
+      transform-origin: 50% 0%;
+    }
+    100% {
+      color: oklch(0.6846 0.2063 37.64);
+      transform: translateY(0) scale(1);
+      transform-origin: 50% 0%;
+    }
+  }
+
+  @keyframes slide-in-right {
+    0% {
+      transform: translateX(1000px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-out-right {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(1000px);
+      display: none;
+    }
+  }
+}
+
+/** DaisyUI Custon Theme Configurations */
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "sabores";
+  default: true;
+  prefersdark: true;
+  color-scheme: light;
+
+  /* * Colors of the theme */
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(97% 0 0);
+  --color-base-300: oklch(92% 0 0);
+  --color-base-content: oklch(0.1609 0.021 89.35);
+  --color-primary: oklch(0.6846 0.2063 37.64);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(0.8371 0.1065 75.54);
+  --color-secondary-content: oklch(0.3686 0.0058 78.26);
+  --color-accent: oklch(0.9475 0.0478 90.06);
+  --color-accent-content: oklch(0.1609 0.021 89.35);
+  --color-neutral: oklch(0.8616 0.0608 134.64);
+  --color-neutral-content: oklch(0.1609 0.021 89.35);
+  --color-info: oklch(74% 0.16 232.661);
+  --color-info-content: oklch(0.1609 0.021 89.35);
+  --color-success: oklch(79% 0.209 151.711);
+  --color-success-content: oklch(0.1609 0.021 89.35);
+  --color-warning: oklch(82% 0.189 84.429);
+  --color-warning-content: oklch(0.1609 0.021 89.35);
+  --color-error: oklch(57% 0.245 27.325);
+  --color-error-content: oklch(100% 0 0);
+
+  /* * Border radius */
+  --radius-selector: 2rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+
+  /* * Base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* * Border size */
+  --border: 1px;
+
+  /* * Effects */
+  --depth: 0;
+  --noise: 0;
+}

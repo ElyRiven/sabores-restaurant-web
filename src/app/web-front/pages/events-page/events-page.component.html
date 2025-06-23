@@ -1,0 +1,117 @@
+<!-- Hero Section -->
+<div class="relative w-full h-(--hero-size)">
+  <img
+    class="w-full h-full object-cover object-top"
+    src="/assets/photos/front/event-hero.webp"
+    alt="Home Page Hero"
+  />
+  <div class="absolute inset-0 bg-base-content opacity-60"></div>
+  <div
+    class="relative flex items-center justify-center text-8xl text-primary-content bottom-1/2 md:text-9xl"
+  >
+    <h2 class="font-lobster">Eventos</h2>
+  </div>
+</div>
+<!-- End Hero Section -->
+<!-- Description Section -->
+<div class="relative flex justify-center -mt-30">
+  <div
+    class="flex justify-center w-full h-full bg-accent shadow-lg mx-4 md:mx-10 lg:mx-20 transition-all ease-in-out"
+  >
+    <div
+      class="flex flex-col items-center justify-center text-center py-15 px-4 md:px-20"
+    >
+      <h2
+        class="font-merriweather text-3xl leading-relaxed underline underline-offset-10 mb-10"
+      >
+        Experiencias Únicas
+      </h2>
+      <p class="font-jakarta text-lg">
+        Vive una experiencia única en un ambiente elegante y acogedor. Disfruta
+        de una propuesta gastronómica gourmet, atención y ambiente acogedor,
+        cada momento está diseñado para impresionar y emocionar. Vive ocasiones
+        especiales, celebraciones y encuentros privados con nosotros.
+      </p>
+    </div>
+  </div>
+</div>
+<!-- End Description Section -->
+<!-- Category Selection -->
+<div class="flex justify-center mx-4 my-4 md:mx-10 md:justify-start lg:mx-20">
+  <div class="dropdown font-jakarta">
+    <div tabindex="0" role="button" class="btn btn-primary m-1">
+      {{ selectedCategory() | categoryTitle }}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M6 9l6 6l6 -6" />
+      </svg>
+    </div>
+    <ul
+      tabindex="0"
+      class="dropdown-content menu bg-base-100 rounded-box z-1 w-full p-2 shadow-sm"
+    >
+      @for (category of categoryList; track $index) {
+      <li class="text-secondary-content">
+        <a (click)="onCategoryChange(category)">{{
+          category | categoryTitle
+        }}</a>
+      </li>
+      }
+    </ul>
+  </div>
+</div>
+<!-- End Category Selection -->
+<div
+  class="w-full mx-auto mt-8 px-4 md:px-10 lg:px-20 transition-all ease-in-out"
+>
+  <div
+    class="grid grid-cols-1 gap-6 mb-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+  >
+    <!-- Event Cards -->
+    @for (event of eventsArray(); track $index) {
+    <div
+      class="w-full rounded-xl overflow-hidden shadow bg-cream-50 border border-secondary-content/50 flex flex-col"
+    >
+      <img
+        [src]="event.image"
+        [alt]="event.title"
+        class="w-full h-32 object-cover"
+      />
+      <!-- Contenido -->
+      <div class="flex flex-col flex-1 p-4 bg-accent gap-3">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-merriweather font-bold text-lg">{{ event.title }}</h3>
+        </div>
+        <div class="flex flex-row justify-between">
+          <div class="badge badge-primary">
+            {{ event.category | categoryTitle }}
+          </div>
+          <span class="text-sm text-gray-600">{{
+            event.date | eventDate
+          }}</span>
+        </div>
+        <p class="text-sm text-gray-700">
+          {{ event.description }}
+        </p>
+      </div>
+    </div>
+    }
+    <!--  -->
+    @empty {
+    <div class="w-full col-span-full flex justify-center my-8">
+      <div class="loading loading-spinner text-primary"></div>
+    </div>
+    }
+  </div>
+</div>
