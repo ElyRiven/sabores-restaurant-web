@@ -128,8 +128,6 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
     for (const direction of this.addressArray()!) {
       const lngLat: LngLatLike = [direction.longitude, direction.latitude];
 
-      console.log('marker', lngLat);
-
       const mapboxMarker = new mapboxgl.Marker({
         color: '#fe5d26',
       })
@@ -155,8 +153,6 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
 
   locationChange(id: number) {
     const newAddress = this.#addressService.getAddressById(id);
-
-    console.log({ newAddress });
 
     this.selectedAddress.set(newAddress);
 
