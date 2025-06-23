@@ -2,20 +2,23 @@ import { Injectable } from '@angular/core';
 import { Address } from '@front/interfaces/address.interface';
 
 const addressArray: Address[] = [
+  // quito
   {
     id: 1,
-    latitude: -0.18547102137356256,
-    longitude: -78.48472728337971,
+    latitude: -0.17694597703713247,
+    longitude: -78.48579314094667,
   },
+  // guayaquil
   {
     id: 2,
-    latitude: -2.158863039604382,
-    longitude: -79.8996753022897,
+    latitude: -2.121217737095276,
+    longitude: -79.89386292786222,
   },
+  // cuenca
   {
     id: 3,
-    latitude: -2.8972528788523166,
-    longitude: -79.00486337982943,
+    latitude: -2.8975632632878106,
+    longitude: -79.02249545166758,
   },
 ];
 

@@ -75,9 +75,17 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
 
     const map = new mapboxgl.Map({
       container: element,
-      style: 'mapbox://styles/mapbox/streets-v12',
+      style: 'mapbox://styles/mapbox/standard',
       center: defaultLocation,
-      zoom: 15,
+      zoom: 17,
+
+      scrollZoom: false,
+      boxZoom: false,
+      doubleClickZoom: false,
+      dragPan: false,
+
+      pitch: 60,
+      touchPitch: true,
     });
 
     this.createMarkers(map);
@@ -120,13 +128,15 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
     for (const direction of this.addressArray()!) {
       const lngLat: LngLatLike = [direction.longitude, direction.latitude];
 
+      console.log('marker', lngLat);
+
       const mapboxMarker = new mapboxgl.Marker({
         color: '#fe5d26',
       })
         .setLngLat(lngLat)
         .addTo(map);
 
-      this.markers.update((markers) => [mapboxMarker, ...markers]);
+      this.markers.update((markers) => [...markers, mapboxMarker]);
     }
   }
 
@@ -139,11 +149,14 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
 
     this.map()!.flyTo({
       center: location,
+      zoom: 17,
     });
   }
 
   locationChange(id: number) {
     const newAddress = this.#addressService.getAddressById(id);
+
+    console.log({ newAddress });
 
     this.selectedAddress.set(newAddress);
 
