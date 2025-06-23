@@ -7,17 +7,19 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { Chef } from '@front/interfaces/chef.interface';
-import { ChefService } from '@front/services/chef.service';
 
+import mapboxgl, { LngLatLike, Marker } from 'mapbox-gl';
 import Swiper from 'swiper';
 import { Autoplay, FreeMode } from 'swiper/modules';
-
 import 'swiper/css';
+
+import { Chef } from '@front/interfaces/chef.interface';
+import { ChefService } from '@front/services/chef.service';
 import { Address } from '@front/interfaces/address.interface';
 import { AddressService } from '@front/services/address.service';
+import { environment } from 'src/environments/environment';
 
-import mapboxgl, { LngLat } from 'mapbox-gl';
+mapboxgl.accessToken = environment.mapboxkey;
 
 @Component({
   selector: 'app-about-page',
@@ -40,21 +42,24 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
     '/assets/photos/front/misc10.webp',
   ];
 
-  public selectedAddress = signal<Address | undefined>(undefined);
-
   public swiper: Swiper | undefined = undefined;
+
+  public selectedAddress = signal<Address | undefined>(undefined);
+  public addressArray = signal<Address[] | undefined>(undefined);
   public map = signal<mapboxgl.Map | undefined>(undefined);
+  public markers = signal<Marker[]>([]);
 
   public swiperDiv = viewChild.required<ElementRef>('swiperDiv');
   public mapDiv = viewChild.required<ElementRef>('mapDiv');
 
   ngOnInit(): void {
     const defaultAddress: Address = this.#addressService.getAddressById(1);
-
-    console.log({ defaultAddress });
+    const allAddresses: Address[] = this.#addressService.getAllAddress();
 
     this.chefsArray = this.#chefService.getChefs();
+
     this.selectedAddress.set(defaultAddress);
+    this.addressArray.set(allAddresses);
 
     this.swiperInit();
   }
@@ -63,12 +68,20 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
     if (!this.mapDiv()?.nativeElement) return;
 
     const element = this.mapDiv().nativeElement;
+    const defaultLocation: LngLatLike = [
+      this.selectedAddress()!.longitude,
+      this.selectedAddress()!.latitude,
+    ];
 
     const map = new mapboxgl.Map({
       container: element,
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [0, 0],
+      center: defaultLocation,
+      zoom: 15,
     });
+
+    this.createMarkers(map);
+    this.saveMap(map);
   }
 
   swiperInit() {
@@ -101,9 +114,39 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onAddressChange(id: number) {
+  createMarkers(map: mapboxgl.Map) {
+    if (!this.addressArray()) return;
+
+    for (const direction of this.addressArray()!) {
+      const lngLat: LngLatLike = [direction.longitude, direction.latitude];
+
+      const mapboxMarker = new mapboxgl.Marker({
+        color: '#fe5d26',
+      })
+        .setLngLat(lngLat)
+        .addTo(map);
+
+      this.markers.update((markers) => [mapboxMarker, ...markers]);
+    }
+  }
+
+  saveMap(map: mapboxgl.Map) {
+    this.map.set(map);
+  }
+
+  flyToLocation(location: LngLatLike) {
+    if (!this.map()) return;
+
+    this.map()!.flyTo({
+      center: location,
+    });
+  }
+
+  locationChange(id: number) {
     const newAddress = this.#addressService.getAddressById(id);
 
     this.selectedAddress.set(newAddress);
+
+    this.flyToLocation(this.markers()[id - 1].getLngLat());
   }
 }
