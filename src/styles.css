@@ -1,11 +1,13 @@
 /** Swiper Custom Styles */
-.swiper-button-prev,
-.swiper-button-next {
-  color: oklch(100% 0 0) !important;
-}
-
 .swiper-pagination-bullet-active {
   background-color: oklch(0.6846 0.2063 37.64) !important;
+}
+
+/** Date and Time input styles */
+input[type="date"],
+input[type="time"] {
+  min-height: 44px !important;
+  min-width: 90% !important;
 }
 
 /** Tailwind Configurations */
