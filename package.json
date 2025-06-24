@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "node ./scripts/set-envs.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -19,6 +20,7 @@
     "@angular/router": "^19.2.0",
     "@tailwindcss/postcss": "^4.1.8",
     "daisyui": "^5.0.43",
+    "dotenv": "^16.5.0",
     "mapbox-gl": "^3.13.0",
     "postcss": "^8.5.4",
     "rxjs": "~7.8.0",
