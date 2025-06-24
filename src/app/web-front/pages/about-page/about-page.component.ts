@@ -1,6 +1,7 @@
 import {
-  AfterViewInit,
+  afterNextRender,
   Component,
+  effect,
   ElementRef,
   inject,
   OnInit,
@@ -11,7 +12,6 @@ import {
 import mapboxgl, { LngLatLike, Marker } from 'mapbox-gl';
 import Swiper from 'swiper';
 import { Autoplay, FreeMode } from 'swiper/modules';
-import 'swiper/css';
 
 import { Chef } from '@front/interfaces/chef.interface';
 import { ChefService } from '@front/services/chef.service';
@@ -26,7 +26,7 @@ mapboxgl.accessToken = environment.mapboxkey;
   imports: [],
   templateUrl: './about-page.component.html',
 })
-export class AboutPageComponent implements OnInit, AfterViewInit {
+export class AboutPageComponent implements OnInit {
   #chefService = inject(ChefService);
   #addressService = inject(AddressService);
 
@@ -47,10 +47,11 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
   public selectedAddress = signal<Address | undefined>(undefined);
   public addressArray = signal<Address[] | undefined>(undefined);
   public map = signal<mapboxgl.Map | undefined>(undefined);
+  public isMapCharged = signal<boolean>(false);
   public markers = signal<Marker[]>([]);
 
   public swiperDiv = viewChild.required<ElementRef>('swiperDiv');
-  public mapDiv = viewChild.required<ElementRef>('mapDiv');
+  public mapDiv = viewChild<ElementRef>('mapDiv');
 
   ngOnInit(): void {
     const defaultAddress: Address = this.#addressService.getAddressById(1);
@@ -64,10 +65,16 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
     this.swiperInit();
   }
 
-  ngAfterViewInit() {
+  mapInitEffect = effect((onCleanup) => {
+    if (this.isMapCharged()) return;
+
+    this.mapInit();
+  });
+
+  mapInit() {
     if (!this.mapDiv()?.nativeElement) return;
 
-    const element = this.mapDiv().nativeElement;
+    const element = this.mapDiv()!.nativeElement;
     const defaultLocation: LngLatLike = [
       this.selectedAddress()!.longitude,
       this.selectedAddress()!.latitude,
@@ -79,10 +86,8 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
       center: defaultLocation,
       zoom: 17,
 
-      scrollZoom: false,
       boxZoom: false,
       doubleClickZoom: false,
-      dragPan: false,
 
       pitch: 60,
       touchPitch: true,
@@ -90,6 +95,7 @@ export class AboutPageComponent implements OnInit, AfterViewInit {
 
     this.createMarkers(map);
     this.saveMap(map);
+    this.isMapCharged.set(true);
   }
 
   swiperInit() {

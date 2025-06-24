@@ -1,10 +1,10 @@
 <footer class="bg-accent p-10">
   <!-- Cards de información -->
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
+  <div
+    class="grid grid-cols-1 items-start gap-8 mb-6 mx-10 sm:mx-0 sm:grid-cols-2 md:grid-cols-4"
+  >
     <!-- Dirección -->
-    <div
-      class="flex items-center justify-center mx-auto md:items-start md:justify-start gap-3"
-    >
+    <div class="flex items-start gap-3 md:items-start md:justify-start">
       <div class="flex items-start pt-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,14 +25,13 @@
           >Dirección</span
         >
         <span class="text-sm text-left text-secondary-content leading-tight"
-          >Av. Sol Naciente 1457, <br />Barrio El Encino</span
+          >Av. Sol Naciente 1457, <br class="hidden md:inline" />Barrio El
+          Encino</span
         >
       </div>
     </div>
     <!-- Contacto -->
-    <div
-      class="flex items-center justify-center mx-auto md:items-start md:justify-start gap-3"
-    >
+    <div class="flex items-start gap-3 md:items-start md:justify-start">
       <div class="flex items-start pt-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -48,19 +47,21 @@
           />
         </svg>
       </div>
-      <div class="flex flex-col gap-2">
-        <span class="font-bold text-lg text-base-content leading-tight"
+      <div class="flex flex-col gap-0 md:gap-2">
+        <span
+          class="font-bold text-lg text-base-content leading-tight mb-2 md:mb-0"
           >Contacto</span
         >
         <span class="text-sm text-left text-secondary-content leading-tight"
-          >Tel: (02) 222 - 1234<br />Mail: contacto&#64;sabores.com</span
+          >Tel: (02) 222 - 1234</span
+        >
+        <span class="text-sm text-left text-secondary-content leading-tight"
+          >Mail: contacto&#64;sabores.com</span
         >
       </div>
     </div>
     <!-- Horarios -->
-    <div
-      class="flex items-center justify-center mx-auto md:items-start md:justify-start gap-3"
-    >
+    <div class="flex items-start gap-3 md:items-start md:justify-start">
       <div class="flex items-start pt-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -76,18 +77,22 @@
           />
         </svg>
       </div>
-      <div class="flex flex-col gap-2">
-        <span class="font-bold text-lg text-base-content leading-tight"
+      <div class="flex flex-col gap-0 md:gap-2">
+        <span
+          class="font-bold text-lg text-base-content leading-tight mb-2 md:mb-0"
           >Horarios</span
         >
         <span class="text-sm text-left text-secondary-content leading-tight"
-          >Lun - Sáb: 10am - 20pm<br />Dom: Cerrado</span
+          >Lun - Sáb: 10am - 20pm</span
+        >
+        <span class="text-sm text-left text-secondary-content leading-tight"
+          >Dom: Cerrado</span
         >
       </div>
     </div>
     <!-- Síguenos -->
     <div
-      class="flex flex-col items-center justify-center mx-auto md:items-start md:justify-start gap-3"
+      class="flex flex-col items-center justify-center gap-3 md:items-start md:justify-start"
     >
       <span class="font-bold text-lg text-base-content mb-2">Síguenos</span>
       <div class="flex gap-3">
