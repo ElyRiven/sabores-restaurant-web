@@ -7,7 +7,7 @@
 input[type="date"],
 input[type="time"] {
   min-height: 44px !important;
-  min-width: 84px !important;
+  min-width: 100% !important;
 }
 
 /** Tailwind Configurations */
