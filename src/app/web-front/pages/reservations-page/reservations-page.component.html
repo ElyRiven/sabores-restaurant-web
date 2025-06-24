@@ -105,7 +105,7 @@
             <input
               type="text"
               placeholder="Nombre"
-              class="!w-full !h-11 p-2 rounded bg-base-300 border-2 transition-all border-black/0 focus:bg-base-100 outline-none"
+              class="p-2 rounded bg-base-300 border-2 transition-all border-black/0 focus:bg-base-100 outline-none"
               [ngClass]="{
                 'border-error ': formUtils.isValidField(reserveForm, 'name')
               }"
@@ -114,7 +114,7 @@
             <input
               type="email"
               placeholder="Email"
-              class="!w-full !h-11 p-2 rounded bg-base-300 border-2 transition-all border-black/0 focus:bg-base-100 outline-none"
+              class="p-2 rounded bg-base-300 border-2 transition-all border-black/0 focus:bg-base-100 outline-none"
               [ngClass]="{
                 'border-error ': formUtils.isValidField(reserveForm, 'mail')
               }"
@@ -124,7 +124,7 @@
               type="date"
               placeholder="Fecha"
               [min]="today"
-              class="!w-full !h-11 p-2 rounded bg-base-300 border-2 transition-all border-black/0 focus:bg-base-100 outline-none"
+              class="p-2 rounded bg-base-300 border-2 transition-all border-black/0 focus:bg-base-100 outline-none"
               [ngClass]="{
                 'border-error ': formUtils.isValidField(
                   reserveForm,
@@ -136,7 +136,7 @@
             <input
               type="time"
               placeholder="Hora"
-              class="!w-full !h-11 p-2 rounded bg-base-300 border-2 transition-all border-black/0 focus:bg-base-100 outline-none"
+              class="p-2 rounded bg-base-300 border-2 transition-all border-black/0 focus:bg-base-100 outline-none"
               [ngClass]="{
                 'border-error ': formUtils.isValidField(
                   reserveForm,
@@ -148,14 +148,14 @@
             <input
               type="text"
               placeholder="Teléfono"
-              class="!w-full !h-11 p-2 rounded bg-base-300 border-2 transition-all border-black/0 outline-none focus:bg-base-100 md:col-span-1"
+              class="p-2 rounded bg-base-300 border-2 transition-all border-black/0 outline-none focus:bg-base-100 md:col-span-1"
               [ngClass]="{
                 'border-error ': formUtils.isValidField(reserveForm, 'phone')
               }"
               formControlName="phone"
             />
             <select
-              class="!w-full !h-11 p-2 rounded bg-base-300 border-2 transition-all border-black/0 outline-none focus:bg-base-100 md:col-span-1"
+              class="p-2 rounded bg-base-300 border-2 transition-all border-black/0 outline-none focus:bg-base-100 md:col-span-1"
               [ngClass]="{
                 'border-error ': formUtils.isValidField(
                   reserveForm,
