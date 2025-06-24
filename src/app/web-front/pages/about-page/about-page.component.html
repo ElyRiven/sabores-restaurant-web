@@ -204,6 +204,7 @@
   <div
     class="flex flex-col gap-4 justify-center mb-8 w-full md:flex-row md:gap-10"
   >
+    @defer ( on viewport ) {
     <a class="cursor-pointer" (click)="locationChange(1)">
       <div
         class="group flex flex-row items-center justify-center gap-5 border border-base-content/60 bg-accent rounded-xl px-6 py-4 hover:bg-primary transition-all duration-200"
@@ -253,6 +254,7 @@
         </div>
       </div>
     </a>
+
     <a class="cursor-pointer" (click)="locationChange(2)">
       <div
         class="group flex flex-row items-center justify-center gap-5 border border-base-content/60 bg-accent rounded-xl px-6 py-4 hover:bg-primary transition-all duration-200"
@@ -302,6 +304,7 @@
         </div>
       </div>
     </a>
+
     <a class="cursor-pointer" (click)="locationChange(3)">
       <div
         class="group flex flex-row items-center justify-center gap-5 border border-base-content/60 bg-accent rounded-xl px-6 py-4 hover:bg-primary transition-all duration-200"
@@ -351,10 +354,29 @@
         </div>
       </div>
     </a>
+    }
+    <!--  -->
+    @placeholder ( minimum 1.5s) {
+    <div
+      class="group flex flex-row items-center justify-center gap-5 px-6 py-4"
+    >
+      <div class="flex-1 loading loading-spinner text-primary"></div>
+    </div>
+    }
   </div>
+  @defer ( on viewport ) {
   <div
     class="w-full h-64 p-10 rounded-xl border border-base-content/60 md:h-100"
     #mapDiv
   ></div>
+  }
+  <!--  -->
+  @placeholder ( minimum 1.5s) {
+  <div
+    class="flex items-center justify-center w-full h-64 p-10 rounded-xl border border-base-content/60 md:h-100"
+  >
+    <div class="loading loading-spinner text-primary"></div>
+  </div>
+  }
 </section>
 <!-- Fin Sección Visítanos -->
