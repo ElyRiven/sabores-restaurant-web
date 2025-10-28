@@ -6,11 +6,14 @@ import {
   NavigationEnd,
   RouterLinkActive,
 } from '@angular/router';
+
 import { filter } from 'rxjs';
+
+import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 @Component({
   selector: 'front-navbar',
-  imports: [RouterLink, RouterLinkActive, NgClass],
+  imports: [RouterLink, RouterLinkActive, NgClass, HlmButtonImports],
   templateUrl: './front-navbar.component.html',
 })
 export class FrontNavbarComponent {

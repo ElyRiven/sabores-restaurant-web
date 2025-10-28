@@ -1,36 +1,8 @@
 <div
-  class="navbar bg-accent shadow-sm font-merriweather h-25 fixed z-50 text-base-content"
+  class="flex justify-between items-center px-10 sticky top-0 h-25 w-full bg-accent font-jakarta font-semibold text-primary z-50"
 >
-  <!-- Menú izquierda -->
-  <div class="navbar-start justify-center hidden md:inline-flex">
-    <ul class="menu menu-horizontal gap-5 text-xl">
-      <li>
-        <a
-          class="hover:underline"
-          routerLink="/about"
-          routerLinkActive="text-primary underline"
-          >Nosotros</a
-        >
-      </li>
-      <li>
-        <a
-          class="hover:underline"
-          routerLink="/about"
-          routerLinkActive="text-primary underline"
-          routerLink="/events"
-          >Eventos</a
-        >
-      </li>
-    </ul>
-  </div>
-  <!-- Nombre Restaurante -->
-  <div
-    class="flex navbar-center w-50 h-20 relative"
-    [ngClass]="{
-          'animate-normal-mobile md:animate-normal': !isTitleFullScreen(),
-          'animate-scale-mobile md:animate-scale-center': isTitleFullScreen(),
-        }"
-  >
+  <!-- Restaurant Title -->
+  <div class="flex w-50 h-20 relative">
     <a
       class="block w-full h-full relative focus:outline-none"
       routerLink="/"
@@ -60,29 +32,127 @@
       </svg>
     </a>
   </div>
-  <!-- Menú Derecha -->
-  <div class="navbar-end justify-center hidden md:inline-flex">
-    <ul class="menu menu-horizontal gap-5 text-xl">
+  <!-- Navigation Options -->
+  <div class="flex items-center justify-center">
+    <ul class="flex flex-row gap-15 text-xl">
       <li>
         <a
-          class="hover:underline"
+          class="flex items-center justify-center gap-2 transition-all duration-380 hover:scale-110"
           routerLink="/about"
-          routerLinkActive="text-primary underline"
-          routerLink="/menu"
-          >Menú</a
+          routerLinkActive="text-foreground"
         >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-user-icon lucide-user"
+          >
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span>Nosotros</span>
+        </a>
       </li>
       <li>
         <a
-          class="hover:underline"
-          routerLink="/about"
-          routerLinkActive="text-primary underline"
-          routerLink="/reservations"
-          >Reservas</a
+          class="flex items-center justify-center gap-2 transition-all duration-380 hover:scale-110"
+          routerLink="/events"
+          routerLinkActive="text-foreground"
         >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-calendar-check-icon lucide-calendar-check"
+          >
+            <path d="M8 2v4" />
+            <path d="M16 2v4" />
+            <rect width="18" height="18" x="3" y="4" rx="2" />
+            <path d="M3 10h18" />
+            <path d="m9 16 2 2 4-4" />
+          </svg>
+          <span>Eventos</span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="flex items-center justify-center gap-2 transition-all duration-380 hover:scale-110"
+          routerLink="/menu"
+          routerLinkActive="text-foreground"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-book-open-text-icon lucide-book-open-text"
+          >
+            <path d="M12 7v14" />
+            <path d="M16 12h2" />
+            <path d="M16 8h2" />
+            <path
+              d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+            />
+            <path d="M6 12h2" />
+            <path d="M6 8h2" />
+          </svg>
+          <span>Menú</span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="flex items-center justify-center gap-2 transition-all duration-380 hover:scale-110"
+          routerLink="/reservations"
+          routerLinkActive="text-foreground"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-notebook-pen-icon lucide-notebook-pen"
+          >
+            <path
+              d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"
+            />
+            <path d="M2 6h4" />
+            <path d="M2 10h4" />
+            <path d="M2 14h4" />
+            <path d="M2 18h4" />
+            <path
+              d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"
+            />
+          </svg>
+          <span>Reservas</span>
+        </a>
       </li>
     </ul>
   </div>
+</div>
+
+<div class="hidden">
   <!-- Menú hamburguesa móvil -->
   <div class="navbar-start md:hidden"></div>
   <div class="navbar-end justify-center items-center md:hidden right-0">
@@ -104,7 +174,6 @@
     </a>
   </div>
   <!-- Menú móvil -->
-  @defer ( on interaction( btnMenu ) ) {
   <div
     class="fixed inset-0 flex"
     [ngClass]="{
@@ -112,7 +181,6 @@
       'animate-slideout-right': !isMobileMenuOpen
     }"
   >
-    <!-- Fondo oscuro semitransparente -->
     <div
       class="fixed inset-0 bg-black opacity-40"
       [ngClass]="{
@@ -121,7 +189,6 @@
       }"
       (click)="mobileMenuInteraction()"
     ></div>
-    <!-- Modal deslizante -->
     <div class="fixed right-0 top-0 h-full w-64 bg-accent text-base-content">
       <nav class="mt-16 flex flex-col gap-6 px-8">
         <a
@@ -159,5 +226,4 @@
       </nav>
     </div>
   </div>
-  }
 </div>
