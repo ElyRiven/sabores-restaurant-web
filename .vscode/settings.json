@@ -10,5 +10,6 @@
     "angular-page": {
       "skipChangeDetectionOnPush": true
     }
-  }
+  },
+  "tailwindCSS.classFunctions": ["hlm", "cva"]
 }
