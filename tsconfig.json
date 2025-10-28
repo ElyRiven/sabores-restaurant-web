@@ -1,11 +1,17 @@
-/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
-/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@front/*": ["./src/app/web-front/*"]
+      "@front/*": [
+        "./src/app/web-front/*"
+      ],
+      "@spartan-ng/helm/button": [
+        "./libs/ui/ui-button-helm/src/index.ts"
+      ],
+      "@spartan-ng/helm/utils": [
+        "./libs/ui/ui-utils-helm/src/index.ts"
+      ]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
