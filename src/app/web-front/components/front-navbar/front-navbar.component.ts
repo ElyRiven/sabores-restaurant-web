@@ -11,19 +11,21 @@ import {
   NavigationEnd,
   RouterLinkActive,
 } from '@angular/router';
-import { NgClass } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 import { filter, map } from 'rxjs';
 
-import { titleAnimation } from '@front/animations/navbar-animations';
+import {
+  mobileMenuAnimation,
+  titleAnimation,
+} from '@front/animations/navbar-animations';
 
 @Component({
   selector: 'front-navbar',
-  imports: [RouterLink, RouterLinkActive, NgClass],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './front-navbar.component.html',
-  animations: [titleAnimation],
+  animations: [titleAnimation, mobileMenuAnimation],
 })
 export class FrontNavbarComponent {
   #router = inject(Router);
