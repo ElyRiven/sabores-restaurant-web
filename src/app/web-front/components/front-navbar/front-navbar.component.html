@@ -3,7 +3,7 @@
 >
   <!-- Restaurant Title -->
   <a
-    class="flex items-center justify-center w-50 h-full relative focus:outline-none cursor-pointer"
+    class="flex items-center justify-center w-50 h-full cursor-pointer"
     [@titleAnimation]="
       isTitleFullScreen()
         ? isMobile()
@@ -38,10 +38,10 @@
   </a>
   <!-- Navigation Options -->
   <div class="flex items-center justify-center">
-    <ul class="flex flex-row gap-15 text-xl">
-      <li>
+    <ul class="hidden flex-row gap-7 md:flex md:text-base lg:gap-15 lg:text-xl">
+      <li class="transition-all duration-380 hover:scale-110">
         <a
-          class="flex items-center justify-center gap-2 transition-all duration-380 hover:scale-110"
+          class="flex items-center justify-center gap-2"
           routerLink="/about"
           routerLinkActive="text-foreground"
         >
@@ -63,9 +63,9 @@
           <span>Nosotros</span>
         </a>
       </li>
-      <li>
+      <li class="transition-all duration-380 hover:scale-110">
         <a
-          class="flex items-center justify-center gap-2 transition-all duration-380 hover:scale-110"
+          class="flex items-center justify-center gap-2"
           routerLink="/events"
           routerLinkActive="text-foreground"
         >
@@ -90,9 +90,9 @@
           <span>Eventos</span>
         </a>
       </li>
-      <li>
+      <li class="transition-all duration-380 hover:scale-110">
         <a
-          class="flex items-center justify-center gap-2 transition-all duration-380 hover:scale-110"
+          class="flex items-center justify-center gap-2"
           routerLink="/menu"
           routerLinkActive="text-foreground"
         >
@@ -120,9 +120,9 @@
           <span>Menú</span>
         </a>
       </li>
-      <li>
+      <li class="transition-all duration-380 hover:scale-110">
         <a
-          class="flex items-center justify-center gap-2 transition-all duration-380 hover:scale-110"
+          class="flex items-center justify-center gap-2"
           routerLink="/reservations"
           routerLinkActive="text-foreground"
         >
