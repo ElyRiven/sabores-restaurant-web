@@ -1,25 +1,53 @@
-import { NgClass } from '@angular/common';
-import { Component, inject, signal, computed } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  computed,
+  HostListener,
+} from '@angular/core';
 import {
   Router,
   RouterLink,
   NavigationEnd,
   RouterLinkActive,
 } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { toSignal } from '@angular/core/rxjs-interop';
 
-import { filter } from 'rxjs';
+import { filter, map } from 'rxjs';
 
-import { HlmButtonImports } from '@spartan-ng/helm/button';
+import {
+  mobileMenuAnimation,
+  titleAnimation,
+} from '@front/animations/navbar-animations';
 
 @Component({
   selector: 'front-navbar',
-  imports: [RouterLink, RouterLinkActive, NgClass, HlmButtonImports],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './front-navbar.component.html',
+  animations: [titleAnimation, mobileMenuAnimation],
 })
 export class FrontNavbarComponent {
   #router = inject(Router);
+  #breakpointObserver = inject(BreakpointObserver);
 
-  currentPath = signal(this.#router.url);
+  currentPath = toSignal(
+    this.#router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map((event) => {
+        return event.urlAfterRedirects;
+      })
+    ),
+    { initialValue: this.#router.url }
+  );
+
+  isMobile = toSignal(
+    this.#breakpointObserver
+      .observe(Breakpoints.Handset)
+      .pipe(map((result) => result.matches)),
+    { initialValue: false }
+  );
+
   hasScrolled = signal<boolean>(false);
 
   isMobileMenuOpen = false;
@@ -31,19 +59,12 @@ export class FrontNavbarComponent {
     );
   });
 
-  constructor() {
-    this.#router.events
-      .pipe(filter((e) => e instanceof NavigationEnd))
-      .subscribe((e: NavigationEnd) => {
-        this.currentPath.set(e.urlAfterRedirects);
-      });
-
-    window.addEventListener('scroll', () => {
-      this.hasScrolled.set(window.scrollY > 0);
-    });
-  }
-
   mobileMenuInteraction() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    this.hasScrolled.set(window.scrollY > 0);
   }
 }

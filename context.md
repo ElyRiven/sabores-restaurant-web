@@ -19,7 +19,7 @@
 
 - Angular v19.2
 - MapBox v3.13
-<!-- - Angular Animations v19.2 -->
+- Angular Animations v19.2
 
 ### UI Dependencies
 
