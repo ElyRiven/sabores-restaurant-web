@@ -4,6 +4,13 @@
   <!-- Restaurant Title -->
   <a
     class="flex items-center justify-center w-50 h-full relative focus:outline-none cursor-pointer"
+    [@titleAnimation]="
+      isTitleFullScreen()
+        ? isMobile()
+          ? 'fullScreenMobile'
+          : 'fullScreen'
+        : 'initial'
+    "
     routerLink="/"
     aria-label="Inicio"
   >

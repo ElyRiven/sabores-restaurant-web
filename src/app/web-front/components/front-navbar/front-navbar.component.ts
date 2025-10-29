@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
   Component,
   inject,
@@ -6,36 +5,47 @@ import {
   computed,
   HostListener,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import {
   Router,
   RouterLink,
   NavigationEnd,
   RouterLinkActive,
 } from '@angular/router';
+import { NgClass } from '@angular/common';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { toSignal } from '@angular/core/rxjs-interop';
+
 import { filter, map } from 'rxjs';
 
-import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { titleAnimation } from '@front/animations/navbar-animations';
 
 @Component({
   selector: 'front-navbar',
-  imports: [RouterLink, RouterLinkActive, NgClass, HlmButtonImports],
+  imports: [RouterLink, RouterLinkActive, NgClass],
   templateUrl: './front-navbar.component.html',
+  animations: [titleAnimation],
 })
 export class FrontNavbarComponent {
   #router = inject(Router);
+  #breakpointObserver = inject(BreakpointObserver);
 
   currentPath = toSignal(
     this.#router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map((event) => {
-        console.log({ currentPath: event.urlAfterRedirects });
-
         return event.urlAfterRedirects;
       })
     ),
     { initialValue: this.#router.url }
   );
+
+  isMobile = toSignal(
+    this.#breakpointObserver
+      .observe(Breakpoints.Handset)
+      .pipe(map((result) => result.matches)),
+    { initialValue: false }
+  );
+
   hasScrolled = signal<boolean>(false);
 
   isMobileMenuOpen = false;
