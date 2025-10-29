@@ -1,5 +1,11 @@
 import { NgClass } from '@angular/common';
-import { Component, inject, signal, computed } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  computed,
+  HostListener,
+} from '@angular/core';
 import {
   Router,
   RouterLink,
@@ -37,13 +43,14 @@ export class FrontNavbarComponent {
       .subscribe((e: NavigationEnd) => {
         this.currentPath.set(e.urlAfterRedirects);
       });
-
-    window.addEventListener('scroll', () => {
-      this.hasScrolled.set(window.scrollY > 0);
-    });
   }
 
   mobileMenuInteraction() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    this.hasScrolled.set(window.scrollY > 0);
   }
 }
