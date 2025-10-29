@@ -3,7 +3,9 @@ import {
   provideRouter,
   withHashLocation,
   withInMemoryScrolling,
+  withViewTransitions,
 } from '@angular/router';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
 
@@ -13,7 +15,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withHashLocation(),
-      withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),
+      withViewTransitions()
     ),
+    provideAnimations(),
   ],
 };
