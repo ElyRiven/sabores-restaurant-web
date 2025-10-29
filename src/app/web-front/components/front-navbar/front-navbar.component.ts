@@ -6,14 +6,14 @@ import {
   computed,
   HostListener,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import {
   Router,
   RouterLink,
   NavigationEnd,
   RouterLinkActive,
 } from '@angular/router';
-
-import { filter } from 'rxjs';
+import { filter, map } from 'rxjs';
 
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 
@@ -25,7 +25,17 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 export class FrontNavbarComponent {
   #router = inject(Router);
 
-  currentPath = signal(this.#router.url);
+  currentPath = toSignal(
+    this.#router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map((event) => {
+        console.log({ currentPath: event.urlAfterRedirects });
+
+        return event.urlAfterRedirects;
+      })
+    ),
+    { initialValue: this.#router.url }
+  );
   hasScrolled = signal<boolean>(false);
 
   isMobileMenuOpen = false;
@@ -36,14 +46,6 @@ export class FrontNavbarComponent {
       !this.hasScrolled()
     );
   });
-
-  constructor() {
-    this.#router.events
-      .pipe(filter((e) => e instanceof NavigationEnd))
-      .subscribe((e: NavigationEnd) => {
-        this.currentPath.set(e.urlAfterRedirects);
-      });
-  }
 
   mobileMenuInteraction() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
