@@ -5,10 +5,46 @@
       "skipStyle": true
     },
     "angular-component": {
-      "skipChangeDetectionOnPush": true
+      "skipChangeDetectionOnPush": true,
+      "suffix": "component",
+      "fileNameSuffix": ".component"
     },
     "angular-page": {
-      "skipChangeDetectionOnPush": true
+      "skipChangeDetectionOnPush": true,
+      "fileNameSuffix": ".page"
+    },
+    "angular-directive": {
+      "suffix": "directive",
+      "fileNameSuffix": ".directive"
+    },
+    "angular-service": {
+      "suffix": "service",
+      "fileNameSuffix": ".service"
+    },
+    "angular-pipe": {
+      "fileNameSuffix": ".pipe"
+    },
+    "angular-interceptor": {
+      "fileNameSuffix": ".interceptor"
+    },
+    "angular-guard": {
+      "fileNameSuffix": ".guard"
+    },
+    "angular-resolver": {
+      "fileNameSuffix": ".resolver"
+    },
+    "angular-async-reactive-service": {
+      "fileNameSuffix": ".service"
+    },
+    "angular-sync-reactive-service": {
+      "fileNameSuffix": ".service"
+    },
+    "angular-material-dialog": {
+      "fileNameSuffix": ".dialog"
+    },
+    "angular-material-table": {
+      "suffix": "component",
+      "fileNameSuffix": ".component"
     }
   },
   "tailwindCSS.classFunctions": ["hlm", "cva"]
