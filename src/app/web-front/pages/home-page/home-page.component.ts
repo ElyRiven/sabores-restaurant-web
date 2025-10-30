@@ -1,4 +1,3 @@
-import { TitleCasePipe } from '@angular/common';
 import {
   AfterViewInit,
   Component,
