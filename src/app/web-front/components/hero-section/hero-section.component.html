@@ -1,0 +1,21 @@
+<!-- Hero Section -->
+<div class="relative w-full h-(--hero-size)">
+  <img
+    class="w-full h-full object-cover object-top"
+    [src]="heroImage()"
+    alt="hero-image"
+    loading="eager"
+  />
+  @if( showOverlay() ){
+  <div class="absolute inset-0 bg-foreground/60"></div>
+  }
+  <!--  -->
+  @if ( heroTitle() ) {
+  <div
+    class="absolute inset-0 flex items-center justify-center text-8xl text-primary-foreground md:text-9xl"
+  >
+    <h2 class="font-lobster">{{ heroTitle() }}</h2>
+  </div>
+  }
+</div>
+<!-- End Hero Section -->

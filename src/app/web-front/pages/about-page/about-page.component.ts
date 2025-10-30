@@ -18,12 +18,13 @@ import { ChefService } from '@front/services/chef.service';
 import { Address } from '@front/interfaces/address.interface';
 import { AddressService } from '@front/services/address.service';
 import { environment } from 'src/environments/environment';
+import { HeroSection } from '@front/components/hero-section/hero-section.component';
 
 mapboxgl.accessToken = environment.mapboxkey;
 
 @Component({
   selector: 'app-about-page',
-  imports: [],
+  imports: [HeroSection],
   templateUrl: './about-page.component.html',
 })
 export class AboutPageComponent implements OnInit {

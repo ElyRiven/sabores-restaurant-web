@@ -1,18 +1,7 @@
-<!-- Hero Section -->
-<div class="relative w-full h-(--hero-size)">
-  <img
-    class="w-full h-full object-cover object-top"
-    src="/assets/photos/front/reservation-hero.webp"
-    alt="Home Page Hero"
-  />
-  <div class="absolute inset-0 bg-base-content opacity-60"></div>
-  <div
-    class="relative flex items-center justify-center text-8xl text-primary-content bottom-1/2 md:text-9xl"
-  >
-    <h2 class="font-lobster">Reservas</h2>
-  </div>
-</div>
-<!-- End Hero Section -->
+<hero-section
+  [heroImage]="'/assets/photos/front/reservation-hero.webp'"
+  [heroTitle]="'Reservas'"
+/>
 <!-- Reservation Form -->
 <div class="relative flex justify-center bottom-20">
   <div

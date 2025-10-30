@@ -14,10 +14,11 @@ import type {
 import { SeatNumbersPipe } from '@front/pipes/seat-numbers.pipe';
 import { ReservationService } from '@front/services/reservation.service';
 import { FormUtils } from '@front/utils/form-utils';
+import { HeroSection } from '@front/components/hero-section/hero-section.component';
 
 @Component({
   selector: 'app-reservations-page',
-  imports: [ReactiveFormsModule, SeatNumbersPipe, NgClass],
+  imports: [ReactiveFormsModule, SeatNumbersPipe, NgClass, HeroSection],
   templateUrl: './reservations-page.component.html',
 })
 export class ReservationsPageComponent {
