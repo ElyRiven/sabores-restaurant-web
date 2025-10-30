@@ -2,10 +2,11 @@ import { NgClass } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Plate, MenuCategory } from '@front/interfaces/plate.interface';
 import { MenuService } from '@front/services/menu.service';
+import { HeroSection } from '@front/components/hero-section/hero-section.component';
 
 @Component({
   selector: 'app-menu-page',
-  imports: [NgClass],
+  imports: [NgClass, HeroSection],
   templateUrl: './menu-page.component.html',
 })
 export class MenuPageComponent implements OnInit {

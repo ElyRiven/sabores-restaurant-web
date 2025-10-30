@@ -1,14 +1,7 @@
-<!-- Hero Section -->
-<div class="relative w-full h-(--hero-size)">
-  <img
-    class="w-full h-full object-cover object-top"
-    src="/assets/photos/front/home-hero.webp"
-    alt="Home Page Hero"
-    loading="eager"
-  />
-  <div class="absolute inset-0 bg-base-content opacity-60"></div>
-</div>
-<!-- End Hero Section -->
+<hero-section
+  [heroImage]="'/assets/photos/front/home-hero.webp'"
+  [showOverlay]="false"
+/>
 <!-- Service Section -->
 <div class="relative w-full flex justify-center items-center -mt-37 z-20">
   <div

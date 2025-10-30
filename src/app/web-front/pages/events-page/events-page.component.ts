@@ -3,10 +3,11 @@ import { Category, Event } from '@front/interfaces/event.interface';
 import { CategoryTitlePipe } from '@front/pipes/category.pipe';
 import { EventDatePipe } from '@front/pipes/event-date.pipe';
 import { EventService } from '@front/services/event.service';
+import { HeroSection } from '@front/components/hero-section/hero-section.component';
 
 @Component({
   selector: 'app-events-page',
-  imports: [CategoryTitlePipe, EventDatePipe],
+  imports: [CategoryTitlePipe, EventDatePipe, HeroSection],
   templateUrl: './events-page.component.html',
 })
 export class EventsPageComponent implements OnInit {
