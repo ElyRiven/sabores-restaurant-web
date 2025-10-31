@@ -155,14 +155,14 @@
   >
     <div class="rounded-[5px] overflow-hidden">
       <img
-        class="object-cover hover:scale-107 transition-all ease-in-out duration-200"
+        class="object-cover hover:scale-107 transition-all ease-(--img-transition) duration-1000"
         src="/assets/photos/front/misc12.webp"
         alt="restaurant service image"
       />
     </div>
     <div class="rounded-[5px] overflow-hidden">
       <img
-        class="object-cover hover:scale-107 transition-all ease-in-out duration-200"
+        class="object-cover hover:scale-107 transition-all ease-(--img-transition) duration-1000"
         src="/assets/photos/front/misc11.webp"
         alt="restaurant service image"
       />
@@ -247,33 +247,30 @@
 </div>
 <!-- End Entries Carousel -->
 <!-- Reservation Section -->
-<div
-  class="flex items-center justify-center w-full p-4 overflow-hidden md:p-10 lg:p-20"
->
-  <div class="relative flex items-center justify-center w-315 h-150">
+<div class="flex items-center justify-center w-full p-4 md:p-10 lg:p-20">
+  <div
+    class="relative flex items-center justify-center w-315 h-150 rounded-xl overflow-hidden"
+  >
     <img
       class="w-full h-full object-cover"
       src="/assets/photos/front/reservation-hero.webp"
       alt="Reservaciones"
     />
-    <div class="absolute inset-0 bg-base-content opacity-50"></div>
+    <div class="absolute inset-0 bg-foreground/50"></div>
   </div>
-  <div class="absolute flex flex-col items-center p-6">
-    <h2 class="font-lobster text-6xl text-primary-content mt-2">
-      Reservaciones
-    </h2>
-    <p
-      class="font-jakarta text-2xl text-primary-content text-center drop-shadow my-20"
-    >
+  <div
+    class="absolute flex flex-col items-center p-6 text-primary-foreground font-jakarta"
+  >
+    <h2 class="font-lobster text-6xl mt-2">Reservaciones</h2>
+    <p class="text-3xl text-center my-20">
       Disfruta de una experiencia única de sabores<br />
-      y excelencia en servicio con nosotros
+      y excelencia en servicio
     </p>
-    <button
-      routerLink="/reservations"
-      class="btn btn-primary bg-primary-content text-base-content font-jakarta px-6 py-2 mb-2 cursor-pointer rounded-full shadow hover:bg-primary hover:text-primary-content"
+    <a
+      class="w-fit font-bold p-3 bg-primary text-primary-foreground hover:text-primary hover:bg-primary-foreground hover:-translate-y-2 transition-all ease-in-out duration-500 rounded-full"
+      routerLink="reservations"
+      >Reservar Mesa</a
     >
-      Reservar
-    </button>
   </div>
 </div>
 <!-- End Reservation Section -->
