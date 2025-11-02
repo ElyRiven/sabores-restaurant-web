@@ -171,114 +171,78 @@
 </div>
 <!-- End Description Section -->
 <!-- Menu Options Section -->
-<div class="bg-accent flex flex-col justify-center md:flex-row h-100">
+<div class="bg-accent flex flex-col justify-center md:flex-row h-130 md:100">
   <div
-    class="relative flex-1 flex items-center justify-center overflow-hidden group hover:flex-1/11 transition-all ease-in-out duration-700"
+    class="relative flex-1 flex items-center justify-center bg-primary overflow-hidden group hover:flex-1/11 transition-all ease-in-out duration-700"
   >
     <div
-      class="opacity-0 absolute top-0 left-0 w-full h-full bg-[url(/assets/photos/front/misc2.webp)] bg-primary bg-cover bg-center bg-no-repeat group-hover:block group-hover:opacity-100 group-hover:scale-110 transition-all ease-in-out duration-500"
+      class="opacity-0 absolute top-0 left-0 w-full h-full bg-[url(/assets/photos/front/entries-home.webp)] bg-cover bg-center bg-no-repeat group-hover:block group-hover:opacity-100 group-hover:scale-110 transition-all ease-in-out duration-500"
     ></div>
-    <div class="relative font-lobster text-5xl text-center text-foreground">
-      Entradas
-    </div>
-    <a class="absolute top-0 left-0 w-full h-full" href=""></a>
-  </div>
-  <div
-    class="relative flex-1 flex items-center justify-center overflow-hidden group hover:flex-1/11 transition-all ease-in-out duration-700"
-  >
     <div
-      class="opacity-0 absolute top-0 left-0 w-full h-full bg-[url(/assets/photos/front/misc2.webp)] bg-primary bg-cover bg-center bg-no-repeat group-hover:block group-hover:opacity-100 group-hover:scale-110 transition-all ease-in-out duration-500"
-    ></div>
-    <div class="relative font-lobster text-5xl text-center text-foreground">
-      Menú
-    </div>
-    <a class="absolute top-0 left-0 w-full h-full" href=""></a>
-  </div>
-  <div
-    class="relative flex-1 flex items-center justify-center overflow-hidden group hover:flex-1/11 transition-all ease-in-out duration-700"
-  >
-    <div
-      class="opacity-0 absolute top-0 left-0 w-full h-full bg-[url(/assets/photos/front/misc2.webp)] bg-primary bg-cover bg-center bg-no-repeat group-hover:block group-hover:opacity-100 group-hover:scale-110 transition-all ease-in-out duration-500"
-    ></div>
-    <div class="relative font-lobster text-5xl text-center text-foreground">
-      Bebidas
-    </div>
-    <a class="absolute top-0 left-0 w-full h-full" href=""></a>
-  </div>
-</div>
-
-<div class="py-7 bg-accent w-full h-88 mt-15 text-primary-content lg:py-10">
-  <div class="px-12 relative md:px-22">
-    <!-- Slider main container -->
-    <div class="swiper" #swiperDiv>
-      <!-- Additional required wrapper -->
-      <div class="swiper-wrapper">
-        <!-- Slides -->
-        @for (entry of entries; track $index) {
-        <div
-          class="swiper-slide w-[350px] h-[250px] flex flex-col justify-center items-center shadow-xl rounded-md"
-        >
-          <img
-            [src]="entry.image"
-            alt="Plato"
-            class="w-full h-[200px] object-cover mx-auto rounded-t-md"
-          />
-          <h2
-            class="flex font-jakarta text-base-content h-[50px] my-2 text-base text-center justify-center items-center md:text-lg"
-          >
-            {{ entry.name }}
-          </h2>
-        </div>
-        }
-      </div>
-      <hr class="mb-13 md:mb-10 lg:mb-8" />
-
-      <!-- Pagination Bullets (Default) -->
-      <div class="swiper-pagination"></div>
-    </div>
-    <!-- Navigation Buttons -->
-    <a
-      class="swiper-button-prev-custom absolute top-1/2 left-1 md:left-8 transform -translate-y-1/2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-primary cursor-pointer"
+      class="relative flex flex-col items-center justify-center gap-5 text-center text-foreground group-hover:text-primary-foreground transition-all"
     >
+      <p class="font-lobster text-5xl">Entradas</p>
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
+        viewBox="70 104 360 15"
         fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="text-primary-content"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M5 12l14 0" />
-        <path d="M5 12l6 6" />
-        <path d="M5 12l6 -6" />
+        <path
+          d="M70.002 111.5L100.002 112.5C100.002 112.5 244.502 112.5 246.502 112.5C248.502 112.5 250.002 118.5 250.002 118.5C250.002 118.5 251.502 112.5 253.502 112.5C255.502 112.5 400.002 112.5 400.002 112.5L429.998 111.5L400.002 110.5C400.002 110.5 255.502 110.5 253.502 110.5C251.502 110.5 250.002 104.5 250.002 104.5C250.002 104.5 248.502 110.5 246.502 110.5C244.502 110.5 100.002 110.5 100.002 110.5L70.002 111.5Z"
+          fill="currentColor"
+        />
       </svg>
-    </a>
-    <a
-      class="swiper-button-next-custom absolute top-1/2 right-1 md:right-8 transform -translate-y-1/2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-primary cursor-pointer"
+      <span class="font-jakarta italic">Bocados para compartir</span>
+    </div>
+    <a class="absolute top-0 left-0 w-full h-full" href=""></a>
+  </div>
+  <div
+    class="relative flex-1 flex items-center justify-center bg-secondary overflow-hidden group hover:flex-1/11 transition-all ease-in-out duration-700"
+  >
+    <div
+      class="opacity-0 absolute top-0 left-0 w-full h-full bg-[url(/assets/photos/front/dishes-home.webp)] bg-cover bg-center bg-no-repeat group-hover:block group-hover:opacity-100 group-hover:scale-110 transition-all ease-in-out duration-500"
+    ></div>
+    <div
+      class="relative flex flex-col items-center justify-center gap-5 text-center text-foreground group-hover:text-primary-foreground transition-all"
     >
+      <p class="font-lobster text-5xl">Menú</p>
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
+        viewBox="70 104 360 15"
         fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="text-primary-content"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M5 12l14 0" />
-        <path d="M13 18l6 -6" />
-        <path d="M13 6l6 6" />
+        <path
+          d="M70.002 111.5L100.002 112.5C100.002 112.5 244.502 112.5 246.502 112.5C248.502 112.5 250.002 118.5 250.002 118.5C250.002 118.5 251.502 112.5 253.502 112.5C255.502 112.5 400.002 112.5 400.002 112.5L429.998 111.5L400.002 110.5C400.002 110.5 255.502 110.5 253.502 110.5C251.502 110.5 250.002 104.5 250.002 104.5C250.002 104.5 248.502 110.5 246.502 110.5C244.502 110.5 100.002 110.5 100.002 110.5L70.002 111.5Z"
+          fill="currentColor"
+        />
       </svg>
-    </a>
+      <span class="font-jakarta italic">Nuestros Platos Principales</span>
+    </div>
+    <a class="absolute top-0 left-0 w-full h-full" href=""></a>
+  </div>
+  <div
+    class="relative flex-1 flex items-center justify-center bg-primary overflow-hidden group hover:flex-1/11 transition-all ease-in-out duration-700"
+  >
+    <div
+      class="opacity-0 absolute top-0 left-0 w-full h-full bg-[url(/assets/photos/front/drinks-home.webp)] bg-cover bg-center bg-no-repeat group-hover:block group-hover:opacity-100 group-hover:scale-110 transition-all ease-in-out duration-500"
+    ></div>
+    <div
+      class="relative flex flex-col items-center justify-center gap-5 text-center text-foreground group-hover:text-primary-foreground transition-all"
+    >
+      <p class="font-lobster text-5xl">Bebidas</p>
+      <svg
+        viewBox="70 104 360 15"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M70.002 111.5L100.002 112.5C100.002 112.5 244.502 112.5 246.502 112.5C248.502 112.5 250.002 118.5 250.002 118.5C250.002 118.5 251.502 112.5 253.502 112.5C255.502 112.5 400.002 112.5 400.002 112.5L429.998 111.5L400.002 110.5C400.002 110.5 255.502 110.5 253.502 110.5C251.502 110.5 250.002 104.5 250.002 104.5C250.002 104.5 248.502 110.5 246.502 110.5C244.502 110.5 100.002 110.5 100.002 110.5L70.002 111.5Z"
+          fill="currentColor"
+        />
+      </svg>
+      <span class="font-jakarta italic">Cócteles, vinos y más</span>
+    </div>
+    <a class="absolute top-0 left-0 w-full h-full" href=""></a>
   </div>
 </div>
 <!-- End Menu Options Section -->
