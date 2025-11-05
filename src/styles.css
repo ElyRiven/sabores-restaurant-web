@@ -49,6 +49,8 @@ input[type="time"] {
 
   --hero-size: calc(100vh - 100px);
 
+  --img-transition: cubic-bezier(0, 0.89, 0.7, 0.94);
+
   /* --animate-scale-center: scale-up-center 0.8s
     cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   --animate-normal: scale-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -202,7 +204,7 @@ input[type="time"] {
   --primary: oklch(0.6846 0.2063 37.64);
   --primary-foreground: oklch(100% 0 0);
   --secondary: oklch(0.8371 0.1065 75.54);
-  --secondary-foreground: oklch(0.1609 0.021 89.35);
+  --secondary-foreground: oklch(0.3686 0.0058 78.26);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.9475 0.0478 90.06);

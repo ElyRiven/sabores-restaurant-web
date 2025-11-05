@@ -2,6 +2,7 @@
   [heroImage]="'/assets/photos/front/home-hero.webp'"
   [showOverlay]="false"
 />
+
 <!-- Service Section -->
 <div class="relative w-full flex justify-center items-center -mt-37 z-20">
   <div
@@ -9,45 +10,43 @@
   >
     <!-- Menu Information -->
     <div
-      class="flex flex-col items-center justify-start w-75 md:w-100 h-fit min-h-75 bg-accent text-base-100 shadow-lg p-6"
+      class="flex flex-col items-center justify-start w-75 md:w-100 h-fit min-h-75 bg-accent text-base-100 shadow-lg p-6 rounded-xl"
     >
       <div
-        class="flex items-center justify-center bg-primary rounded-full w-20 h-20 mb-10"
+        class="flex items-center justify-center bg-secondary text-primary rounded-full w-20 h-20 mb-10 hover:bg-primary hover:text-primary-foreground transition-all ease-in-out duration-300"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="50"
           height="50"
           viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="text-primary-content"
         >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-          <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-          <path d="M3 6l0 13" />
-          <path d="M12 6l0 13" />
-          <path d="M21 6l0 13" />
+          <g fill="none" fill-rule="evenodd">
+            <path
+              d="m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z"
+            />
+            <path
+              fill="currentColor"
+              d="M9 4a1 1 0 0 1 1-1h4a1 1 0 1 1 0 2h-1v1.035c5.44.49 9.01 6.132 6.929 11.336A1 1 0 0 1 19 18H5a1 1 0 0 1-.928-.629C1.99 12.167 5.56 6.525 11 6.035V5h-1a1 1 0 0 1-1-1m2.77 4c-4.226 0-7.184 4.053-6.057 8h12.574c1.127-3.947-1.831-8-6.057-8zM3 20a1 1 0 0 1 1-1h16a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1"
+            />
+          </g>
         </svg>
       </div>
-      <div class="text-center text-base-content text-lg">
-        <h2 class="font-merriweather font-bold mb-4">Menú</h2>
+      <div class="text-center">
+        <h2 class="font-lobster text-3xl mb-4">Menú</h2>
         <p class="font-jakarta">
           Ofrecemos un menú exclusivo con ingredientes selectos y frescos
         </p>
       </div>
     </div>
     <!-- End Menu Information -->
+
     <!-- Variety information -->
     <div
-      class="flex flex-col items-center justify-start w-75 md:w-100 h-fit min-h-75 bg-accent text-base-100 shadow-lg p-6"
+      class="flex flex-col items-center justify-start w-75 md:w-100 h-fit min-h-75 bg-accent text-base-100 shadow-lg p-6 rounded-xl"
     >
       <div
-        class="flex items-center justify-center bg-primary rounded-full w-20 h-20 mb-10"
+        class="flex items-center justify-center bg-secondary text-primary rounded-full w-20 h-20 mb-10 hover:bg-primary hover:text-primary-foreground transition-all ease-in-out duration-300"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -59,16 +58,20 @@
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"
+          class="lucide lucide-book-open-text-icon lucide-book-open-text"
         >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M12 7v14" />
+          <path d="M16 12h2" />
+          <path d="M16 8h2" />
           <path
-            d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3"
+            d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
           />
+          <path d="M6 12h2" />
+          <path d="M6 8h2" />
         </svg>
       </div>
-      <div class="text-center text-base-content text-lg">
-        <h2 class="font-merriweather font-bold mb-4">Variedad</h2>
+      <div class="text-center">
+        <h2 class="font-lobster text-3xl mb-4">Variedad</h2>
         <p class="font-jakarta">
           Nuestros platos ofrecen sabores únicos que fusionan opciones clásicas
           y creativas
@@ -76,12 +79,13 @@
       </div>
     </div>
     <!-- End Variety information -->
+
     <!-- Service information -->
     <div
-      class="flex flex-col items-center justify-start w-75 md:w-100 h-fit min-h-75 bg-accent text-base-100 shadow-lg p-6"
+      class="flex flex-col items-center justify-start w-75 md:w-100 h-fit min-h-75 bg-accent text-base-100 shadow-lg p-6 rounded-xl"
     >
       <div
-        class="flex items-center justify-center bg-primary rounded-full w-20 h-20 mb-10"
+        class="flex items-center justify-center bg-secondary text-primary rounded-full w-20 h-20 mb-10 hover:bg-primary hover:text-primary-foreground transition-all ease-in-out duration-300"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -97,8 +101,8 @@
           />
         </svg>
       </div>
-      <div class="text-center text-base-content text-lg">
-        <h2 class="font-merriweather font-bold mb-4">Servicio Gourmet</h2>
+      <div class="text-center">
+        <h2 class="font-lobster text-3xl mb-4">Servicio Gourmet</h2>
         <p class="font-jakarta">
           Un espacio elegante para disfrutar comer en familia
         </p>
@@ -108,142 +112,171 @@
   </div>
 </div>
 <!-- End Service Section -->
+
 <!-- Description Section -->
 <div
-  class="flex flex-col items-center gap-18 my-15 p-4 w-full h-full text-base-content md:flex-row md:p-10 lg:p-20"
+  class="flex flex-col items-center justify-center my-15 p-4 w-full h-full md:flex-row md:p-10 lg:p-20"
 >
-  <div>
-    <h2
-      class="font-merriweather text-primary text-center text-3xl underline underline-offset-8 md:text-left"
+  <div
+    class="relative flex flex-col items-center justify-between gap-7 bottom-5 md:-right-7 md:bottom-10 bg-accent shadow-2xl min-h-130 max-w-125 p-10 rounded-sm z-49 text-center font-jakarta order-2 md:order-none"
+  >
+    <div>
+      <h2 class="font-lobster text-5xl mb-5">
+        Descubre nuestros
+        <strong class="italic text-primary">Sabores</strong>
+      </h2>
+      <svg
+        viewBox="70 104 360 15"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-fit text-primary"
+      >
+        <path
+          d="M70.002 111.5L100.002 112.5C100.002 112.5 244.502 112.5 246.502 112.5C248.502 112.5 250.002 118.5 250.002 118.5C250.002 118.5 251.502 112.5 253.502 112.5C255.502 112.5 400.002 112.5 400.002 112.5L429.998 111.5L400.002 110.5C400.002 110.5 255.502 110.5 253.502 110.5C251.502 110.5 250.002 104.5 250.002 104.5C250.002 104.5 248.502 110.5 246.502 110.5C244.502 110.5 100.002 110.5 100.002 110.5L70.002 111.5Z"
+          fill="currentColor"
+        />
+      </svg>
+    </div>
+    <div>
+      <span class="font-semibold text-lg"
+        >Elegancia y sabor en nuestro restaurante
+      </span>
+      <p class="mt-7">
+        Disfruta de una experiencia culinaria única, un ambiente sofisticado,
+        atención impecable y una carta diseñada por chefs de primer nivel.
+      </p>
+    </div>
+    <a
+      class="w-fit p-3 font-bold hover:text-primary-foreground hover:bg-primary hover:-translate-y-2 transition-all ease-in-out duration-500 rounded-full"
+      routerLink="reservations"
+      >Reservar Mesa</a
     >
-      “Los sabores en tu mesa”
-    </h2>
-    <p class="font-jakarta text-lg text-center mt-8 md:text-left">
-      Sumérgete en una experiencia culinaria única donde la elegancia y el sabor
-      se fusionan en cada detalle. Nuestro restaurante ofrece un ambiente
-      sofisticado, atención impecable y una carta diseñada por chefs de primer
-      nivel.
-    </p>
-    <p class="font-jakarta text-lg text-center mt-5 md:text-left">
-      Cada plato ofrece sabores refinados con ingredientes frescos y
-      presentaciones memorables. Ideal para celebraciones especiales, cenas
-      íntimas o simplemente para quienes disfrutan del buen gusto en su máxima
-      expresión.
-    </p>
   </div>
-  <div class="max-h-90 max-w-140">
-    <img
-      class="object-cover md:min-w-80 md:min-h-100"
-      src="/assets/photos/front/misc1.webp"
-      alt="Home Page Hero"
-    />
+  <div
+    class="flex flex-row items-center justify-center gap-6 max-w-180 order-1 md:order-none"
+  >
+    <div class="rounded-[5px] overflow-hidden">
+      <img
+        class="object-cover hover:scale-107 transition-all ease-(--img-transition) duration-1000"
+        src="/assets/photos/front/misc12.webp"
+        alt="restaurant service image"
+      />
+    </div>
+    <div class="rounded-[5px] overflow-hidden">
+      <img
+        class="object-cover hover:scale-107 transition-all ease-(--img-transition) duration-1000"
+        src="/assets/photos/front/misc11.webp"
+        alt="restaurant service image"
+      />
+    </div>
   </div>
 </div>
 <!-- End Description Section -->
-<!-- Entries Carousel -->
-<div class="py-7 bg-accent w-full h-88 mt-15 text-primary-content lg:py-10">
-  <div class="px-12 relative md:px-22">
-    <!-- Slider main container -->
-    <div class="swiper" #swiperDiv>
-      <!-- Additional required wrapper -->
-      <div class="swiper-wrapper">
-        <!-- Slides -->
-        @for (entry of entries; track $index) {
-        <div
-          class="swiper-slide w-[350px] h-[250px] flex flex-col justify-center items-center shadow-xl rounded-md"
-        >
-          <img
-            [src]="entry.image"
-            alt="Plato"
-            class="w-full h-[200px] object-cover mx-auto rounded-t-md"
-          />
-          <h2
-            class="flex font-jakarta text-base-content h-[50px] my-2 text-base text-center justify-center items-center md:text-lg"
-          >
-            {{ entry.name }}
-          </h2>
-        </div>
-        }
-      </div>
-      <hr class="mb-13 md:mb-10 lg:mb-8" />
 
-      <!-- Pagination Bullets (Default) -->
-      <div class="swiper-pagination"></div>
+<!-- Menu Options Section -->
+<div class="bg-accent flex flex-col justify-center md:flex-row h-130 md:h-100">
+  <div
+    class="relative flex-1 flex items-center justify-center bg-primary overflow-hidden group hover:flex-1/11 transition-all ease-in-out duration-700"
+  >
+    <div
+      class="opacity-0 absolute top-0 left-0 w-full h-full bg-[url(/assets/photos/front/entries-home.webp)] bg-cover bg-center bg-no-repeat group-hover:block group-hover:opacity-100 group-hover:scale-110 transition-all ease-in-out duration-500"
+    ></div>
+    <div
+      class="relative flex flex-col items-center justify-center gap-5 text-center text-foreground group-hover:text-primary-foreground transition-all"
+    >
+      <p class="font-lobster text-5xl">Entradas</p>
+      <svg
+        viewBox="70 104 360 15"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M70.002 111.5L100.002 112.5C100.002 112.5 244.502 112.5 246.502 112.5C248.502 112.5 250.002 118.5 250.002 118.5C250.002 118.5 251.502 112.5 253.502 112.5C255.502 112.5 400.002 112.5 400.002 112.5L429.998 111.5L400.002 110.5C400.002 110.5 255.502 110.5 253.502 110.5C251.502 110.5 250.002 104.5 250.002 104.5C250.002 104.5 248.502 110.5 246.502 110.5C244.502 110.5 100.002 110.5 100.002 110.5L70.002 111.5Z"
+          fill="currentColor"
+        />
+      </svg>
+      <span class="font-jakarta italic">Bocados para compartir</span>
     </div>
-    <!-- Navigation Buttons -->
-    <a
-      class="swiper-button-prev-custom absolute top-1/2 left-1 md:left-8 transform -translate-y-1/2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-primary cursor-pointer"
+    <a class="absolute top-0 left-0 w-full h-full" href=""></a>
+  </div>
+  <div
+    class="relative flex-1 flex items-center justify-center bg-secondary overflow-hidden group hover:flex-1/11 transition-all ease-in-out duration-700"
+  >
+    <div
+      class="opacity-0 absolute top-0 left-0 w-full h-full bg-[url(/assets/photos/front/dishes-home.webp)] bg-cover bg-center bg-no-repeat group-hover:block group-hover:opacity-100 group-hover:scale-110 transition-all ease-in-out duration-500"
+    ></div>
+    <div
+      class="relative flex flex-col items-center justify-center gap-5 text-center text-foreground group-hover:text-primary-foreground transition-all"
     >
+      <p class="font-lobster text-5xl">Menú</p>
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
+        viewBox="70 104 360 15"
         fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="text-primary-content"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M5 12l14 0" />
-        <path d="M5 12l6 6" />
-        <path d="M5 12l6 -6" />
+        <path
+          d="M70.002 111.5L100.002 112.5C100.002 112.5 244.502 112.5 246.502 112.5C248.502 112.5 250.002 118.5 250.002 118.5C250.002 118.5 251.502 112.5 253.502 112.5C255.502 112.5 400.002 112.5 400.002 112.5L429.998 111.5L400.002 110.5C400.002 110.5 255.502 110.5 253.502 110.5C251.502 110.5 250.002 104.5 250.002 104.5C250.002 104.5 248.502 110.5 246.502 110.5C244.502 110.5 100.002 110.5 100.002 110.5L70.002 111.5Z"
+          fill="currentColor"
+        />
       </svg>
-    </a>
-    <a
-      class="swiper-button-next-custom absolute top-1/2 right-1 md:right-8 transform -translate-y-1/2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-primary cursor-pointer"
+      <span class="font-jakarta italic">Nuestros Platos Principales</span>
+    </div>
+    <a class="absolute top-0 left-0 w-full h-full" href=""></a>
+  </div>
+  <div
+    class="relative flex-1 flex items-center justify-center bg-primary overflow-hidden group hover:flex-1/11 transition-all ease-in-out duration-700"
+  >
+    <div
+      class="opacity-0 absolute top-0 left-0 w-full h-full bg-[url(/assets/photos/front/drinks-home.webp)] bg-cover bg-center bg-no-repeat group-hover:block group-hover:opacity-100 group-hover:scale-110 transition-all ease-in-out duration-500"
+    ></div>
+    <div
+      class="relative flex flex-col items-center justify-center gap-5 text-center text-foreground group-hover:text-primary-foreground transition-all"
     >
+      <p class="font-lobster text-5xl">Bebidas</p>
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
+        viewBox="70 104 360 15"
         fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="text-primary-content"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M5 12l14 0" />
-        <path d="M13 18l6 -6" />
-        <path d="M13 6l6 6" />
+        <path
+          d="M70.002 111.5L100.002 112.5C100.002 112.5 244.502 112.5 246.502 112.5C248.502 112.5 250.002 118.5 250.002 118.5C250.002 118.5 251.502 112.5 253.502 112.5C255.502 112.5 400.002 112.5 400.002 112.5L429.998 111.5L400.002 110.5C400.002 110.5 255.502 110.5 253.502 110.5C251.502 110.5 250.002 104.5 250.002 104.5C250.002 104.5 248.502 110.5 246.502 110.5C244.502 110.5 100.002 110.5 100.002 110.5L70.002 111.5Z"
+          fill="currentColor"
+        />
       </svg>
-    </a>
+      <span class="font-jakarta italic">Cócteles, vinos y más</span>
+    </div>
+    <a class="absolute top-0 left-0 w-full h-full" href=""></a>
   </div>
 </div>
-<!-- End Entries Carousel -->
+<!-- End Menu Options Section -->
+
+<upcoming-events-section />
+
 <!-- Reservation Section -->
-<div
-  class="flex items-center justify-center w-full p-4 overflow-hidden md:p-10 lg:p-20"
->
-  <div class="relative flex items-center justify-center w-315 h-150">
+<div class="flex items-center justify-center w-full p-4 md:p-10 lg:p-20">
+  <div
+    class="relative flex items-center justify-center w-315 h-150 rounded-xl overflow-hidden"
+  >
     <img
       class="w-full h-full object-cover"
       src="/assets/photos/front/reservation-hero.webp"
       alt="Reservaciones"
     />
-    <div class="absolute inset-0 bg-base-content opacity-50"></div>
+    <div class="absolute inset-0 bg-foreground/50"></div>
   </div>
-  <div class="absolute flex flex-col items-center p-6">
-    <h2 class="font-lobster text-6xl text-primary-content mt-2">
-      Reservaciones
-    </h2>
-    <p
-      class="font-jakarta text-2xl text-primary-content text-center drop-shadow my-20"
-    >
+  <div
+    class="absolute flex flex-col items-center p-6 text-primary-foreground font-jakarta"
+  >
+    <h2 class="font-lobster text-6xl mt-2">Reservaciones</h2>
+    <p class="text-3xl text-center my-20">
       Disfruta de una experiencia única de sabores<br />
-      y excelencia en servicio con nosotros
+      y excelencia en servicio
     </p>
-    <button
-      routerLink="/reservations"
-      class="btn btn-primary bg-primary-content text-base-content font-jakarta px-6 py-2 mb-2 cursor-pointer rounded-full shadow hover:bg-primary hover:text-primary-content"
+    <a
+      class="w-fit font-bold p-3 bg-primary text-primary-foreground hover:text-primary hover:bg-primary-foreground hover:-translate-y-2 transition-all ease-in-out duration-500 rounded-full"
+      routerLink="reservations"
+      >Reservar Mesa</a
     >
-      Reservar
-    </button>
   </div>
 </div>
 <!-- End Reservation Section -->
