@@ -1,16 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { MenuService } from '@front/services/menu.service';
 import { RouterLink } from '@angular/router';
 import { HeroSection } from '@front/components/hero-section/hero-section.component';
+import { UpcomingEventsSectionComponent } from './upcoming-events-section/upcoming-events-section.component';
 
 @Component({
   selector: 'app-home-page',
-  imports: [RouterLink, HeroSection],
+  imports: [RouterLink, HeroSection, UpcomingEventsSectionComponent],
   templateUrl: './home-page.component.html',
 })
-export class HomePageComponent {
-  #menuService = inject(MenuService);
-
-  public entries = this.#menuService.getPlatesByCategory('entry');
-}
+export class HomePageComponent {}
