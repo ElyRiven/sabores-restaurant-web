@@ -1,5 +1,4 @@
 import {
-  afterNextRender,
   Component,
   effect,
   ElementRef,
@@ -19,12 +18,13 @@ import { Address } from '@front/interfaces/address.interface';
 import { AddressService } from '@front/services/address.service';
 import { environment } from 'src/environments/environment';
 import { HeroSection } from '@front/components/hero-section/hero-section.component';
+import { RouterLink } from '@angular/router';
 
 mapboxgl.accessToken = environment.mapboxkey;
 
 @Component({
   selector: 'app-about-page',
-  imports: [HeroSection],
+  imports: [RouterLink, HeroSection],
   templateUrl: './about-page.component.html',
 })
 export class AboutPageComponent implements OnInit {
