@@ -61,11 +61,11 @@
     class="flex flex-col items-center justify-center md:justify-between gap-5 md:w-3/10 lg:w-4/10 px-8 lg:px-20 py-10 order-2 md:order-none"
   >
     <div class="text-center md:text-right font-jakarta">
-      <h2 class="font-lobster text-5xl md:text-3xl lg:text-5xl">
+      <h2 class="font-lobster text-5xl md:max-lg:text-3xl">
         Nuestra Gastronomía
       </h2>
       <br />
-      <p class="text-base md:text-sm lg:text-base">
+      <p class="text-base md:max-lg:text-sm">
         Inspirados en la cocina moderna, reinterpretamos sabores clásicos con
         creatividad y equilibrio. Cada plato refleja nuestra pasión por la
         excelencia y el placer de compartir.
@@ -93,99 +93,113 @@
 <!-- End Gastronomy Section -->
 
 <!-- Highlights Section -->
-<div class="flex items-center justify-center w-full h-full bg-primary md:h-50">
+<div
+  class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-4 gap-5 w-full h-fit sm:bg-primary px-10 py-5 font-jakarta text-center place-items-center"
+>
   <div
-    class="flex flex-col items-center justify-between w-full p-10 m-5 gap-5 md:flex-row"
+    class="flex items-center justify-center gap-10 sm:gap-3 w-full md:max-w-35 bg-primary sm:bg-transparent text-background px-3 py-5 sm:p-0 rounded-xl md:rounded-none"
   >
-    <div
-      class="flex flex-col items-center font-merriweather text-primary-content text-center md:flex-row gap-3 md:text-left"
+    <svg
+      version="1.1"
+      id="_x32_"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 512 512"
+      xml:space="preserve"
+      fill="currentColor"
+      class="shrink-0 size-10 md:size-15"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="90"
-        height="90"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path
-          d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3"
-        />
-      </svg>
-      <span class="text-xl w-40 md:w-30 lg:w-auto"
-        >Platos con sabores únicos
-      </span>
-    </div>
-    <div
-      class="flex flex-col items-center font-merriweather text-primary-content text-center md:flex-row gap-3 md:text-left"
-    >
-      <svg
-        height="90"
-        width="90"
-        version="1.1"
-        id="_x32_"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 512 512"
-        xml:space="preserve"
-        fill="currentColor"
-      >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g
-          id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></g>
-        <g id="SVGRepo_iconCarrier">
-          <g>
-            <path
-              class="st0"
-              d="M430.126,237.978H81.874c-15.456,0-27.984,12.528-27.984,27.984c0,15.456,12.528,27.984,27.984,27.984h348.252 c15.456,0,27.984-12.528,27.984-27.984C458.111,250.507,445.582,237.978,430.126,237.978z"
-            ></path>
-            <path
-              class="st0"
-              d="M273.934,50.479c6.398-5.229,10.567-13.075,10.567-21.978C284.501,12.76,271.738,0,256,0 c-15.738,0-28.5,12.76-28.5,28.501c0,8.903,4.169,16.75,10.567,21.978c-86.018,8.964-153.083,81.689-153.083,170.075h342.033 C427.017,132.168,359.952,59.443,273.934,50.479z M184.083,192.57h-55.568c0-55.793,42.001-101.705,96.094-108.021L184.083,192.57z "
-            ></path>
-            <path
-              class="st0"
-              d="M365.369,380.852l-8.575-6.061c-8.56-6.036-14.126-15.474-15.292-25.896l-3.924-35.102 c0.122-3.996,0.161-9.596-2.644-12.449c-2.806-2.854-6.657-4.446-10.662-4.398v0.049c-4.782,0.054-10.789-0.407-15.918,6.407 l-14.654,26.278c-9.711,16.184-22.188,16.16-35.218,11.666l-102.16-44.844c-5.6-1.925-11.8,0.037-15.277,4.828l-0.139,0.195 c-4.206,5.794-3.128,13.87,2.45,18.365l117.614,97.903l66.205,33.268l-10.944,20.12L389.27,512l58.756-107.997l-73.043-40.817 L365.369,380.852z M422.823,411.29L381.9,486.511l-40.465-22.616l40.92-75.221L422.823,411.29z"
-            ></path>
-            <circle class="st0" cx="395.522" cy="421.433" r="10.105"></circle>
-          </g>
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <g>
+          <path
+            class="st0"
+            d="M430.126,237.978H81.874c-15.456,0-27.984,12.528-27.984,27.984c0,15.456,12.528,27.984,27.984,27.984h348.252 c15.456,0,27.984-12.528,27.984-27.984C458.111,250.507,445.582,237.978,430.126,237.978z"
+          ></path>
+          <path
+            class="st0"
+            d="M273.934,50.479c6.398-5.229,10.567-13.075,10.567-21.978C284.501,12.76,271.738,0,256,0 c-15.738,0-28.5,12.76-28.5,28.501c0,8.903,4.169,16.75,10.567,21.978c-86.018,8.964-153.083,81.689-153.083,170.075h342.033 C427.017,132.168,359.952,59.443,273.934,50.479z M184.083,192.57h-55.568c0-55.793,42.001-101.705,96.094-108.021L184.083,192.57z "
+          ></path>
+          <path
+            class="st0"
+            d="M365.369,380.852l-8.575-6.061c-8.56-6.036-14.126-15.474-15.292-25.896l-3.924-35.102 c0.122-3.996,0.161-9.596-2.644-12.449c-2.806-2.854-6.657-4.446-10.662-4.398v0.049c-4.782,0.054-10.789-0.407-15.918,6.407 l-14.654,26.278c-9.711,16.184-22.188,16.16-35.218,11.666l-102.16-44.844c-5.6-1.925-11.8,0.037-15.277,4.828l-0.139,0.195 c-4.206,5.794-3.128,13.87,2.45,18.365l117.614,97.903l66.205,33.268l-10.944,20.12L389.27,512l58.756-107.997l-73.043-40.817 L365.369,380.852z M422.823,411.29L381.9,486.511l-40.465-22.616l40.92-75.221L422.823,411.29z"
+          ></path>
+          <circle class="st0" cx="395.522" cy="421.433" r="10.105"></circle>
         </g>
-      </svg>
-      <span class="text-xl w-40 md:w-30 lg:w-auto">Servicio profesional</span>
+      </g>
+    </svg>
+    <div class="flex flex-col items-center justify-center md:text-lg">
+      <span class="font-bold italic">+50</span>
+      <span>Platos únicos</span>
     </div>
-    <div
-      class="flex flex-col items-center font-merriweather text-primary-content text-center md:flex-row gap-3 md:text-left"
+  </div>
+  <div
+    class="flex items-center justify-center gap-10 sm:gap-3 w-full md:max-w-35 bg-primary sm:bg-transparent text-background px-3 py-5 sm:p-0 rounded-xl md:rounded-none"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-circle-star-icon lucide-circle-star shrink-0 size-10 md:size-15"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="90"
-        height="90"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-check"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path
-          d="M11.5 21h-5.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v6"
-        />
-        <path d="M16 3v4" />
-        <path d="M8 3v4" />
-        <path d="M4 11h16" />
-        <path d="M15 19l2 2l4 -4" />
-      </svg>
-      <span class="text-xl w-40 md:w-30 lg:w-auto">Eventos exclusivos</span>
+      <path
+        d="M11.051 7.616a1 1 0 0 1 1.909.024l.737 1.452a1 1 0 0 0 .737.535l1.634.256a1 1 0 0 1 .588 1.806l-1.172 1.168a1 1 0 0 0-.282.866l.259 1.613a1 1 0 0 1-1.541 1.134l-1.465-.75a1 1 0 0 0-.912 0l-1.465.75a1 1 0 0 1-1.539-1.133l.258-1.613a1 1 0 0 0-.282-.867l-1.156-1.152a1 1 0 0 1 .572-1.822l1.633-.256a1 1 0 0 0 .737-.535z"
+      />
+      <circle cx="12" cy="12" r="10" />
+    </svg>
+    <div class="flex flex-col items-center justify-center md:text-lg">
+      <span class="font-bold italic">+10</span>
+      <span>Años de experiencia</span>
+    </div>
+  </div>
+  <div
+    class="flex items-center justify-center gap-10 sm:gap-3 w-full md:max-w-35 bg-primary sm:bg-transparent text-background px-3 py-5 sm:p-0 rounded-xl md:rounded-none"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-users-round-icon lucide-users-round shrink-0 size-10 md:size-15"
+    >
+      <path d="M18 21a8 8 0 0 0-16 0" />
+      <circle cx="10" cy="8" r="5" />
+      <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" />
+    </svg>
+    <div class="flex flex-col items-center justify-center md:text-lg">
+      <span class="font-bold italic">+500</span>
+      <span>Clientes satisfechos</span>
+    </div>
+  </div>
+  <div
+    class="flex items-center justify-center gap-10 sm:gap-3 w-full md:max-w-35 bg-primary sm:bg-transparent text-background px-3 py-5 sm:p-0 rounded-xl md:rounded-none"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      class="icon icon-tabler icons-tabler-filled icon-tabler-glass-full shrink-0 size-10 md:size-15"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path
+        d="M5.004 10.229l-.003 -.186l.001 -.113l.008 -.071l1 -7a1 1 0 0 1 .877 -.853l.113 -.006h10a1 1 0 0 1 .968 .747l.022 .112l1.006 7.05l.004 .091c0 3.226 -2.56 5.564 -6 5.945v4.055h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-4.055c-3.358 -.371 -5.878 -2.609 -5.996 -5.716zm11.129 -6.229h-8.267l-.607 4.258a6.001 6.001 0 0 1 5.125 .787l.216 .155a4 4 0 0 0 4.32 .31l-.787 -5.51z"
+      />
+    </svg>
+    <div class="flex flex-col items-center justify-center md:text-lg">
+      <span class="font-bold italic">+25</span>
+      <span>Eventos exclusivos</span>
     </div>
   </div>
 </div>
