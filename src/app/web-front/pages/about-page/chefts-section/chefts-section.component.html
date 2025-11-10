@@ -1,0 +1,31 @@
+<!-- Chefs Section -->
+<div class="flex justify-center w-full h-full px-[7%] py-[3%]">
+  <div class="flex flex-col items-center justify-center gap-10 font-jakarta">
+    <h2 class="font-lobster text-5xl">Nuestros Chefs</h2>
+    <div class="flex flex-col md:flex-row items-center justify-between gap-10">
+      <!--  -->
+      @for (chef of chefsService.getChefs(); track $index) {
+      <div class="flex flex-col gap-5 group">
+        <div
+          class="w-full overflow-hidden group-hover:scale-92 transition-all duration-500"
+        >
+          <img
+            class="object-cover group-hover:scale-122 transition-all duration-500 rounded-xl"
+            [src]="chef.image"
+            [alt]="chef.name + 'image'"
+          />
+        </div>
+        <div>
+          <p class="text-secondary-foreground italic">{{ chef.role }}</p>
+          <h5 class="font-bold text-xl">{{ chef.name }}</h5>
+        </div>
+        <p>
+          {{ chef.quote }}
+        </p>
+      </div>
+      }
+      <!--  -->
+    </div>
+  </div>
+</div>
+<!-- End Chefs Section -->

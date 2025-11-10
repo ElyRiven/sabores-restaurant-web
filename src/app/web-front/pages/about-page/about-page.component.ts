@@ -12,26 +12,23 @@ import mapboxgl, { LngLatLike, Marker } from 'mapbox-gl';
 import Swiper from 'swiper';
 import { Autoplay, FreeMode } from 'swiper/modules';
 
-import { Chef } from '@front/interfaces/chef.interface';
-import { ChefService } from '@front/services/chef.service';
 import { Address } from '@front/interfaces/address.interface';
 import { AddressService } from '@front/services/address.service';
 import { environment } from 'src/environments/environment';
 import { HeroSection } from '@front/components/hero-section/hero-section.component';
 import { RouterLink } from '@angular/router';
+import { CheftsSectionComponent } from './chefts-section/chefts-section.component';
 
 mapboxgl.accessToken = environment.mapboxkey;
 
 @Component({
   selector: 'app-about-page',
-  imports: [RouterLink, HeroSection],
+  imports: [RouterLink, HeroSection, CheftsSectionComponent],
   templateUrl: './about-page.component.html',
 })
 export class AboutPageComponent implements OnInit {
-  #chefService = inject(ChefService);
   #addressService = inject(AddressService);
 
-  public chefsArray: Chef[] | undefined = undefined;
   public aboutImages: string[] = [
     '/assets/photos/front/misc3.webp',
     '/assets/photos/front/misc4.webp',
@@ -57,8 +54,6 @@ export class AboutPageComponent implements OnInit {
   ngOnInit(): void {
     const defaultAddress: Address = this.#addressService.getAddressById(1);
     const allAddresses: Address[] = this.#addressService.getAllAddress();
-
-    this.chefsArray = this.#chefService.getChefs();
 
     this.selectedAddress.set(defaultAddress);
     this.addressArray.set(allAddresses);
