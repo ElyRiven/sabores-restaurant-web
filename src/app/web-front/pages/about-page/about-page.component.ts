@@ -10,7 +10,7 @@ import {
 
 import mapboxgl, { LngLatLike, Marker } from 'mapbox-gl';
 import Swiper from 'swiper';
-import { Autoplay, FreeMode } from 'swiper/modules';
+import { FreeMode } from 'swiper/modules';
 
 import { Address } from '@front/interfaces/address.interface';
 import { AddressService } from '@front/services/address.service';
@@ -18,15 +18,29 @@ import { environment } from 'src/environments/environment';
 import { HeroSection } from '@front/components/hero-section/hero-section.component';
 import { RouterLink } from '@angular/router';
 import { CheftsSectionComponent } from './chefts-section/chefts-section.component';
+import { HlmCarouselImports } from '@spartan-ng/helm/carousel';
+
+import Autoplay from 'embla-carousel-autoplay';
 
 mapboxgl.accessToken = environment.mapboxkey;
 
 @Component({
   selector: 'app-about-page',
-  imports: [RouterLink, HeroSection, CheftsSectionComponent],
+  imports: [
+    RouterLink,
+    HeroSection,
+    CheftsSectionComponent,
+    HlmCarouselImports,
+  ],
   templateUrl: './about-page.component.html',
 })
 export class AboutPageComponent implements OnInit {
+  public items = Array.from({ length: 5 }, (_, i) => i + 1);
+
+  public plugins = [
+    Autoplay({ delay: 500, playOnInit: true, stopOnInteraction: false }),
+  ];
+
   #addressService = inject(AddressService);
 
   public aboutImages: string[] = [
@@ -120,7 +134,7 @@ export class AboutPageComponent implements OnInit {
         },
       },
 
-      modules: [Autoplay, FreeMode],
+      modules: [FreeMode],
     });
   }
 

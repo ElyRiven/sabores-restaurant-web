@@ -208,16 +208,14 @@
 <chefts-section />
 
 <!-- Image Carousel -->
-<div
+<!-- <div
   class="flex items-center py-10 w-full h-full text-base-content relative pointer-events-none"
 >
   <div class="swiper relative w-full" #swiperDiv>
     <div
       class="absolute inset-0 w-full h-full bg-black/50 pointer-events-none z-10"
     ></div>
-    <!-- Additional required wrapper -->
     <div class="swiper-wrapper ease-linear">
-      <!-- Slides -->
       @for (image of aboutImages; track $index) {
       <div class="swiper-slide">
         <img
@@ -230,8 +228,34 @@
       }
     </div>
   </div>
-</div>
+</div> -->
 <!-- End Image Carousel -->
+
+<!-- Reviews Carousel -->
+<div class="flex w-full items-center justify-center p-4 bg-accent">
+  <hlm-carousel
+    class="w-full max-w-sm"
+    [plugins]="plugins"
+    [options]="{ loop: true }"
+  >
+    <hlm-carousel-content>
+      @for (item of items; track item) {
+      <hlm-carousel-item>
+        <div class="p-1">
+          <div
+            class="flex aspect-square items-center justify-center p-6 border-black border-2"
+          >
+            <span class="text-4xl font-semibold">{{ item }}</span>
+          </div>
+        </div>
+      </hlm-carousel-item>
+      }
+    </hlm-carousel-content>
+    <button hlm-carousel-previous></button>
+    <button hlm-carousel-next></button>
+  </hlm-carousel>
+</div>
+<!-- End Reviews Carousel -->
 
 <!-- Sección Visítanos -->
 <section
