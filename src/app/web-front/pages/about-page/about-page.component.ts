@@ -37,7 +37,7 @@ mapboxgl.accessToken = environment.mapboxkey;
 })
 export class AboutPageComponent implements OnInit {
   public readonly reviewsService = inject(ReviewsService);
-  #addressService = inject(AddressService);
+  public readonly addressService = inject(AddressService);
 
   public plugins = [
     Autoplay({ delay: 5000, playOnInit: true, stopOnInteraction: false }),
@@ -51,8 +51,8 @@ export class AboutPageComponent implements OnInit {
   public mapDiv = viewChild<ElementRef>('mapDiv');
 
   ngOnInit(): void {
-    const defaultAddress: Address = this.#addressService.getAddressById(1);
-    const allAddresses: Address[] = this.#addressService.getAllAddress();
+    const defaultAddress: Address = this.addressService.getAddressById(1);
+    const allAddresses: Address[] = this.addressService.getAllAddress();
 
     this.selectedAddress.set(defaultAddress);
     this.addressArray.set(allAddresses);
@@ -94,8 +94,8 @@ export class AboutPageComponent implements OnInit {
   createMarkers(map: mapboxgl.Map) {
     if (!this.addressArray()) return;
 
-    for (const direction of this.addressArray()!) {
-      const lngLat: LngLatLike = [direction.longitude, direction.latitude];
+    for (const address of this.addressArray()!) {
+      const lngLat: LngLatLike = [address.longitude, address.latitude];
 
       const mapboxMarker = new mapboxgl.Marker({
         color: '#fe5d26',
@@ -121,7 +121,12 @@ export class AboutPageComponent implements OnInit {
   }
 
   locationChange(id: number) {
-    const newAddress = this.#addressService.getAddressById(id);
+    if (!this.addressArray()) return;
+
+    const newAddress = this.addressArray()!.find(
+      (address) => address.id === id
+    );
+    // const newAddress = this.addressService.getAddressById(id);
 
     this.selectedAddress.set(newAddress);
 

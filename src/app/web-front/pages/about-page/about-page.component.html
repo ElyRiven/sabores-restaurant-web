@@ -267,15 +267,17 @@
 <section
   class="w-full pb-10 pt-0! flex flex-col items-center p-4 md:p-10 lg:p-20"
 >
-  <h2 class="font-merriweather text-3xl text-center my-5">Visítanos</h2>
+  <h2 class="font-lobster text-5xl text-center py-[5%]">Visítanos</h2>
   <div
     class="flex flex-col gap-4 justify-center mb-8 w-full md:flex-row md:gap-10"
   >
     @defer ( on viewport ) {
-    <a class="cursor-pointer" (click)="locationChange(1)">
+    <!--  -->
+    @for (address of addressArray(); track address) {
+    <a class="cursor-pointer" (click)="locationChange(address.id)">
       <div
-        class="group flex flex-row items-center justify-center gap-5 border border-base-content/60 bg-accent rounded-xl px-6 py-4 hover:bg-primary transition-all duration-200"
-        [class]="{ 'bg-primary': selectedAddress()?.id === 1 }"
+        class="group flex flex-row items-center justify-center gap-5 border border-secondary-foreground/40 bg-accent rounded-xl px-6 py-4 hover:bg-primary transition-all duration-200"
+        [class]="{ 'bg-primary': selectedAddress()?.id === address.id }"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -287,8 +289,10 @@
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="text-primary group-hover:text-primary-content"
-          [class]="{ 'text-primary-content': selectedAddress()?.id === 1 }"
+          class="text-primary group-hover:text-primary-foreground"
+          [class]="{
+            'text-primary-foreground': selectedAddress()?.id === address.id
+          }"
         >
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M3 21l18 0" />
@@ -299,141 +303,41 @@
           <path d="M19 21l0 -10.15" />
           <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
         </svg>
-        <div class="flex flex-col">
+        <div class="flex flex-col transition-all duration-200">
           <span
-            class="text-sm mb-1 group-hover:text-primary-content group-hover:font-bold"
+            class="text-sm mb-1 group-hover:text-primary-foreground group-hover:font-bold"
             [class]="
-              selectedAddress()?.id === 1
-                ? 'text-primary-content font-bold'
-                : 'text-base-content'
+              selectedAddress()?.id === address.id
+                ? 'text-primary-foreground font-bold'
+                : 'text-foreground'
             "
-            >Restaurante Norte</span
+            >{{ address.name }}</span
           >
           <span
-            class="text-sm text-base-content group-hover:text-primary-content"
+            class="text-sm group-hover:text-primary-foreground"
             [class]="
-              selectedAddress()?.id === 1
-                ? 'text-primary-content'
-                : 'text-base-content'
+              selectedAddress()?.id === address.id
+                ? 'text-primary-foreground'
+                : 'text-foreground'
             "
-            >Av. Sol Naciente 1457, Barrio El Encino</span
-          >
-        </div>
-      </div>
-    </a>
-
-    <a class="cursor-pointer" (click)="locationChange(2)">
-      <div
-        class="group flex flex-row items-center justify-center gap-5 border border-base-content/60 bg-accent rounded-xl px-6 py-4 hover:bg-primary transition-all duration-200"
-        [class]="{ 'bg-primary': selectedAddress()?.id === 2 }"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="text-primary group-hover:text-primary-content"
-          [class]="{ 'text-primary-content': selectedAddress()?.id === 2 }"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M3 21l18 0" />
-          <path
-            d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4"
-          />
-          <path d="M5 21l0 -10.15" />
-          <path d="M19 21l0 -10.15" />
-          <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
-        </svg>
-        <div class="flex flex-col">
-          <span
-            class="text-sm mb-1 group-hover:text-primary-content group-hover:font-bold"
-            [class]="
-              selectedAddress()?.id === 2
-                ? 'text-primary-content font-bold'
-                : 'text-base-content'
-            "
-            >Restaurante Centro</span
-          >
-          <span
-            class="text-sm text-base-content group-hover:text-primary-content"
-            [class]="
-              selectedAddress()?.id === 2
-                ? 'text-primary-content'
-                : 'text-base-content'
-            "
-            >Av. Del Olivo 309, Sector Monte Claro</span
-          >
-        </div>
-      </div>
-    </a>
-
-    <a class="cursor-pointer" (click)="locationChange(3)">
-      <div
-        class="group flex flex-row items-center justify-center gap-5 border border-base-content/60 bg-accent rounded-xl px-6 py-4 hover:bg-primary transition-all duration-200"
-        [class]="{ 'bg-primary': selectedAddress()?.id === 3 }"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="text-primary group-hover:text-primary-content"
-          [class]="{ 'text-primary-content': selectedAddress()?.id === 3 }"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M3 21l18 0" />
-          <path
-            d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4"
-          />
-          <path d="M5 21l0 -10.15" />
-          <path d="M19 21l0 -10.15" />
-          <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
-        </svg>
-        <div class="flex flex-col">
-          <span
-            class="text-sm mb-1 group-hover:text-primary-content group-hover:font-bold"
-            [class]="
-              selectedAddress()?.id === 3
-                ? 'text-primary-content font-bold'
-                : 'text-base-content'
-            "
-            >Restaurante Sur</span
-          >
-          <span
-            class="text-sm text-base-content group-hover:text-primary-content"
-            [class]="
-              selectedAddress()?.id === 3
-                ? 'text-primary-content'
-                : 'text-base-content'
-            "
-            >Av. Horizonte Azul 880, Zona Mirador Norte</span
+            >{{ address.streets }}</span
           >
         </div>
       </div>
     </a>
     }
     <!--  -->
+    }
+    <!--  -->
     @placeholder ( minimum 1.5s) {
-    <div
-      class="group flex flex-row items-center justify-center gap-5 px-6 py-4"
-    >
+    <div class="flex flex-row items-center justify-center gap-5 px-6 py-4">
       <div class="flex-1 loading loading-spinner text-primary"></div>
     </div>
     }
   </div>
   @defer ( on viewport ) {
   <div
-    class="w-full h-64 p-10 rounded-xl border border-base-content/60 md:h-100"
+    class="w-full h-64 p-10 rounded-xl border border-foreground/40 md:h-100"
     #mapDiv
   ></div>
   }
