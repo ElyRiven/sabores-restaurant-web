@@ -2,73 +2,49 @@
   [heroImage]="'/assets/photos/front/event-hero.webp'"
   [heroTitle]="'Eventos'"
 />
-<!-- Description Section -->
-<div class="relative flex justify-center -mt-30">
-  <div
-    class="flex justify-center w-full h-full bg-accent shadow-lg mx-4 md:mx-10 lg:mx-20 transition-all ease-in-out"
-  >
-    <div
-      class="flex flex-col items-center justify-center text-center py-15 px-4 md:px-20"
-    >
-      <h2
-        class="font-merriweather text-3xl leading-relaxed underline underline-offset-10 mb-10"
+
+<!-- Events List -->
+
+<section class="px-[7%] py-[3%] font-jakarta">
+  <div class="flex flex-col items-center justify-center gap-7">
+    @for (event of eventService.getAllEvents(); track event; let odd = $odd) {
+    <div class="flex flex-col sm:flex-row items-center gap-10">
+      <div
+        class="aspect-video w-full max-h-50 sm:flex-1/3 sm:max-w-250"
+        [class.sm:order-2]="odd"
       >
-        Experiencias Únicas
-      </h2>
-      <p class="font-jakarta text-lg">
-        Vive una experiencia única en un ambiente elegante y acogedor. Disfruta
-        de una propuesta gastronómica gourmet, atención y ambiente acogedor,
-        cada momento está diseñado para impresionar y emocionar. Vive ocasiones
-        especiales, celebraciones y encuentros privados con nosotros.
-      </p>
-    </div>
-  </div>
-</div>
-<!-- End Description Section -->
-<!-- Category Selection -->
-<div class="flex justify-center mx-4 my-4 md:mx-10 md:justify-start lg:mx-20">
-  <div class="dropdown font-jakarta">
-    <div tabindex="0" role="button" class="btn btn-primary m-1">
-      {{ selectedCategory() | categoryTitle }}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"
+        <img
+          class="size-full object-cover rounded-xl"
+          [src]="event.image"
+          [alt]="event.title + ' event image'"
+        />
+      </div>
+      <div
+        class="flex flex-col items-start justify-center sm:flex-2/3 gap-3"
+        [class]="odd ? 'sm:items-end sm:order-1' : 'sm:items-start'"
       >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M6 9l6 6l6 -6" />
-      </svg>
+        <div class="flex items-start justify-center gap-2 italic">
+          <span>{{ event.date | date : "longDate" }}</span>
+          <div>{{ event.category }}</div>
+        </div>
+        <h2 class="text-3xl font-lobster">{{ event.title }}</h2>
+        <p [class.sm:text-right]="odd">
+          {{ event.description }}
+        </p>
+        <button>reserve text</button>
+      </div>
     </div>
-    <ul
-      tabindex="0"
-      class="dropdown-content menu bg-base-100 rounded-box z-1 w-full p-2 shadow-sm"
-    >
-      @for (category of categoryList; track $index) {
-      <li class="text-secondary-content">
-        <a (click)="onCategoryChange(category)">{{
-          category | categoryTitle
-        }}</a>
-      </li>
-      }
-    </ul>
+    }
   </div>
-</div>
-<!-- End Category Selection -->
-<div
+</section>
+
+<!-- <div
   class="w-full mx-auto mt-8 px-4 md:px-10 lg:px-20 transition-all ease-in-out"
 >
   <div
     class="grid grid-cols-1 gap-6 mb-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
   >
-    <!-- Event Cards -->
-    @for (event of eventsArray(); track $index) {
+    @for (event of eventService.getAllEvents(); track event) {
     <div
       class="w-full rounded-xl overflow-hidden shadow bg-cream-50 border border-secondary-content/50 flex flex-col"
     >
@@ -77,7 +53,6 @@
         [alt]="event.title"
         class="w-full h-32 object-cover"
       />
-      <!-- Contenido -->
       <div class="flex flex-col flex-1 p-4 bg-accent gap-3">
         <div class="flex items-center justify-between mb-2">
           <h3 class="font-merriweather font-bold text-lg">{{ event.title }}</h3>
@@ -96,11 +71,11 @@
       </div>
     </div>
     }
-    <!--  -->
     @empty {
     <div class="w-full col-span-full flex justify-center my-8">
       <div class="loading loading-spinner text-primary"></div>
     </div>
     }
   </div>
-</div>
+</div> -->
+<!-- End Events List -->
