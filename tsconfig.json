@@ -11,6 +11,12 @@
       ],
       "@spartan-ng/helm/utils": [
         "./libs/ui/ui-utils-helm/src/index.ts"
+      ],
+      "@spartan-ng/helm/carousel": [
+        "./libs/ui/ui-carousel-helm/src/index.ts"
+      ],
+      "@spartan-ng/helm/icon": [
+        "./libs/ui/ui-icon-helm/src/index.ts"
       ]
     },
     "outDir": "./dist/out-tsc",
