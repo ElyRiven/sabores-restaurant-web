@@ -7,20 +7,20 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import mapboxgl, { LngLatLike, Marker } from 'mapbox-gl';
-import Swiper from 'swiper';
-import { FreeMode } from 'swiper/modules';
 
-import { Address } from '@front/interfaces/address.interface';
+import type { Address } from '@front/interfaces/address.interface';
 import { AddressService } from '@front/services/address.service';
-import { environment } from 'src/environments/environment';
+import { ReviewsService } from '@front/services/reviews.service';
 import { HeroSection } from '@front/components/hero-section/hero-section.component';
-import { RouterLink } from '@angular/router';
 import { CheftsSectionComponent } from './chefts-section/chefts-section.component';
 import { HlmCarouselImports } from '@spartan-ng/helm/carousel';
+import { environment } from 'src/environments/environment';
 
 import Autoplay from 'embla-carousel-autoplay';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 mapboxgl.accessToken = environment.mapboxkey;
 
@@ -31,38 +31,23 @@ mapboxgl.accessToken = environment.mapboxkey;
     HeroSection,
     CheftsSectionComponent,
     HlmCarouselImports,
+    HlmButtonImports,
   ],
   templateUrl: './about-page.component.html',
 })
 export class AboutPageComponent implements OnInit {
-  public items = Array.from({ length: 5 }, (_, i) => i + 1);
-
-  public plugins = [
-    Autoplay({ delay: 500, playOnInit: true, stopOnInteraction: false }),
-  ];
-
+  public readonly reviewsService = inject(ReviewsService);
   #addressService = inject(AddressService);
 
-  public aboutImages: string[] = [
-    '/assets/photos/front/misc3.webp',
-    '/assets/photos/front/misc4.webp',
-    '/assets/photos/front/misc5.webp',
-    '/assets/photos/front/misc6.webp',
-    '/assets/photos/front/misc7.webp',
-    '/assets/photos/front/misc8.webp',
-    '/assets/photos/front/misc9.webp',
-    '/assets/photos/front/misc10.webp',
+  public plugins = [
+    Autoplay({ delay: 5000, playOnInit: true, stopOnInteraction: false }),
   ];
-
-  public swiper: Swiper | undefined = undefined;
 
   public selectedAddress = signal<Address | undefined>(undefined);
   public addressArray = signal<Address[] | undefined>(undefined);
   public map = signal<mapboxgl.Map | undefined>(undefined);
   public isMapCharged = signal<boolean>(false);
   public markers = signal<Marker[]>([]);
-
-  public swiperDiv = viewChild.required<ElementRef>('swiperDiv');
   public mapDiv = viewChild<ElementRef>('mapDiv');
 
   ngOnInit(): void {
@@ -71,11 +56,9 @@ export class AboutPageComponent implements OnInit {
 
     this.selectedAddress.set(defaultAddress);
     this.addressArray.set(allAddresses);
-
-    this.swiperInit();
   }
 
-  mapInitEffect = effect((onCleanup) => {
+  mapInitEffect = effect(() => {
     if (this.isMapCharged()) return;
 
     this.mapInit();
@@ -106,36 +89,6 @@ export class AboutPageComponent implements OnInit {
     this.createMarkers(map);
     this.saveMap(map);
     this.isMapCharged.set(true);
-  }
-
-  swiperInit() {
-    const swiperContainer = this.swiperDiv().nativeElement;
-    if (!swiperContainer) return;
-
-    this.swiper = new Swiper(swiperContainer, {
-      direction: 'horizontal',
-      loop: true,
-      slidesPerView: 1,
-      spaceBetween: 10,
-      allowTouchMove: false,
-
-      freeMode: {
-        enabled: true,
-      },
-
-      autoplay: {
-        delay: 1500,
-        waitForTransition: false,
-      },
-
-      breakpoints: {
-        768: {
-          slidesPerView: 3,
-        },
-      },
-
-      modules: [FreeMode],
-    });
   }
 
   createMarkers(map: mapboxgl.Map) {

@@ -58,7 +58,7 @@
 <!-- Gastronomy Section -->
 <div class="flex flex-col items-center justify-between md:flex-row bg-accent">
   <div
-    class="flex flex-col items-center justify-center md:justify-between gap-5 md:w-3/10 lg:w-4/10 px-8 lg:px-20 py-10 order-2 md:order-none"
+    class="flex flex-col items-center justify-center md:justify-between gap-5 md:w-3/10 lg:w-4/10 px-8 lg:px-20 py-10 order-2 md:order-0"
   >
     <div class="text-center md:text-right font-jakarta">
       <h2 class="font-lobster text-5xl md:max-lg:text-3xl">
@@ -207,59 +207,65 @@
 
 <chefts-section />
 
-<!-- Image Carousel -->
-<!-- <div
-  class="flex items-center py-10 w-full h-full text-base-content relative pointer-events-none"
->
-  <div class="swiper relative w-full" #swiperDiv>
-    <div
-      class="absolute inset-0 w-full h-full bg-black/50 pointer-events-none z-10"
-    ></div>
-    <div class="swiper-wrapper ease-linear">
-      @for (image of aboutImages; track $index) {
-      <div class="swiper-slide">
-        <img
-          [src]="image"
-          alt="Plato"
-          class="w-full h-[300px] object-cover"
-          loading="lazy"
-        />
-      </div>
-      }
-    </div>
-  </div>
-</div> -->
-<!-- End Image Carousel -->
-
 <!-- Reviews Carousel -->
 <div class="flex w-full items-center justify-center p-4 bg-accent">
-  <hlm-carousel
-    class="w-full max-w-sm"
-    [plugins]="plugins"
-    [options]="{ loop: true }"
-  >
-    <hlm-carousel-content>
-      @for (item of items; track item) {
-      <hlm-carousel-item>
-        <div class="p-1">
-          <div
-            class="flex aspect-square items-center justify-center p-6 border-black border-2"
-          >
-            <span class="text-4xl font-semibold">{{ item }}</span>
+  <div class="flex flex-col items-center justify-center gap-7 sm:gap-0">
+    <h2 class="font-lobster text-5xl pt-[3%] text-center">Nuestros Clientes</h2>
+    <hlm-carousel
+      class="w-full max-w-70 sm:max-w-sm"
+      [plugins]="plugins"
+      [options]="{ loop: true }"
+    >
+      <hlm-carousel-content>
+        <!--  -->
+        @for (review of reviewsService.getAllReviews(); track review) {
+        <hlm-carousel-item>
+          <div class="p-1">
+            <div
+              class="flex flex-col gap-8 aspect-square items-center justify-center text-center font-jakarta"
+            >
+              <p class="font-semibold italic">
+                {{ review.text }}
+              </p>
+              <svg
+                viewBox="70 104 360 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-fit text-primary"
+              >
+                <path
+                  d="M70.002 111.5L100.002 112.5C100.002 112.5 244.502 112.5 246.502 112.5C248.502 112.5 250.002 118.5 250.002 118.5C250.002 118.5 251.502 112.5 253.502 112.5C255.502 112.5 400.002 112.5 400.002 112.5L429.998 111.5L400.002 110.5C400.002 110.5 255.502 110.5 253.502 110.5C251.502 110.5 250.002 104.5 250.002 104.5C250.002 104.5 248.502 110.5 246.502 110.5C244.502 110.5 100.002 110.5 100.002 110.5L70.002 111.5Z"
+                  fill="currentColor"
+                />
+              </svg>
+              <div class="flex flex-col items-center justify-center">
+                <span class="text-lg">{{ review.author }}</span>
+                <span class="text-sm text-secondary-foreground">{{
+                  review.title
+                }}</span>
+              </div>
+            </div>
           </div>
-        </div>
-      </hlm-carousel-item>
-      }
-    </hlm-carousel-content>
-    <button hlm-carousel-previous></button>
-    <button hlm-carousel-next></button>
-  </hlm-carousel>
+        </hlm-carousel-item>
+        }
+        <!--  -->
+      </hlm-carousel-content>
+      <button
+        class="hidden md:inline-flex -left-11/20 lg:-left-9/10 border-none shadow-none text-secondary size-fit bg-transparent hover:bg-transparent hover:text-primary hover:cursor-pointer"
+        hlm-carousel-previous
+      ></button>
+      <button
+        class="hidden md:inline-flex -right-11/20 lg:-right-9/10 border-none shadow-none text-secondary size-fit bg-transparent hover:bg-transparent hover:text-primary hover:cursor-pointer"
+        hlm-carousel-next
+      ></button>
+    </hlm-carousel>
+  </div>
 </div>
 <!-- End Reviews Carousel -->
 
 <!-- Sección Visítanos -->
 <section
-  class="w-full pb-10 !pt-0 flex flex-col items-center p-4 md:p-10 lg:p-20"
+  class="w-full pb-10 pt-0! flex flex-col items-center p-4 md:p-10 lg:p-20"
 >
   <h2 class="font-merriweather text-3xl text-center my-5">Visítanos</h2>
   <div
