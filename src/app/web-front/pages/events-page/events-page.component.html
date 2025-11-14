@@ -5,7 +5,7 @@
 
 <!-- Events List -->
 
-<section class="px-[7%] py-[3%] font-jakarta">
+<section class="p-[5%] sm:px-[7%] sm:py-[3%] font-jakarta">
   <div class="flex flex-col items-center justify-center gap-7">
     @for (event of eventService.getAllEvents(); track event; let odd = $odd) {
     <div class="flex flex-col sm:flex-row items-center gap-10">
@@ -23,11 +23,11 @@
         class="flex flex-col items-start justify-center sm:flex-2/3 gap-3"
         [class]="odd ? 'sm:items-end sm:order-1' : 'sm:items-start'"
       >
-        <div class="flex items-start justify-center gap-2 italic">
-          <span>{{ event.date | date : "longDate" }}</span>
-          <div>{{ event.category }}</div>
+        <div class="flex items-start justify-center gap-2 italic text-xs">
+          <span>{{ event.date | date : "MMMM d, y" | uppercase }}</span>
+          <div>{{ event.category | uppercase }}</div>
         </div>
-        <h2 class="text-3xl font-lobster">{{ event.title }}</h2>
+        <h2 class="text-4xl font-lobster">{{ event.title }}</h2>
         <p [class.sm:text-right]="odd">
           {{ event.description }}
         </p>
