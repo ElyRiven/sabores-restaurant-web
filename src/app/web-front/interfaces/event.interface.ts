@@ -1,9 +1,15 @@
-export type Category = 'bebida' | 'comida';
+export type CategoryValues =
+  | 'degustación'
+  | 'gourmet'
+  | 'aniversario'
+  | 'gala'
+  | 'invitado'
+  | 'coctel';
 
 export interface Event {
   title: string;
   description: string;
   image: string;
-  date: string; // MM-dd | 12-25
-  category: Category;
+  date: string;
+  categories: CategoryValues[];
 }

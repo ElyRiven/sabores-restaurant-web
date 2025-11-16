@@ -4,78 +4,96 @@
 />
 
 <!-- Events List -->
-
 <section class="p-[5%] sm:px-[7%] sm:py-[3%] font-jakarta">
   <div class="flex flex-col items-center justify-center gap-7">
     @for (event of eventService.getAllEvents(); track event; let odd = $odd) {
-    <div class="flex flex-col sm:flex-row items-center gap-10">
+    <a
+      href="#"
+      class="flex flex-col sm:flex-row items-center gap-10 p-2 group hover:-translate-y-1 transition-all duration-500"
+    >
       <div
-        class="aspect-video w-full max-h-50 sm:flex-1/3 sm:max-w-250"
+        class="w-full h-64 sm:h-80 sm:max-w-250 md:h-auto md:aspect-video sm:flex-1/2 lg:flex-1/3 overflow-hidden rounded-xl"
         [class.sm:order-2]="odd"
       >
         <img
-          class="size-full object-cover rounded-xl"
+          class="size-full object-cover rounded-xl group-hover:scale-120 transition-all ease-out duration-3000"
           [src]="event.image"
           [alt]="event.title + ' event image'"
         />
       </div>
       <div
-        class="flex flex-col items-start justify-center sm:flex-2/3 gap-3"
+        class="flex flex-col items-start justify-center sm:flex-1/2 lg:flex-2/3 gap-3"
         [class]="odd ? 'sm:items-end sm:order-1' : 'sm:items-start'"
       >
-        <div class="flex items-start justify-center gap-2 italic text-xs">
+        <div
+          class="flex flex-col sm:flex-row items-start sm:items-center justify-center gap-2 italic text-xs"
+        >
           <span>{{ event.date | date : "MMMM d, y" | uppercase }}</span>
-          <div>{{ event.category | uppercase }}</div>
+          <div class="flex flex-wrap gap-2">
+            <!--  -->
+            @for (category of event.categories; track category) {
+            <span
+              hlmBadge
+              variant="secondary"
+              class="group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300"
+              >{{ category | uppercase }}</span
+            >
+            }
+          </div>
         </div>
-        <h2 class="text-4xl font-lobster">{{ event.title }}</h2>
+        <h2
+          class="text-4xl font-lobster group-hover:text-primary transition-colors"
+        >
+          {{ event.title }}
+        </h2>
         <p [class.sm:text-right]="odd">
           {{ event.description }}
         </p>
-        <button>reserve text</button>
+        <div
+          class="flex items-center gap-2 group-hover:text-primary transition-colors"
+        >
+          <span class="font-bold">Reservar Evento</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-0 transition-all duration-500"
+          >
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <path stroke-dasharray="20" stroke-dashoffset="20" d="M3 12h17.5">
+                <animate
+                  fill="freeze"
+                  attributeName="stroke-dashoffset"
+                  dur="0.2s"
+                  values="20;0"
+                />
+              </path>
+              <path
+                stroke-dasharray="12"
+                stroke-dashoffset="12"
+                d="M21 12l-7 7M21 12l-7 -7"
+              >
+                <animate
+                  fill="freeze"
+                  attributeName="stroke-dashoffset"
+                  begin="0.2s"
+                  dur="0.2s"
+                  values="12;0"
+                />
+              </path>
+            </g>
+          </svg>
+        </div>
       </div>
-    </div>
+    </a>
     }
   </div>
 </section>
-
-<!-- <div
-  class="w-full mx-auto mt-8 px-4 md:px-10 lg:px-20 transition-all ease-in-out"
->
-  <div
-    class="grid grid-cols-1 gap-6 mb-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-  >
-    @for (event of eventService.getAllEvents(); track event) {
-    <div
-      class="w-full rounded-xl overflow-hidden shadow bg-cream-50 border border-secondary-content/50 flex flex-col"
-    >
-      <img
-        [src]="event.image"
-        [alt]="event.title"
-        class="w-full h-32 object-cover"
-      />
-      <div class="flex flex-col flex-1 p-4 bg-accent gap-3">
-        <div class="flex items-center justify-between mb-2">
-          <h3 class="font-merriweather font-bold text-lg">{{ event.title }}</h3>
-        </div>
-        <div class="flex flex-row justify-between">
-          <div class="badge badge-primary">
-            {{ event.category | categoryTitle }}
-          </div>
-          <span class="text-sm text-gray-600">{{
-            event.date | eventDate
-          }}</span>
-        </div>
-        <p class="text-sm text-gray-700">
-          {{ event.description }}
-        </p>
-      </div>
-    </div>
-    }
-    @empty {
-    <div class="w-full col-span-full flex justify-center my-8">
-      <div class="loading loading-spinner text-primary"></div>
-    </div>
-    }
-  </div>
-</div> -->
 <!-- End Events List -->
