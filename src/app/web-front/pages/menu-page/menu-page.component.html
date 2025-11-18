@@ -135,51 +135,52 @@
 <!-- Plates Grid -->
 @for (category of categories; track category) {
 <!-- Section Header -->
-<div
-  [id]="category.name"
-  class="relative w-full h-60 z-10 scroll-mt-50 md:scroll-mt-[186px]"
->
-  <img class="w-full h-full object-cover" [src]="category.image" alt="" />
-  <div
-    class="absolute flex items-center justify-center inset-0 bg-foreground/60 text-background"
-  >
-    <div class="flex flex-col items-center justify-center">
-      <h2 class="font-lobster text-6xl text-center">
-        {{ categoryLabels[category.name] }}
-      </h2>
-      <svg
-        viewBox="70 104 360 15"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M70.002 111.5L100.002 112.5C100.002 112.5 244.502 112.5 246.502 112.5C248.502 112.5 250.002 118.5 250.002 118.5C250.002 118.5 251.502 112.5 253.502 112.5C255.502 112.5 400.002 112.5 400.002 112.5L429.998 111.5L400.002 110.5C400.002 110.5 255.502 110.5 253.502 110.5C251.502 110.5 250.002 104.5 250.002 104.5C250.002 104.5 248.502 110.5 246.502 110.5C244.502 110.5 100.002 110.5 100.002 110.5L70.002 111.5Z"
-          fill="currentColor"
-        />
-      </svg>
-    </div>
-  </div>
-</div>
-<!-- End Section Header -->
-
-<div class="w-full p-[5%]">
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-x-15 border border-black"
-  >
-    @for (dish of category.dishes; track dish) {
-    <!-- Dish -->
-    <div class="flex items-center justify-between border border-black">
-      <div class="size-25">Imagen</div>
-      <div>
-        <div class="flex items-center justify-between">
-          <h4>Spinach Salad</h4>
-          <span>$70</span>
-        </div>
-        <p>Occaecat officia adipisicing sit exercitation cupidatat laboris.</p>
+<div [id]="category.name" class="scroll-mt-50 md:scroll-mt-[186px]">
+  <div class="relative w-full h-60 z-10">
+    <img class="w-full h-full object-cover" [src]="category.image" alt="" />
+    <div
+      class="absolute flex items-center justify-center inset-0 bg-foreground/60 text-background"
+    >
+      <div class="flex flex-col items-center justify-center">
+        <h2 class="font-lobster text-6xl text-center">
+          {{ categoryLabels[category.name] }}
+        </h2>
+        <svg
+          viewBox="70 104 360 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M70.002 111.5L100.002 112.5C100.002 112.5 244.502 112.5 246.502 112.5C248.502 112.5 250.002 118.5 250.002 118.5C250.002 118.5 251.502 112.5 253.502 112.5C255.502 112.5 400.002 112.5 400.002 112.5L429.998 111.5L400.002 110.5C400.002 110.5 255.502 110.5 253.502 110.5C251.502 110.5 250.002 104.5 250.002 104.5C250.002 104.5 248.502 110.5 246.502 110.5C244.502 110.5 100.002 110.5 100.002 110.5L70.002 111.5Z"
+            fill="currentColor"
+          />
+        </svg>
       </div>
     </div>
-    <!-- End Dish -->
-    }
+  </div>
+  <!-- End Section Header -->
+
+  <div class="w-full p-[5%]">
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-x-15 border border-black"
+    >
+      @for (dish of category.dishes; track dish) {
+      <!-- Dish -->
+      <div class="flex items-center justify-between border border-black">
+        <div class="size-25">Imagen</div>
+        <div>
+          <div class="flex items-center justify-between">
+            <h4>Spinach Salad</h4>
+            <span>$70</span>
+          </div>
+          <p>
+            Occaecat officia adipisicing sit exercitation cupidatat laboris.
+          </p>
+        </div>
+      </div>
+      <!-- End Dish -->
+      }
+    </div>
   </div>
 </div>
 }
