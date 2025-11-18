@@ -1,7 +1,8 @@
 import { NgClass } from '@angular/common';
-import { Component, inject, OnInit, signal, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { Plate, MenuCategory } from '@front/interfaces/plate.interface';
+import { Component, inject, signal } from '@angular/core';
+
 import { MenuService } from '@front/services/menu.service';
+import type { MenuCategories } from '@front/interfaces/plate.interface';
 import { HeroSection } from '@front/components/hero-section/hero-section.component';
 
 @Component({
@@ -9,45 +10,32 @@ import { HeroSection } from '@front/components/hero-section/hero-section.compone
   imports: [NgClass, HeroSection],
   templateUrl: './menu-page.component.html',
 })
-export class MenuPageComponent implements OnInit, AfterViewInit, OnDestroy {
-  private menuService = inject(MenuService);
-  private observer?: IntersectionObserver;
+export class MenuPageComponent {
+  public readonly menuService = inject(MenuService);
 
-  @ViewChild('categorySelector') categorySelector!: ElementRef<HTMLDivElement>;
+  public categoryLabels: Record<MenuCategories, string> = {
+    entries: 'Entradas',
+    dishes: 'Platos Fuertes',
+    desserts: 'Postres',
+    drinks: 'Bebidas',
+  };
 
-  public selectedCategory = signal<MenuCategory>('entry');
-  public platesArray = signal<Plate[] | undefined>(undefined);
-  public isSticky = signal<boolean>(false);
+  public categories = Object.entries(this.menuService.getMenu()).map(
+    ([key, value]) => ({
+      name: key as MenuCategories,
+      image: value.image,
+      dishes: value.dishes,
+    })
+  );
 
-  ngOnInit(): void {
-    this.platesArray.set(
-      this.menuService.getPlatesByCategory(this.selectedCategory())
-    );
-  }
+  public selectedCategory = signal<MenuCategories>('entries');
 
-  ngAfterViewInit(): void {
-    this.observer = new IntersectionObserver(
-      ([entry]) => {
-        this.isSticky.set(!entry.isIntersecting);
-      },
-      { threshold: [1], rootMargin: '-100px 0px 0px 0px' }
-    );
-
-    if (this.categorySelector) {
-      this.observer.observe(this.categorySelector.nativeElement);
+  scrollToSection(event: Event, sectionId: MenuCategories) {
+    event.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      this.selectedCategory.set(sectionId);
     }
-  }
-
-  ngOnDestroy(): void {
-    if (this.observer) {
-      this.observer.disconnect();
-    }
-  }
-
-  onCategoryChange(selectedCategory: MenuCategory) {
-    this.selectedCategory.set(selectedCategory);
-    this.platesArray.set(
-      this.menuService.getPlatesByCategory(this.selectedCategory())
-    );
   }
 }

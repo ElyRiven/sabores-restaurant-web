@@ -1,139 +1,155 @@
 import { Injectable } from '@angular/core';
 
-import { MenuCategory, Plate } from '@front/interfaces/plate.interface';
+import type { Menu } from '@front/interfaces/plate.interface';
 
-const menuArray: Plate[] = [
-  {
-    name: 'Bocado de la casa',
-    description:
-      'Filete sellado con especias, acompañado de papas asadas y brotes frescos',
-    category: 'entry',
-    image: 'assets/photos/menu/entries/entry1.webp',
+const menu: Menu = {
+  entries: {
+    image: '/assets/photos/front/menu-hero.webp',
+    dishes: [
+      {
+        name: 'Bocado de la casa',
+        description:
+          'Filete sellado con especias, acompañado de papas asadas y brotes frescos',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 40.99,
+      },
+      {
+        name: 'Tesoro del mar',
+        description:
+          'Selección premium de mariscos frescos servidos en su punto perfecto',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 30.147,
+      },
+      {
+        name: 'Nido al pomodoro',
+        description:
+          'Pasta artesanal al dente con salsa de tomate confitado y albahaca fresca',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 50.025,
+      },
+      {
+        name: 'Rissoto de champiñones',
+        description:
+          'Rissoto cremoso con champiñones y un toque de queso parmesano',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 2.2,
+      },
+      {
+        name: 'Tofu salteado con sésamo y jengibre',
+        description:
+          'Tofu crujiente salteado con verduras en un sabroso glaseado de sésamo y jengibre, servido sobre arroz al vapor',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 3.25898,
+      },
+      {
+        name: 'Paella de verduras',
+        description:
+          'Un vibrante plato de arroz español relleno de una mezcla de verduras de temporada',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 4.8,
+      },
+      {
+        name: 'Ensalada de aguacate y frijoles negros',
+        description:
+          'Una ensalada refrescante con aguacate cremoso, frijoles negros, maíz y una vinagreta de lima picante',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 53.251,
+      },
+      {
+        name: 'Salmón a la parrilla con salsa de limón',
+        description:
+          'Filete de salmón recién asado con una salsa picante de limón y hierbas, acompañado de espárragos asados',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 9.64556,
+      },
+      {
+        name: 'Sopa de Lentejas con pan crujiente',
+        description:
+          'Suculenta sopa de lentejas cocinada a fuego lento con verduras aromáticas y especias, servida con pan crujiente',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 43.2,
+      },
+    ],
   },
-  {
-    name: 'Tesoro del mar',
-    description:
-      'Selección premium de mariscos frescos servidos en su punto perfecto',
-    category: 'entry',
-    image: 'assets/photos/menu/entries/entry2.webp',
+  dishes: {
+    image: '/assets/photos/front/menu-hero.webp',
+    dishes: [
+      {
+        name: 'Pollo al Horno',
+        description:
+          'Delicioso pollo al horno con especias para un toque de sabor único',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 10.0,
+      },
+      {
+        name: 'Salmón a las parrilla',
+        description: 'Filete de salmón a la parrilla con un toque de verduras',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 20.89556,
+      },
+      {
+        name: 'Pollo con Mole',
+        description:
+          'Una presa de pollo horneado acompañado de una porción de mole',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 95.1,
+      },
+    ],
   },
-  {
-    name: 'Nido al pomodoro',
-    description:
-      'Pasta artesanal al dente con salsa de tomate confitado y albahaca fresca',
-    category: 'entry',
-    image: 'assets/photos/menu/entries/entry3.webp',
+  desserts: {
+    image: '/assets/photos/front/menu-hero.webp',
+    dishes: [
+      {
+        name: 'Cheesecake de vainilla',
+        description: 'Un postre fresco y delicioso con un toque de limón',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 53.3,
+      },
+      {
+        name: 'Brownie de chocolate',
+        description: 'Delicioso brownie con relleno líquido de chocolate',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 90.526,
+      },
+      {
+        name: 'Cupcake de frutas',
+        description: 'Un cupcake con relleno y sabor a frutas',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 45.8,
+      },
+    ],
   },
-  {
-    name: 'Rissoto de champiñones',
-    description:
-      'Rissoto cremoso con champiñones y un toque de queso parmesano',
-    category: 'entry',
-    image: 'assets/photos/menu/entries/entry4.webp',
+  drinks: {
+    image: '/assets/photos/front/menu-hero.webp',
+    dishes: [
+      {
+        name: 'Vino blanco serenetta',
+        description:
+          'Refrescante y equilibrado, ideal para acompañar platos ligeros y entradas gourmet',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 10.85,
+      },
+      {
+        name: 'Champagne brut espumante',
+        description:
+          'Elegancia en cada burbuja. Perfecto para brindar o acompañar celebraciones especiales',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 9.6558,
+      },
+      {
+        name: 'Vino tinto nuitte',
+        description:
+          'Un vino tinto intenso, con cuerpo y notas profundas de frutas maduras',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 62.15,
+      },
+    ],
   },
-  {
-    name: 'Tofu salteado con sésamo y jengibre',
-    description:
-      'Tofu crujiente salteado con verduras en un sabroso glaseado de sésamo y jengibre, servido sobre arroz al vapor',
-    category: 'entry',
-    image: 'assets/photos/menu/entries/entry5.webp',
-  },
-  {
-    name: 'Paella de verduras',
-    description:
-      'Un vibrante plato de arroz español relleno de una mezcla de verduras de temporada',
-    category: 'entry',
-    image: 'assets/photos/menu/entries/entry6.webp',
-  },
-  {
-    name: 'Ensalada de aguacate y frijoles negros',
-    description:
-      'Una ensalada refrescante con aguacate cremoso, frijoles negros, maíz y una vinagreta de lima picante',
-    category: 'entry',
-    image: 'assets/photos/menu/entries/entry7.webp',
-  },
-  {
-    name: 'Salmón a la parrilla con salsa de limón',
-    description:
-      'Filete de salmón recién asado con una salsa picante de limón y hierbas, acompañado de espárragos asados',
-    category: 'entry',
-    image: 'assets/photos/menu/entries/entry8.webp',
-  },
-  {
-    name: 'Sopa de Lentejas con pan crujiente',
-    description:
-      'Suculenta sopa de lentejas cocinada a fuego lento con verduras aromáticas y especias, servida con pan crujiente',
-    category: 'entry',
-    image: 'assets/photos/menu/entries/entry9.webp',
-  },
-  {
-    name: 'Pollo al Horno',
-    description:
-      'Delicioso pollo al horno con especias para un toque de sabor único',
-    category: 'dish',
-    image: 'assets/photos/menu/dishes/dish1.webp',
-  },
-  {
-    name: 'Salmón a las parrilla',
-    description: 'Filete de salmón a la parrilla con un toque de verduras',
-    category: 'dish',
-    image: 'assets/photos/menu/dishes/dish2.webp',
-  },
-  {
-    name: 'Pollo con Mole',
-    description:
-      'Una presa de pollo horneado acompañado de una porción de mole',
-    category: 'dish',
-    image: 'assets/photos/menu/dishes/dish3.webp',
-  },
-  {
-    name: 'Cheesecake de vainilla',
-    description: 'Un postre fresco y delicioso con un toque de limón',
-    category: 'dessert',
-    image: 'assets/photos/menu/desserts/dessert1.webp',
-  },
-  {
-    name: 'Brownie de chocolate',
-    description: 'Delicioso brownie con relleno líquido de chocolate',
-    category: 'dessert',
-    image: 'assets/photos/menu/desserts/dessert2.webp',
-  },
-  {
-    name: 'Cupcake de frutas',
-    description: 'Un cupcake con relleno y sabor a frutas',
-    category: 'dessert',
-    image: 'assets/photos/menu/desserts/dessert3.webp',
-  },
-  {
-    name: 'Vino blanco serenetta',
-    description:
-      'Refrescante y equilibrado, ideal para acompañar platos ligeros y entradas gourmet',
-    category: 'drink',
-    image: 'assets/photos/menu/drinks/drink1.webp',
-  },
-  {
-    name: 'Champagne brut espumante',
-    description:
-      'Elegancia en cada burbuja. Perfecto para brindar o acompañar celebraciones especiales',
-    category: 'drink',
-    image: 'assets/photos/menu/drinks/drink2.webp',
-  },
-  {
-    name: 'Vino tinto nuitte',
-    description:
-      'Un vino tinto intenso, con cuerpo y notas profundas de frutas maduras',
-    category: 'drink',
-    image: 'assets/photos/menu/drinks/drink3.webp',
-  },
-];
+};
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
-  getAllPlates(): Plate[] {
-    return menuArray;
-  }
-
-  getPlatesByCategory(category: MenuCategory): Plate[] {
-    return menuArray.filter((plate) => plate.category === category);
+  getMenu(): Menu {
+    return menu;
   }
 }

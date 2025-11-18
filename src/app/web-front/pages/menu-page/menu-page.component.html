@@ -9,11 +9,12 @@
 >
   <div class="flex items-center overflow-x-auto">
     <a
+      href="#entries"
       class="flex-1 flex flex-col min-w-32 text-center items-center py-3 text-primary cursor-pointer transition-all ease-in-out duration-300 whitespace-nowrap"
       [ngClass]="{
-        'bg-primary text-primary-foreground': selectedCategory() === 'entry'
+        'bg-primary text-primary-foreground': selectedCategory() === 'entries'
       }"
-      (click)="onCategoryChange('entry')"
+      (click)="scrollToSection($event, 'entries')"
     >
       <span class="font-lobster font-bold text-2xl">Entradas</span>
       <svg
@@ -45,11 +46,12 @@
       </svg>
     </a>
     <a
+      href="#dishes"
       class="flex-1 shrink-0 flex flex-col min-w-32 items-center text-center py-3 mx-3 sm:mx-0 bg-base-100 text-primary cursor-pointer transition-all ease-in-out duration-300 whitespace-nowrap"
       [ngClass]="{
-        'bg-primary text-primary-foreground': selectedCategory() === 'dish'
+        'bg-primary text-primary-foreground': selectedCategory() === 'dishes'
       }"
-      (click)="onCategoryChange('dish')"
+      (click)="scrollToSection($event, 'dishes')"
     >
       <span class="font-lobster font-bold text-2xl">Platos Fuertes</span>
       <svg
@@ -71,11 +73,12 @@
       </svg>
     </a>
     <a
+      href="#desserts"
       class="flex-1 flex flex-col min-w-32 items-center text-center py-3 bg-base-100 text-primary cursor-pointer transition-all ease-in-out duration-300 whitespace-nowrap"
       [ngClass]="{
-        'bg-primary text-primary-foreground': selectedCategory() === 'dessert'
+        'bg-primary text-primary-foreground': selectedCategory() === 'desserts'
       }"
-      (click)="onCategoryChange('dessert')"
+      (click)="scrollToSection($event, 'desserts')"
     >
       <span class="font-lobster font-bold text-2xl">Postres</span>
       <svg
@@ -103,11 +106,12 @@
       </svg>
     </a>
     <a
+      href="#drinks"
       class="flex-1 flex flex-col min-w-32 items-center text-center py-3 bg-base-100 text-primary cursor-pointer transition-all ease-in-out duration-300 whitespace-nowrap"
       [ngClass]="{
-        'bg-primary text-primary-foreground': selectedCategory() === 'drink'
+        'bg-primary text-primary-foreground': selectedCategory() === 'drinks'
       }"
-      (click)="onCategoryChange('drink')"
+      (click)="scrollToSection($event, 'drinks')"
     >
       <span class="font-lobster font-bold text-2xl">Bebidas</span>
       <svg
@@ -128,18 +132,21 @@
 </div>
 <!-- End Menu Category Selector -->
 
+<!-- Plates Grid -->
+@for (category of categories; track category) {
 <!-- Section Header -->
-<div class="relative w-full h-60 z-10">
-  <img
-    class="w-full h-full object-cover"
-    src="/assets/photos/front/menu-hero.webp"
-    alt=""
-  />
+<div
+  [id]="category.name"
+  class="relative w-full h-60 z-10 scroll-mt-50 md:scroll-mt-[186px]"
+>
+  <img class="w-full h-full object-cover" [src]="category.image" alt="" />
   <div
     class="absolute flex items-center justify-center inset-0 bg-foreground/60 text-background"
   >
     <div class="flex flex-col items-center justify-center">
-      <h2 class="font-lobster text-6xl">Entradas</h2>
+      <h2 class="font-lobster text-6xl text-center">
+        {{ categoryLabels[category.name] }}
+      </h2>
       <svg
         viewBox="70 104 360 15"
         fill="none"
@@ -155,13 +162,13 @@
 </div>
 <!-- End Section Header -->
 
-<!-- Plates Grid -->
 <div class="w-full p-[5%]">
   <div
     class="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-x-15 border border-black"
   >
+    @for (dish of category.dishes; track dish) {
     <!-- Dish -->
-    <div class="flex items-center border border-black">
+    <div class="flex items-center justify-between border border-black">
       <div class="size-25">Imagen</div>
       <div>
         <div class="flex items-center justify-between">
@@ -172,78 +179,8 @@
       </div>
     </div>
     <!-- End Dish -->
-    <!-- Dish -->
-    <div class="flex items-center border border-black">
-      <div class="size-25">Imagen</div>
-      <div>
-        <div class="flex items-center justify-between">
-          <h4>Spinach Salad</h4>
-          <span>$70</span>
-        </div>
-        <p>Occaecat officia adipisicing sit exercitation cupidatat laboris.</p>
-      </div>
-    </div>
-    <!-- End Dish -->
-    <!-- Dish -->
-    <div class="flex items-center">
-      <div class="size-25">Imagen</div>
-      <div>
-        <div class="flex items-center justify-between">
-          <h4>Spinach Salad</h4>
-          <span>$70</span>
-        </div>
-        <p>Occaecat officia adipisicing sit exercitation cupidatat laboris.</p>
-      </div>
-    </div>
-    <!-- End Dish -->
-    <!-- Dish -->
-    <div class="flex items-center">
-      <div class="size-25">Imagen</div>
-      <div>
-        <div class="flex items-center justify-between">
-          <h4>Spinach Salad</h4>
-          <span>$70</span>
-        </div>
-        <p>Occaecat officia adipisicing sit exercitation cupidatat laboris.</p>
-      </div>
-    </div>
-    <!-- End Dish -->
+    }
   </div>
 </div>
-<!-- End Plates Grid -->
-
-<!-- Plates Grid -->
-<!-- <div
-  class="w-full mx-auto mt-8 px-4 md:px-10 lg:px-20 transition-all ease-in-out"
->
-  <div
-    class="grid grid-cols-1 gap-6 mb-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-  >
-    @for (plate of platesArray(); track $index) {
-    <div
-      class="bg-accent border border-secondary-content/50 rounded-lg overflow-hidden shadow-md flex flex-col items-center"
-    >
-      <img
-        [src]="plate.image"
-        [alt]="plate.name"
-        class="w-full h-40 object-cover"
-        loading="eager"
-      />
-      <div class="w-full p-4 text-center">
-        <h3 class="font-merriweather font-bold text-lg mb-2">
-          {{ plate.name }}
-        </h3>
-        <p class="font-jakarta text-sm text-secondary-content">
-          {{ plate.description }}
-        </p>
-      </div>
-    </div>
-    }
-    @empty {
-    <div class="w-full col-span-full flex justify-center my-8">
-      <div class="loading loading-spinner text-primary"></div>
-    </div>
-    }
-  </div>
-</div> -->
+}
 <!-- End Plates Grid -->
