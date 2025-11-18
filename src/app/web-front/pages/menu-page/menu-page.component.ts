@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { DecimalPipe, NgClass, UpperCasePipe } from '@angular/common';
 import {
   Component,
   inject,
@@ -13,7 +13,7 @@ import { HeroSection } from '@front/components/hero-section/hero-section.compone
 
 @Component({
   selector: 'app-menu-page',
-  imports: [NgClass, HeroSection],
+  imports: [NgClass, HeroSection, UpperCasePipe, DecimalPipe],
   templateUrl: './menu-page.component.html',
 })
 export class MenuPageComponent implements AfterViewInit, OnDestroy {
@@ -25,7 +25,6 @@ export class MenuPageComponent implements AfterViewInit, OnDestroy {
     desserts: 'Postres',
     drinks: 'Bebidas',
   };
-
   public categories = Object.entries(this.menuService.getMenu()).map(
     ([key, value]) => ({
       name: key as MenuCategories,
@@ -33,11 +32,12 @@ export class MenuPageComponent implements AfterViewInit, OnDestroy {
       dishes: value.dishes,
     })
   );
-
   public selectedCategory = signal<MenuCategories>('entries');
+
   private observer?: IntersectionObserver;
 
   ngAfterViewInit(): void {
+    // Observer for section detection
     this.observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
