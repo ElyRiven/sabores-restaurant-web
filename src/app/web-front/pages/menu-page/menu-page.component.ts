@@ -5,7 +5,12 @@ import {
   signal,
   AfterViewInit,
   OnDestroy,
+  OnInit,
+  HostListener,
+  viewChild,
+  ElementRef,
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { MenuService } from '@front/services/menu.service';
 import type { MenuCategories } from '@front/interfaces/plate.interface';
@@ -16,8 +21,9 @@ import { HeroSection } from '@front/components/hero-section/hero-section.compone
   imports: [NgClass, HeroSection, UpperCasePipe, DecimalPipe],
   templateUrl: './menu-page.component.html',
 })
-export class MenuPageComponent implements AfterViewInit, OnDestroy {
+export class MenuPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public readonly menuService = inject(MenuService);
+  private route = inject(ActivatedRoute);
 
   public categoryLabels: Record<MenuCategories, string> = {
     entries: 'Entradas',
@@ -34,7 +40,29 @@ export class MenuPageComponent implements AfterViewInit, OnDestroy {
   );
   public selectedCategory = signal<MenuCategories>('entries');
 
+  public isCategoryMenuSticky = signal<boolean>(false);
+  public CategoryMenuElement = viewChild<ElementRef>('categorySelector');
+
   private observer?: IntersectionObserver;
+
+  ngOnInit(): void {
+    this.route.fragment.subscribe((fragment) => {
+      if (fragment) {
+        setTimeout(() => {
+          const element = document.getElementById(fragment);
+          if (element) {
+            const yOffset = -186;
+            const y =
+              element.getBoundingClientRect().top +
+              window.pageYOffset +
+              yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+            this.selectedCategory.set(fragment as MenuCategories);
+          }
+        }, 100);
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
     // Observer for section detection
@@ -70,6 +98,18 @@ export class MenuPageComponent implements AfterViewInit, OnDestroy {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       this.selectedCategory.set(sectionId);
+    }
+  }
+
+  @HostListener('window:scroll')
+  onScroll() {
+    const menu = this.CategoryMenuElement()?.nativeElement;
+    if (menu) {
+      const topDistance = menu.getBoundingClientRect().top;
+
+      topDistance === 100
+        ? this.isCategoryMenuSticky.set(true)
+        : this.isCategoryMenuSticky.set(false);
     }
   }
 }

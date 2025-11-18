@@ -5,7 +5,11 @@
 
 <!-- Menu Category Selector -->
 <div
-  class="sticky top-25 bg-background/50 mx-[5%] rounded-b-xl md:rounded-b-4xl overflow-hidden shadow-xl z-11"
+  #categorySelector
+  class="sticky top-25 bg-background/50 overflow-hidden shadow-xl z-11 transition-all duration-500"
+  [ngClass]="{
+    'mx-[5%] rounded-b-xl md:rounded-b-4xl ': isCategoryMenuSticky()
+  }"
 >
   <div class="flex items-center overflow-x-auto">
     <a
