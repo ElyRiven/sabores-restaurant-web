@@ -14,10 +14,11 @@ import { ReservationService } from '@front/services/reservation.service';
 import { FormUtils } from '@front/utils/form-utils';
 import { HeroSection } from '@front/components/hero-section/hero-section.component';
 import { EventService } from '@front/services/event.service';
+import { HlmDatePickerImports } from '@spartan-ng/helm/date-picker';
 
 @Component({
   selector: 'app-reservations-page',
-  imports: [ReactiveFormsModule, HeroSection],
+  imports: [ReactiveFormsModule, HeroSection, HlmDatePickerImports],
   templateUrl: './reservations-page.component.html',
 })
 export class ReservationsPageComponent {

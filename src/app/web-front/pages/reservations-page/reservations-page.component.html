@@ -76,15 +76,13 @@
       >
         <form class="flex-1" [formGroup]="reserveForm">
           @if (true) {
-
           <div class="flex flex-col justify-center gap-4">
             <label class="font-semibold text-lg" for="event-select"
               >Seleccionar Evento</label
             >
-
             <select
               #eventSelect
-              class="appearance-none bg-secondary py-2 px-3 rounded-xl [&>option]:bg-background"
+              class="appearance-none bg-background py-2 px-3 rounded-xl"
               name="event-select"
               id="event-select"
               formControlName="name"
@@ -107,6 +105,22 @@
             >
           </div>
           }
+          <!--  -->
+          @if (true) {
+          <div class="flex flex-col justify-center gap-4">
+            <label class="font-semibold text-lg" for="date-picker"
+              >Seleccionar Fecha y Hora</label
+            >
+            <hlm-date-picker
+              buttonId="date"
+              name="date-picker"
+              id="date-picker"
+            >
+              <span>Select date</span>
+            </hlm-date-picker>
+          </div>
+          }
+          <!--  -->
         </form>
       </div>
     </div>
