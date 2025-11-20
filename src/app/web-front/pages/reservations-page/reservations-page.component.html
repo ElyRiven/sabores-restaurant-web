@@ -5,7 +5,7 @@
 
 <div class="flex items-center justify-center font-jakarta">
   <div
-    class="flex flex-col items-center justify-center gap-[5%] w-full min-h-125 mx-[5%] my-10 md:flex-row"
+    class="flex flex-col items-center justify-center gap-10 md:gap-18 lg:gap-25 w-full min-h-125 mx-[5%] my-10 md:flex-row"
   >
     <div class="flex-5/9">
       <div class="flex flex-col items-center justify-center gap-5">
@@ -22,7 +22,7 @@
             />
           </svg>
         </div>
-        <div class="flex gap-25">
+        <div class="flex flex-col sm:flex-row gap-5 md:gap-25">
           <div class="flex flex-col items-center gap-2">
             <div class="flex items-center justify-center gap-2">
               <svg
@@ -70,18 +70,43 @@
         </div>
       </div>
     </div>
-    <div class="flex-4/9">
+    <div class="w-full flex-4/9">
       <div
         class="relative flex items-center bg-accent p-10 min-h-75 before:absolute before:top-0 before:left-0 before:w-full before:h-2 before:bg-primary"
       >
-        <form class="flex-1">
-          <div class="flex flex-col justify-center gap-2">
-            <label class="" for="date">Seleccionar Evento</label>
-            <input id="date" type="date" />
-            <a class="w-full bg-primary text-center py-3" href="">
+        <form class="flex-1" [formGroup]="reserveForm">
+          @if (true) {
+
+          <div class="flex flex-col justify-center gap-4">
+            <label class="font-semibold text-lg" for="event-select"
+              >Seleccionar Evento</label
+            >
+
+            <select
+              #eventSelect
+              class="appearance-none bg-secondary py-2 px-3 rounded-xl [&>option]:bg-background"
+              name="event-select"
+              id="event-select"
+              formControlName="name"
+              (change)="onSelect(eventSelect.value)"
+            >
+              <option value="">— Eventos —</option>
+              <option value="lunch">Almuerzo o Cena</option>
+              <option value="wedding">Boda</option>
+              <option value="formal">Evento Formal</option>
+              <!--  -->
+              @for (event of eventsService.getAllEvents(); track $index) {
+              <option [value]="event.title.replaceAll(' ', '-').toLowerCase()">
+                {{ event.title }}
+              </option>
+              }
+              <!--  -->
+            </select>
+            <a class="w-full bg-primary text-center py-3">
               <span class="font-bold text-background">Siguiente</span></a
             >
           </div>
+          }
         </form>
       </div>
     </div>

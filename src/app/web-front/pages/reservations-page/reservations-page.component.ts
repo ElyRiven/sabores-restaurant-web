@@ -1,5 +1,4 @@
-import { NgClass } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,19 +10,22 @@ import type {
   Reservation,
   ReserveSeatNumbers,
 } from '@front/interfaces/reservation.interface';
-import { SeatNumbersPipe } from '@front/pipes/seat-numbers.pipe';
 import { ReservationService } from '@front/services/reservation.service';
 import { FormUtils } from '@front/utils/form-utils';
 import { HeroSection } from '@front/components/hero-section/hero-section.component';
+import { EventService } from '@front/services/event.service';
 
 @Component({
   selector: 'app-reservations-page',
-  imports: [ReactiveFormsModule, SeatNumbersPipe, NgClass, HeroSection],
+  imports: [ReactiveFormsModule, HeroSection],
   templateUrl: './reservations-page.component.html',
 })
 export class ReservationsPageComponent {
   #formBuilder = inject(FormBuilder);
   #reservationService = inject(ReservationService);
+
+  public readonly eventsService = inject(EventService);
+
   public formUtils = FormUtils;
 
   public wasSaved = signal<boolean>(false);
@@ -41,6 +43,10 @@ export class ReservationsPageComponent {
     numberOfPersons: [1, Validators.required],
     comment: ['', Validators.maxLength(80)],
   });
+
+  onSelect(selectedEvent: string) {
+    console.log({ selectedEvent });
+  }
 
   onReserve() {
     if (this.reserveForm.invalid) {
