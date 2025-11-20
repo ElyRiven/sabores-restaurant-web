@@ -9,9 +9,15 @@ import {
 
 import { provideBrnCalendarI18n } from '@spartan-ng/brain/calendar';
 import {
-  HlmDatePickerImports,
-  provideHlmDatePickerConfig,
-} from '@spartan-ng/helm/date-picker';
+  BrnPopover,
+  BrnPopoverContent,
+  BrnPopoverTrigger,
+} from '@spartan-ng/brain/popover';
+import { HlmCalendar } from '@spartan-ng/helm/calendar';
+import { HlmPopoverContent } from '@spartan-ng/helm/popover';
+import { HlmIcon } from '@spartan-ng/helm/icon';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideChevronDown } from '@ng-icons/lucide';
 
 import type {
   Customer,
@@ -24,8 +30,19 @@ import { EventService } from '@front/services/event.service';
 
 @Component({
   selector: 'reservation-form',
-  imports: [ReactiveFormsModule, HlmDatePickerImports, NgClass],
+  imports: [
+    ReactiveFormsModule,
+    NgClass,
+    BrnPopover,
+    BrnPopoverTrigger,
+    BrnPopoverContent,
+    HlmPopoverContent,
+    HlmCalendar,
+    NgIcon,
+    HlmIcon,
+  ],
   providers: [
+    provideIcons({ lucideChevronDown }),
     provideBrnCalendarI18n({
       labelWeekday: (weekday: number) => {
         const dias = [
@@ -102,35 +119,6 @@ import { EventService } from '@front/services/event.service';
       },
       firstDayOfWeek: () => 1,
     }),
-    provideHlmDatePickerConfig({
-      formatDate: (date: Date) => {
-        if (!(date instanceof Date)) return `${date}`;
-
-        const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-        const meses = [
-          'Ene',
-          'Feb',
-          'Mar',
-          'Abr',
-          'May',
-          'Jun',
-          'Jul',
-          'Ago',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dic',
-        ];
-
-        const dia = dias[date.getDay()];
-        const mes = meses[date.getMonth()];
-        const numDia = date.getDate();
-        const año = date.getFullYear();
-
-        return `${dia} ${numDia} ${mes} ${año}`;
-      },
-      autoCloseOnSelect: true,
-    }),
   ],
   templateUrl: './reservation-form.component.html',
 })
@@ -152,7 +140,49 @@ export class ReservationFormComponent {
     longitude: 0,
   });
 
+  // Fecha mínima permitida (hoy)
+  public today = new Date();
+
+  // Fecha seleccionada
+  public selectedDate = signal<Date | undefined>(undefined);
+
+  // Estado del popover
+  public isPopoverOpen = signal<boolean>(false);
+
   public timeSlots = this.generateTimeSlots();
+
+  // Función para deshabilitar domingos
+  public isSunday = (date: Date): boolean => {
+    return date.getDay() === 0;
+  };
+
+  // Formato de fecha para mostrar
+  public formatDisplayDate(date: Date | undefined): string {
+    if (!date) return '';
+
+    const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+    const meses = [
+      'Ene',
+      'Feb',
+      'Mar',
+      'Abr',
+      'May',
+      'Jun',
+      'Jul',
+      'Ago',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dic',
+    ];
+
+    const dia = dias[date.getDay()];
+    const mes = meses[date.getMonth()];
+    const numDia = date.getDate();
+    const año = date.getFullYear();
+
+    return `${dia} ${numDia} ${mes} ${año}`;
+  }
 
   public reserveForm: FormGroup<ReservationForm> = this.formBuilder.group({
     event: ['', Validators.required],
@@ -167,11 +197,45 @@ export class ReservationFormComponent {
 
   generateTimeSlots(): string[] {
     const slots: string[] = [];
-    const startHour = 10;
+    const now = new Date();
+    const today = new Date();
+
+    // Verificar si estamos generando para hoy
+    const isToday =
+      this.selectedDate() &&
+      this.selectedDate()!.getDate() === today.getDate() &&
+      this.selectedDate()!.getMonth() === today.getMonth() &&
+      this.selectedDate()!.getFullYear() === today.getFullYear();
+
+    let startHour = 10;
+    let startMinutes = 0;
     const endHour = 20;
 
+    // Si es hoy, calcular la siguiente hora válida
+    if (isToday) {
+      const currentHour = now.getHours();
+      const currentMinutes = now.getMinutes();
+
+      startHour = currentHour;
+      startMinutes = currentMinutes <= 30 ? 30 : 0;
+
+      // Si ya pasamos el minuto 30, la siguiente hora válida es la hora siguiente
+      if (currentMinutes > 30) {
+        startHour++;
+        startMinutes = 0;
+      }
+
+      // Si la hora de inicio ya es mayor o igual a las 8pm, no hay slots disponibles
+      if (startHour >= endHour) {
+        return [];
+      }
+    }
+
     for (let hour = startHour; hour <= endHour; hour++) {
-      for (let minutes = 0; minutes < 60; minutes += 30) {
+      const minutesToIterate =
+        hour === startHour && isToday && startMinutes === 30 ? [30] : [0, 30];
+
+      for (const minutes of minutesToIterate) {
         if (hour === endHour && minutes > 0) break;
 
         const period = hour < 12 ? 'AM' : 'PM';
@@ -197,6 +261,29 @@ export class ReservationFormComponent {
     console.log({
       formTime: this.reserveForm.controls.time.value,
       selectedTime,
+    });
+  }
+
+  onDateSelect(selectedDate: Date | undefined) {
+    if (!selectedDate) return;
+
+    this.selectedDate.set(selectedDate);
+
+    // Regenerar timeSlots basándose en la fecha seleccionada
+    this.timeSlots = this.generateTimeSlots();
+
+    // Convertir Date a string en formato ISO
+    const dateString = selectedDate.toISOString().split('T')[0]; // YYYY-MM-DD
+    this.reserveForm.controls.date.setValue(dateString);
+
+    // Cerrar el popover
+    this.isPopoverOpen.set(false);
+
+    console.log({
+      formDate: this.reserveForm.controls.date.value,
+      selectedDate,
+      dateString,
+      availableSlots: this.timeSlots.length,
     });
   }
 }

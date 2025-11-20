@@ -38,14 +38,39 @@
       <label class="font-lobster text-4xl text-center py-4" for="date-picker"
         >Seleccionar Fecha y Hora</label
       >
-      <hlm-date-picker
-        class="font-jakarta"
-        buttonId="date"
-        name="date-picker"
-        id="date-picker"
+      <!-- Custom Date Picker con calendario que deshabilita domingos -->
+      <brn-popover
+        sideOffset="5"
+        [state]="isPopoverOpen() ? 'open' : 'closed'"
+        (stateChanged)="isPopoverOpen.set($event === 'open')"
       >
-        <span class="text-base">Fechas Disponibles</span>
-      </hlm-date-picker>
+        <button
+          type="button"
+          class="font-jakarta cursor-pointer ring-offset-background border-input bg-background hover:text-accent-foreground inline-flex h-10 w-full items-center justify-between gap-2 rounded-xl border py-2 px-3 text-left text-sm font-normal whitespace-nowrap transition-all focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+          brnPopoverTrigger
+        >
+          <span class="truncate">
+            @if (selectedDate(); as date) {
+            {{ formatDisplayDate(date) }}
+            }
+            <!--  -->
+            @else {
+            <span class="text-base">Fechas Disponibles</span>
+            }
+          </span>
+          <ng-icon hlm size="sm" name="lucideChevronDown" />
+        </button>
+
+        <div hlmPopoverContent class="w-auto p-0" *brnPopoverContent>
+          <hlm-calendar
+            calendarClass="border-0 rounded-none"
+            [date]="selectedDate()"
+            [min]="today"
+            [dateDisabled]="isSunday"
+            (dateChange)="onDateSelect($event)"
+          />
+        </div>
+      </brn-popover>
 
       <!-- Time Selector -->
       <div class="grid grid-cols-3 gap-3">
