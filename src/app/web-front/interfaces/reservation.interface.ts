@@ -10,7 +10,6 @@ export interface Customer {
   name: string;
   mail: string;
   phone: string;
-  comments?: string;
 }
 
 export interface ReservationForm {
@@ -22,4 +21,5 @@ export interface ReservationForm {
   price: FormControl<number | null>;
   customer: FormControl<Customer | null>;
   paymentType: FormControl<PaymentType | null>;
+  comments: FormControl<string | null>;
 }

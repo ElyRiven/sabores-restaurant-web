@@ -35,6 +35,15 @@
       ],
       "@spartan-ng/helm/form-field": [
         "./libs/ui/form-field/src/index.ts"
+      ],
+      "@spartan-ng/helm/input": [
+        "./libs/ui/input/src/index.ts"
+      ],
+      "@spartan-ng/helm/textarea": [
+        "./libs/ui/textarea/src/index.ts"
+      ],
+      "@spartan-ng/helm/radio-group": [
+        "./libs/ui/radio-group/src/index.ts"
       ]
     },
     "outDir": "./dist/out-tsc",

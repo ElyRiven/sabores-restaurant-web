@@ -12,13 +12,14 @@
         class="appearance-none bg-background py-2 px-3 rounded-xl"
         name="event-select"
         id="event-select"
-        formControlName="name"
+        formControlName="event"
         (change)="onEventSelect(eventSelect.value)"
       >
         <option value="">— Eventos —</option>
         <option value="lunch">Almuerzo o Cena</option>
         <option value="wedding">Boda</option>
         <option value="formal">Evento Formal</option>
+        <option value="formal">Cumpleaños</option>
         <!--  -->
         @for (event of eventsService.getAllEvents(); track $index) {
         <option [value]="event.title.replaceAll(' ', '-').toLowerCase()">
@@ -33,12 +34,12 @@
     </div>
     }
     <!--  -->
-    @if (true) {
+    @if (false) {
     <div class="flex flex-col justify-center gap-4">
-      <label class="font-lobster text-4xl text-center py-4" for="date-picker"
+      <label class="font-semibold text-3xl text-center py-4" for="date-picker"
         >Seleccionar Fecha y Hora</label
       >
-      <!-- Custom Date Picker con calendario que deshabilita domingos -->
+
       <brn-popover
         sideOffset="5"
         [state]="isPopoverOpen() ? 'open' : 'closed'"
@@ -72,12 +73,11 @@
         </div>
       </brn-popover>
 
-      <!-- Time Selector -->
       <div class="grid grid-cols-3 gap-3">
         @for (timeSlot of timeSlots; track timeSlot) {
         <button
           type="button"
-          class="py-2 px-3 min-w-18 border-2 rounded-xl transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:border-secondary"
+          class="py-2 px-3 text-sm md:text-base min-w-18 border-2 rounded-xl transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:border-secondary"
           [ngClass]="
             reserveForm.controls.time.value === timeSlot
               ? 'bg-primary text-primary-foreground border-secondary'
@@ -98,9 +98,410 @@
           <span class="font-bold text-background">Siguiente</span></a
         >
       </div>
-      <!-- End Time Selector -->
     </div>
     }
     <!--  -->
+    @if (false) {
+    <div class="flex flex-col justify-center gap-4">
+      <h2 class="font-semibold text-3xl text-center py-4">Tu Reserva</h2>
+      <div class="flex flex-col gap-10 bg-secondary/30 px-6 py-10">
+        <div>
+          <h3 class="text-2xl font-bold">Evento Seleccionado</h3>
+          <div>
+            <span class="text-lg font-bold"
+              >Fecha seleccionada, Hora seleccionada</span
+            >
+          </div>
+        </div>
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-2">
+            <label class="font-bold text-xs" for="guests-select">{{
+              "Número de Invitados" | uppercase
+            }}</label>
+            <!-- !  DELETE (valueChange) -->
+            <brn-select
+              #guestsSelect
+              class="w-full max-w-full inline-block"
+              placeholder="Seleccionar Invitados"
+              formControlName="numberOfGuests"
+              (valueChange)="onGuestsSelect(guestsSelect.value())"
+            >
+              <hlm-select-trigger
+                class="w-full max-w-full bg-background rounded-xl"
+              >
+                <hlm-select-value />
+              </hlm-select-trigger>
+              <hlm-select-content
+                class="w-full max-w-full max-h-60 overflow-y-auto"
+              >
+                @for (num of guests; track num) {
+                <hlm-option [value]="num">{{ num }}</hlm-option>
+                }
+              </hlm-select-content>
+            </brn-select>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="font-bold text-xs" for="address-select">{{
+              "Restaurante" | uppercase
+            }}</label>
+
+            <!-- !  DELETE (valueChange) -->
+            <brn-select
+              #addressSelect
+              class="w-full max-w-full inline-block"
+              placeholder="Seleccionar Restaurante"
+              formControlName="address"
+              (valueChange)="onAddressSelect(addressSelect.value())"
+            >
+              <hlm-select-trigger
+                class="w-full max-w-full bg-background rounded-xl"
+              >
+                <hlm-select-value />
+              </hlm-select-trigger>
+              <hlm-select-content class="w-full max-w-full">
+                @for (address of addressService.getAllAddress(); track address)
+                {
+                <hlm-option [value]="address">{{ address.name }}</hlm-option>
+                }
+              </hlm-select-content>
+            </brn-select>
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="font-bold text-xs" for="address-select">{{
+              "Dirección" | uppercase
+            }}</span>
+
+            @if (selectedAddress()) {
+            <span>{{ selectedAddress() }}</span>
+            }
+            <!--  -->
+            @else {
+            <span>——————————</span>
+            }
+          </div>
+          <div class="grid grid-cols-2">
+            <div class="flex flex-col gap-2">
+              <h4 class="font-bold text-xs">{{ "Subtotal" | uppercase }}</h4>
+              <span>$ {{ reserveForm.controls.price.value }}</span>
+            </div>
+            @if ( discount() > 0 ) {
+            <div class="flex flex-col gap-2">
+              <h4 class="font-bold text-xs">{{ "Descuento" | uppercase }}</h4>
+              <span>{{ discount() * 100 }} %</span>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 pt-4">
+        <a class="w-full bg-primary text-center py-2 rounded-xl">
+          <span class="font-bold text-background">Atrás</span></a
+        >
+
+        <a class="w-full bg-primary text-center py-2 rounded-xl">
+          <span class="font-bold text-background">Siguiente</span></a
+        >
+      </div>
+    </div>
+    }
+    <!--  -->
+    @if (false) {
+    <div class="flex flex-col justify-center gap-4">
+      <label class="font-semibold text-3xl text-center pt-4" for="date-picker"
+        >Tu Información
+      </label>
+      <div class="flex flex-col gap-4 p-6">
+        <div class="flex flex-col gap-2">
+          <label for="name-input">Nombre *</label>
+          <hlm-form-field>
+            <input
+              id="name-input"
+              class="w-full bg-background py-2 px-3 rounded-xl"
+              type="text"
+              placeholder="Nombre"
+              hlmInput
+            />
+            <hlm-error>Nombre requerido</hlm-error>
+          </hlm-form-field>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="email-input">Email *</label>
+          <hlm-form-field>
+            <input
+              id="email-input"
+              name="email-input"
+              class="w-full bg-background py-2 px-3 rounded-xl"
+              type="email"
+              placeholder="Email"
+              hlmInput
+            />
+            <hlm-error>Email requerido</hlm-error>
+          </hlm-form-field>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="phone-input">Teléfono *</label>
+          <hlm-form-field>
+            <input
+              id="phone-input"
+              name="phone-input"
+              class="w-full bg-background py-2 px-3 rounded-xl"
+              type="text"
+              placeholder="Teléfono"
+              hlmInput
+            />
+            <hlm-error>Número requerido</hlm-error>
+          </hlm-form-field>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="comment-input">Notas</label>
+          <textarea
+            id="comment-input"
+            name="comment-input"
+            class="bg-background py-2 px-3 rounded-xl resize-none min-w-full min-h-40"
+            hlmTextarea
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 pt-4">
+        <a class="w-full bg-primary text-center py-2 rounded-xl">
+          <span class="font-bold text-background">Atrás</span></a
+        >
+
+        <a class="w-full bg-primary text-center py-2 rounded-xl">
+          <span class="font-bold text-background">Siguiente</span></a
+        >
+      </div>
+    </div>
+    }
+    <!--  -->
+    @if (false) {
+    <div class="flex flex-col justify-center gap-4">
+      <h2 class="font-semibold text-3xl text-center py-4">Tu Orden</h2>
+      <div class="flex flex-col gap-10 px-6">
+        <div class="flex flex-col">
+          <div
+            class="relative grid grid-cols-2 after:absolute after:bottom-0 after:left-0 after:w-full after:border-t after:border-primary"
+          >
+            <span class="p-5">Evento Seleccionado</span>
+            <span class="p-5 text-right">$50</span>
+          </div>
+          @if( discount() > 0 || true ) {
+          <div
+            class="relative font-bold grid grid-cols-2 after:absolute after:bottom-0 after:left-0 after:w-full after:border-t after:border-primary"
+          >
+            <span class="p-5">Descuento</span>
+            <span class="p-5 text-right">80%</span>
+          </div>
+          }
+          <div
+            class="relative font-bold grid grid-cols-2 after:absolute after:bottom-0 after:left-0 after:w-full after:border-t after:border-primary"
+          >
+            <span class="p-5">Total</span>
+            <span class="p-5 text-right">$50</span>
+          </div>
+        </div>
+
+        <hlm-radio-group
+          formControlName="paymentType"
+          class="flex flex-col gap-8"
+        >
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <hlm-radio value="cash" id="cash">
+                <hlm-radio-indicator class="bg-background" indicator />
+              </hlm-radio>
+              <label class="font-bold" hlmLabel for="cash"
+                >Pago presencial</label
+              >
+            </div>
+            <p>Use this mode or any below to test booking confirmation</p>
+          </div>
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <hlm-radio value="transfer" id="transfer">
+                <hlm-radio-indicator class="bg-background" indicator />
+              </hlm-radio>
+              <label class="font-bold" hlmLabel for="transfer"
+                >Transferencia bancaria</label
+              >
+            </div>
+            <p>
+              Make your payment directly into our bank account. Please use your
+              Booking ID as the payment reference.
+            </p>
+          </div>
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <hlm-radio value="card" id="card">
+                <hlm-radio-indicator class="bg-background" indicator />
+              </hlm-radio>
+              <label class="font-bold" hlmLabel for="card">Tarjeta</label>
+            </div>
+            <p>
+              Pay with your credit card via Stripe. Use the card number
+              4242424242424242 with CVC 123, a valid expiration date and random
+              5-digit ZIP-code to test a payment.
+            </p>
+          </div>
+        </hlm-radio-group>
+
+        <!-- Campo de tarjeta estilo Stripe -->
+        @if ( reserveForm.controls.paymentType.value === 'card' ) {
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm">Crédito o Débito</label>
+          <div
+            class="relative flex items-center gap-2 md:gap-3 w-full bg-background border border-input rounded-xl px-3 md:px-4 py-3 focus-within:ring-2 focus-within:ring-ring/50 transition-all overflow-hidden"
+          >
+            <!-- Número de tarjeta con ícono -->
+            <div class="flex items-center gap-2 flex-1 min-w-0">
+              <ng-icon
+                hlm
+                name="lucideCreditCard"
+                size="sm"
+                class="text-muted-foreground shrink-0"
+              />
+              <input
+                #cardNumber
+                type="text"
+                placeholder="Número de tarjeta"
+                maxlength="19"
+                class="flex-1 bg-transparent outline-none text-sm min-w-0 w-full"
+                (input)="formatCardNumber($event)"
+              />
+            </div>
+
+            <!-- Fecha y CVC: se muestran solo cuando hay contenido o en pantallas grandes -->
+            <ng-container>
+              <!-- Separador -->
+              <div
+                class="h-4 md:h-6 w-px bg-border shrink-0 hidden lg:block"
+              ></div>
+
+              <!-- Fecha de expiración -->
+              <input
+                #cardExpiry
+                type="text"
+                placeholder="MM/AA"
+                maxlength="5"
+                class="hidden lg:block w-16 bg-transparent outline-none text-sm text-center shrink-0"
+                (input)="formatExpiry($event)"
+              />
+
+              <!-- Separador -->
+              <div
+                class="h-4 md:h-6 w-px bg-border shrink-0 hidden lg:block"
+              ></div>
+
+              <!-- CVC -->
+              <input
+                #cardCvc
+                type="text"
+                placeholder="CVC"
+                maxlength="4"
+                class="hidden lg:block w-12 bg-transparent outline-none text-sm text-center shrink-0"
+                (input)="formatCvc($event)"
+              />
+            </ng-container>
+          </div>
+
+          <!-- Campos adicionales en móvil: mostrar debajo -->
+          <div class="grid grid-cols-2 gap-2 lg:hidden">
+            <div
+              class="flex items-center gap-2 bg-background border border-input rounded-xl px-3 py-3"
+            >
+              <input
+                type="text"
+                placeholder="MM/AA"
+                maxlength="5"
+                class="flex-1 bg-transparent outline-none text-sm"
+                (input)="formatExpiry($event)"
+              />
+            </div>
+            <div
+              class="flex items-center gap-2 bg-background border border-input rounded-xl px-3 py-3"
+            >
+              <input
+                type="text"
+                placeholder="CVC"
+                maxlength="4"
+                class="flex-1 bg-transparent outline-none text-sm"
+                (input)="formatCvc($event)"
+              />
+            </div>
+          </div>
+
+          <p class="text-xs text-muted-foreground">
+            Usa 4242 4242 4242 4242 con CVC 123 y fecha válida para probar
+          </p>
+        </div>
+        }
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 pt-4">
+        <a class="w-full bg-primary text-center py-2 rounded-xl">
+          <span class="font-bold text-background">Atrás</span></a
+        >
+
+        <a class="w-full bg-primary text-center py-2 rounded-xl">
+          <span class="font-bold text-background">Reservar</span></a
+        >
+      </div>
+    </div>
+    }
+    <!--  -->
+    @if (true) {
+    <div class="flex flex-col justify-center gap-8">
+      <h2 class="font-semibold text-3xl text-center">¡Reserva Confirmada!</h2>
+
+      <p class="px-6 text-center">
+        Tu reserva se ha confirmado exitosamente.
+        <br />
+        ¡Muchas gracias por tu preferencia!
+      </p>
+
+      <a class="w-full bg-primary text-center py-2 rounded-xl">
+        <span class="font-bold text-background">Nueva Reserva</span></a
+      >
+    </div>
+    }
   </form>
 </div>
+
+@if (true) {
+<!-- Debug info -->
+<div class="mt-8 p-6 bg-secondary/30 rounded-xl">
+  <h3 class="font-bold text-lg mb-4">Debug - Estado del Formulario</h3>
+  <div class="grid gap-4">
+    <div>
+      <p class="font-semibold text-sm mb-2">Válido:</p>
+      <pre class="bg-background p-3 rounded text-xs overflow-x-auto">{{
+        reserveForm.valid
+      }}</pre>
+    </div>
+    <div>
+      <p class="font-semibold text-sm mb-2">Errores:</p>
+      <pre class="bg-background p-3 rounded text-xs overflow-x-auto">{{
+        {
+          event: reserveForm.controls.event.errors,
+          date: reserveForm.controls.date.errors,
+          time: reserveForm.controls.time.errors,
+          numberOfGuests: reserveForm.controls.numberOfGuests.errors,
+          address: reserveForm.controls.address.errors,
+          price: reserveForm.controls.price.errors,
+          customer: reserveForm.controls.customer.errors,
+          paymentType: reserveForm.controls.paymentType.errors,
+          comments: reserveForm.controls.comments.errors
+        } | json
+      }}</pre>
+    </div>
+    <div>
+      <p class="font-semibold text-sm mb-2">Valores:</p>
+      <pre class="bg-background p-3 rounded text-xs overflow-x-auto">{{
+        reserveForm.value | json
+      }}</pre>
+    </div>
+  </div>
+</div>
+}

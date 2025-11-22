@@ -22,6 +22,12 @@
             />
           </svg>
         </div>
+        <!-- TODO: Agregar asset de la marca en color naranja como en el menú móvil -->
+        <img
+          class="size-50 text-center"
+          src=""
+          alt="SOMBRERITO DE SABORES NARANJA"
+        />
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <div class="flex flex-col items-center gap-2">
             <div class="flex items-center justify-center gap-2">
@@ -75,63 +81,3 @@
     </div>
   </div>
 </div>
-
-<!-- Reservation Alert  -->
-@if ( wasSaved() ) {
-<div
-  class="fixed z-50 right-6 bottom-6 max-w-sm w-full p-4 left-1/2 -translate-x-1/2 animate-fadeIn md:right-6 md:bottom-6 md:translate-x-0 md:left-auto"
->
-  <div role="alert" class="alert bg-primary text-primary-content">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-      <path d="M9 12l2 2l4 -4" />
-    </svg>
-    <span class="font-jakarta font-bold"
-      >Reservación Generada Correctamente</span
-    >
-  </div>
-</div>
-}
-<!--  -->
-@if ( isError() ) {
-<div
-  class="fixed z-50 right-6 bottom-6 max-w-sm w-full p-4 left-1/2 -translate-x-1/2 animate-fadeIn md:right-6 md:bottom-6 md:translate-x-0 md:left-auto"
->
-  <div role="alert" class="alert bg-error text-primary-content">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="icon icon-tabler icons-tabler-outline icon-tabler-xbox-x"
-    >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path
-        d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
-      />
-      <path d="M9 8l6 8" />
-      <path d="M15 8l-6 8" />
-    </svg>
-    <span class="font-jakarta font-bold"
-      >La información ingresada no es correcta</span
-    >
-  </div>
-</div>
-}
-<!-- End Reservation Alert -->
