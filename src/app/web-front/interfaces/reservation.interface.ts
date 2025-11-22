@@ -6,6 +6,15 @@ export type SeatNumbers = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 export type PaymentType = 'cash' | 'card' | 'transfer';
 
+export enum FormStage {
+  firstStage = 1,
+  secondStage = 2,
+  thirdStage = 3,
+  fourthStage = 4,
+  fifthStage = 5,
+  sixthStage = 6,
+}
+
 export interface Customer {
   name: string;
   mail: string;

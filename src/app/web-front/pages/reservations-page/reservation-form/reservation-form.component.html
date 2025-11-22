@@ -2,8 +2,9 @@
   class="relative flex items-center bg-accent p-10 min-h-75 before:absolute before:top-0 before:left-0 before:w-full before:h-2 before:bg-primary"
 >
   <form class="flex-1" [formGroup]="reserveForm">
-    @if (false) {
-    <div class="flex flex-col justify-center gap-4">
+    <!-- First Stage -->
+    @if ( currentStage() === 1 ) {
+    <div class="flex-1 flex flex-col justify-center gap-4">
       <label class="font-semibold text-lg" for="event-select"
         >Seleccionar Evento</label
       >
@@ -19,7 +20,6 @@
         <option value="lunch">Almuerzo o Cena</option>
         <option value="wedding">Boda</option>
         <option value="formal">Evento Formal</option>
-        <option value="formal">Cumpleaños</option>
         <!--  -->
         @for (event of eventsService.getAllEvents(); track $index) {
         <option [value]="event.title.replaceAll(' ', '-').toLowerCase()">
@@ -28,14 +28,20 @@
         }
         <!--  -->
       </select>
-      <a class="w-full bg-primary text-center py-2 rounded-xl">
-        <span class="font-bold text-background">Siguiente</span></a
+      <button
+        class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary"
+        (click)="setFormStage(2)"
       >
+        <span class="font-bold text-foreground group-hover:text-background"
+          >Siguiente</span
+        >
+      </button>
     </div>
     }
-    <!--  -->
-    @if (false) {
-    <div class="flex flex-col justify-center gap-4">
+
+    <!-- Second Stage -->
+    @if ( currentStage() === 2 ) {
+    <div class="flex-1 flex flex-col justify-center gap-4">
       <label class="font-semibold text-3xl text-center py-4" for="date-picker"
         >Seleccionar Fecha y Hora</label
       >
@@ -77,11 +83,11 @@
         @for (timeSlot of timeSlots; track timeSlot) {
         <button
           type="button"
-          class="py-2 px-3 text-sm md:text-base min-w-18 border-2 rounded-xl transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:border-secondary"
+          class="py-2 px-3 text-sm md:text-base min-w-18 border-2 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:border-secondary"
           [ngClass]="
             reserveForm.controls.time.value === timeSlot
               ? 'bg-primary text-primary-foreground border-secondary'
-              : 'bg-secondary border-secondary '
+              : 'bg-secondary border-secondary'
           "
           (click)="onTimeSelect(timeSlot)"
         >
@@ -89,20 +95,32 @@
         </button>
         }
       </div>
-      <div class="grid grid-cols-2 gap-3 pt-4">
-        <a class="w-full bg-primary text-center py-2 rounded-xl">
-          <span class="font-bold text-background">Atrás</span></a
-        >
 
-        <a class="w-full bg-primary text-center py-2 rounded-xl">
-          <span class="font-bold text-background">Siguiente</span></a
+      <div class="grid grid-cols-2 gap-3 pt-4">
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary"
+          (click)="setFormStage(1)"
         >
+          <span class="font-bold text-foreground group-hover:text-background"
+            >Atrás</span
+          >
+        </button>
+
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary"
+          (click)="setFormStage(3)"
+        >
+          <span class="font-bold text-foreground group-hover:text-background"
+            >Siguiente</span
+          >
+        </button>
       </div>
     </div>
     }
-    <!--  -->
-    @if (false) {
-    <div class="flex flex-col justify-center gap-4">
+
+    <!-- Third Stage -->
+    @if ( currentStage() === 3 ) {
+    <div class="flex-1 flex flex-col justify-center gap-4">
       <h2 class="font-semibold text-3xl text-center py-4">Tu Reserva</h2>
       <div class="flex flex-col gap-10 bg-secondary/30 px-6 py-10">
         <div>
@@ -127,7 +145,7 @@
               (valueChange)="onGuestsSelect(guestsSelect.value())"
             >
               <hlm-select-trigger
-                class="w-full max-w-full bg-background rounded-xl"
+                class="w-full max-w-full bg-background rounded-xl cursor-pointer"
               >
                 <hlm-select-value />
               </hlm-select-trigger>
@@ -154,7 +172,7 @@
               (valueChange)="onAddressSelect(addressSelect.value())"
             >
               <hlm-select-trigger
-                class="w-full max-w-full bg-background rounded-xl"
+                class="w-full max-w-full bg-background rounded-xl cursor-pointer"
               >
                 <hlm-select-value />
               </hlm-select-trigger>
@@ -195,19 +213,30 @@
       </div>
 
       <div class="grid grid-cols-2 gap-3 pt-4">
-        <a class="w-full bg-primary text-center py-2 rounded-xl">
-          <span class="font-bold text-background">Atrás</span></a
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary"
+          (click)="setFormStage(2)"
         >
+          <span class="font-bold text-foreground group-hover:text-background"
+            >Atrás</span
+          >
+        </button>
 
-        <a class="w-full bg-primary text-center py-2 rounded-xl">
-          <span class="font-bold text-background">Siguiente</span></a
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary"
+          (click)="setFormStage(4)"
         >
+          <span class="font-bold text-foreground group-hover:text-background"
+            >Siguiente</span
+          >
+        </button>
       </div>
     </div>
     }
-    <!--  -->
-    @if (false) {
-    <div class="flex flex-col justify-center gap-4">
+
+    <!-- Fourth Stage -->
+    @if ( currentStage() === 4 ) {
+    <div class="flex-1 flex flex-col justify-center gap-4">
       <label class="font-semibold text-3xl text-center pt-4" for="date-picker"
         >Tu Información
       </label>
@@ -265,19 +294,30 @@
       </div>
 
       <div class="grid grid-cols-2 gap-3 pt-4">
-        <a class="w-full bg-primary text-center py-2 rounded-xl">
-          <span class="font-bold text-background">Atrás</span></a
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary"
+          (click)="setFormStage(3)"
         >
+          <span class="font-bold text-foreground group-hover:text-background"
+            >Atrás</span
+          >
+        </button>
 
-        <a class="w-full bg-primary text-center py-2 rounded-xl">
-          <span class="font-bold text-background">Siguiente</span></a
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary"
+          (click)="setFormStage(5)"
         >
+          <span class="font-bold text-foreground group-hover:text-background"
+            >Siguiente</span
+          >
+        </button>
       </div>
     </div>
     }
-    <!--  -->
-    @if (false) {
-    <div class="flex flex-col justify-center gap-4">
+
+    <!-- Fifth Stage -->
+    @if ( currentStage() === 5 ) {
+    <div class="flex-1 flex flex-col justify-center gap-4">
       <h2 class="font-semibold text-3xl text-center py-4">Tu Orden</h2>
       <div class="flex flex-col gap-10 px-6">
         <div class="flex flex-col">
@@ -309,7 +349,7 @@
         >
           <div class="flex flex-col gap-4">
             <div class="flex items-center gap-3">
-              <hlm-radio value="cash" id="cash">
+              <hlm-radio class="cursor-pointer" value="cash" id="cash">
                 <hlm-radio-indicator class="bg-background" indicator />
               </hlm-radio>
               <label class="font-bold" hlmLabel for="cash"
@@ -320,7 +360,7 @@
           </div>
           <div class="flex flex-col gap-4">
             <div class="flex items-center gap-3">
-              <hlm-radio value="transfer" id="transfer">
+              <hlm-radio class="cursor-pointer" value="transfer" id="transfer">
                 <hlm-radio-indicator class="bg-background" indicator />
               </hlm-radio>
               <label class="font-bold" hlmLabel for="transfer"
@@ -334,7 +374,7 @@
           </div>
           <div class="flex flex-col gap-4">
             <div class="flex items-center gap-3">
-              <hlm-radio value="card" id="card">
+              <hlm-radio class="cursor-pointer" value="card" id="card">
                 <hlm-radio-indicator class="bg-background" indicator />
               </hlm-radio>
               <label class="font-bold" hlmLabel for="card">Tarjeta</label>
@@ -440,20 +480,49 @@
       </div>
 
       <div class="grid grid-cols-2 gap-3 pt-4">
-        <a class="w-full bg-primary text-center py-2 rounded-xl">
-          <span class="font-bold text-background">Atrás</span></a
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary"
+          (click)="setFormStage(4)"
         >
+          <span class="font-bold text-foreground group-hover:text-background"
+            >Atrás</span
+          >
+        </button>
 
-        <a class="w-full bg-primary text-center py-2 rounded-xl">
-          <span class="font-bold text-background">Reservar</span></a
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary"
+          (click)="setFormStage(6)"
         >
+          <span class="font-bold text-foreground group-hover:text-background"
+            >Siguiente</span
+          >
+        </button>
       </div>
     </div>
     }
-    <!--  -->
-    @if (true) {
-    <div class="flex flex-col justify-center gap-8">
+
+    <!-- Sixth Stage -->
+    @if ( currentStage() === 6 ) {
+    <div class="flex-1 flex flex-col items-center justify-center gap-8">
       <h2 class="font-semibold text-3xl text-center">¡Reserva Confirmada!</h2>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="75"
+        height="75"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-badge-check-icon lucide-badge-check text-primary"
+      >
+        <path
+          d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"
+        />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
 
       <p class="px-6 text-center">
         Tu reserva se ha confirmado exitosamente.
@@ -461,15 +530,20 @@
         ¡Muchas gracias por tu preferencia!
       </p>
 
-      <a class="w-full bg-primary text-center py-2 rounded-xl">
-        <span class="font-bold text-background">Nueva Reserva</span></a
+      <button
+        class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary"
+        (click)="setFormStage(1)"
       >
+        <span class="font-bold text-foreground group-hover:text-background"
+          >Nueva Reserva</span
+        >
+      </button>
     </div>
     }
   </form>
 </div>
 
-@if (true) {
+@if (false) {
 <!-- Debug info -->
 <div class="mt-8 p-6 bg-secondary/30 rounded-xl">
   <h3 class="font-bold text-lg mb-4">Debug - Estado del Formulario</h3>

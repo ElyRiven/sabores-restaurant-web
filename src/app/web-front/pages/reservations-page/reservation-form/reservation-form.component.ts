@@ -1,5 +1,5 @@
 import { JsonPipe, NgClass, UpperCasePipe } from '@angular/common';
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,14 +13,21 @@ import {
   BrnPopoverContent,
   BrnPopoverTrigger,
 } from '@spartan-ng/brain/popover';
-import { HlmCalendar } from '@spartan-ng/helm/calendar';
-import { HlmPopoverContent } from '@spartan-ng/helm/popover';
 import { HlmIcon } from '@spartan-ng/helm/icon';
+import { HlmCalendar } from '@spartan-ng/helm/calendar';
+import { HlmInputImports } from '@spartan-ng/helm/input';
+import { HlmSelectImports } from '@spartan-ng/helm/select';
+import { BrnSelectImports } from '@spartan-ng/brain/select';
+import { HlmPopoverContent } from '@spartan-ng/helm/popover';
+import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
+import { HlmFormFieldImports } from '@spartan-ng/helm/form-field';
+import { HlmRadioGroupImports } from '@spartan-ng/helm/radio-group';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown, lucideCreditCard } from '@ng-icons/lucide';
 
-import type {
+import {
   Customer,
+  FormStage,
   PaymentType,
   ReservationForm,
   SeatNumbers,
@@ -28,12 +35,7 @@ import type {
 import type { Address } from '@front/interfaces/address.interface';
 import { EventService } from '@front/services/event.service';
 import { AddressService } from '@front/services/address.service';
-import { HlmSelectImports } from '@spartan-ng/helm/select';
-import { BrnSelectImports } from '@spartan-ng/brain/select';
-import { HlmFormFieldImports } from '@spartan-ng/helm/form-field';
-import { HlmInputImports } from '@spartan-ng/helm/input';
-import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
-import { HlmRadioGroupImports } from '@spartan-ng/helm/radio-group';
+import { HlmCarouselImports } from '@spartan-ng/helm/carousel';
 
 @Component({
   selector: 'reservation-form',
@@ -142,6 +144,18 @@ export class ReservationFormComponent {
 
   private readonly formBuilder = inject(FormBuilder);
 
+  public readonly currentStage = signal<FormStage>(FormStage.firstStage);
+
+  public readonly navigationRight = signal<'rightEnter' | 'rightLeave'>(
+    'rightLeave'
+  );
+
+  public readonly navigationLeft = signal<'leftLeave' | 'leftEnter'>(
+    'leftLeave'
+  );
+
+  public readonly isNextStage = signal<boolean>(true);
+
   public readonly eventsService = inject(EventService);
   public readonly addressService = inject(AddressService);
   public guests = Array.from({ length: 300 }, (_, i) => i + 1);
@@ -212,6 +226,26 @@ export class ReservationFormComponent {
     paymentType: ['cash' as PaymentType, Validators.required],
     comments: [''],
   });
+
+  setFormStage(stage: FormStage): void {
+    if (!(stage in FormStage)) return;
+
+    this.currentStage.set(stage);
+
+    console.log({ formStage: this.currentStage() });
+  }
+
+  nextStage(): void {
+    this.isNextStage.set(true);
+    this.navigationLeft.set('leftLeave');
+    this.navigationRight.set('rightEnter');
+  }
+
+  previousStage(): void {
+    this.isNextStage.set(false);
+    this.navigationLeft.set('leftEnter');
+    this.navigationRight.set('rightLeave');
+  }
 
   generateTimeSlots(): string[] {
     const slots: string[] = [];
