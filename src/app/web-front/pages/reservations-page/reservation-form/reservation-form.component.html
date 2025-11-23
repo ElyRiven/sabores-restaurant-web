@@ -17,6 +17,7 @@
           class="w-full max-w-full inline-block"
           placeholder="Seleccionar Evento"
           formControlName="event"
+          (valueChange)="onEventSelect(eventSelect.value())"
         >
           <hlm-select-trigger
             class="w-full max-w-full bg-background rounded-xl cursor-pointer"
@@ -56,6 +57,7 @@
           class="w-full max-w-full inline-block"
           placeholder="Seleccionar Restaurante"
           formControlName="address"
+          (valueChange)="onAddressSelect(addressSelect.value())"
         >
           <hlm-select-trigger
             class="w-full max-w-full bg-background rounded-xl cursor-pointer"
@@ -63,7 +65,7 @@
             <hlm-select-value />
           </hlm-select-trigger>
           <hlm-select-content class="w-full max-w-full">
-            @for (address of addressService.getAllAddress(); track address) {
+            @for (address of availableAddresses(); track address) {
             <hlm-option [value]="address">{{ address.name }}</hlm-option>
             }
           </hlm-select-content>
@@ -116,7 +118,7 @@
         >
           <span class="truncate">
             @if (selectedDate(); as date) {
-            {{ formatDisplayDate(date) }}
+            {{ formUtils.formatDisplayDate(date) }}
             }
             <!--  -->
             @else {
@@ -131,7 +133,7 @@
             calendarClass="border-0 rounded-none"
             [date]="selectedDate()"
             [min]="today"
-            [dateDisabled]="isSunday"
+            [dateDisabled]="formUtils.isSunday"
             (dateChange)="onDateSelect($event)"
           />
         </div>
@@ -248,7 +250,7 @@
           <div class="grid grid-cols-2">
             <div class="flex flex-col gap-2">
               <h4 class="font-bold text-xs">{{ "Subtotal" | uppercase }}</h4>
-              <span>$ {{ reserveForm.controls.price.value }}</span>
+              <span>$ {{ subtotal() | number : "1.2-2" }}</span>
             </div>
             @if ( discount() > 0 ) {
             <div class="flex flex-col gap-2">
@@ -339,7 +341,7 @@
               placeholder="Teléfono"
               formControlName="phone"
               maxlength="10"
-              (input)="formatPhone($event)"
+              (input)="formUtils.formatPhone($event)"
               hlmInput
             />
             <hlm-error>{{
@@ -411,7 +413,9 @@
               >
               }
             </div>
-            <span class="p-5 text-right">$ {{ subtotal() }}</span>
+            <span class="p-5 text-right"
+              >$ {{ subtotal() | number : "1.2-2" }}</span
+            >
           </div>
           @if( discount() > 0 ) {
           <div
@@ -426,7 +430,7 @@
           >
             <span class="p-5">{{ "Total" | uppercase }}</span>
             <span class="p-5 text-right"
-              >$ {{ reserveForm.controls.price.value }}</span
+              >$ {{ reserveForm.controls.price.value | number : "1.2-2" }}</span
             >
           </div>
         </div>
@@ -501,7 +505,7 @@
                 placeholder="Número de tarjeta"
                 maxlength="19"
                 class="flex-1 bg-transparent outline-none text-sm min-w-0 w-full"
-                (input)="formatCardNumber($event)"
+                (input)="formUtils.formatCardNumber($event)"
               />
             </div>
 
@@ -519,7 +523,7 @@
                 placeholder="MM/AA"
                 maxlength="5"
                 class="hidden lg:block w-16 bg-transparent outline-none text-sm text-center shrink-0"
-                (input)="formatExpiry($event)"
+                (input)="formUtils.formatExpiry($event)"
               />
 
               <!-- Separador -->
@@ -532,9 +536,9 @@
                 #cardCvc
                 type="text"
                 placeholder="CVC"
-                maxlength="3"
+                maxlength="4"
                 class="hidden lg:block w-12 bg-transparent outline-none text-sm text-center shrink-0"
-                (input)="formatCvc($event)"
+                (input)="formUtils.formatCvc($event)"
               />
             </ng-container>
           </div>
@@ -549,7 +553,7 @@
                 placeholder="MM/AA"
                 maxlength="5"
                 class="flex-1 bg-transparent outline-none text-sm"
-                (input)="formatExpiry($event)"
+                (input)="formUtils.formatExpiry($event)"
               />
             </div>
             <div
@@ -558,9 +562,9 @@
               <input
                 type="text"
                 placeholder="CVC"
-                maxlength="3"
+                maxlength="4"
                 class="flex-1 bg-transparent outline-none text-sm"
-                (input)="formatCvc($event)"
+                (input)="formUtils.formatCvc($event)"
               />
             </div>
           </div>

@@ -1,5 +1,6 @@
 import {
   DatePipe,
+  DecimalPipe,
   JsonPipe,
   LowerCasePipe,
   NgClass,
@@ -66,6 +67,7 @@ import { FormUtils } from '@front/utils/form-utils';
     UpperCasePipe,
     TitleCasePipe,
     LowerCasePipe,
+    DecimalPipe,
     DatePipe,
     JsonPipe,
   ],
@@ -151,47 +153,40 @@ import { FormUtils } from '@front/utils/form-utils';
   templateUrl: './reservation-form.component.html',
 })
 export class ReservationFormComponent {
-  private readonly defaultPrice = 50;
   formUtils = FormUtils;
 
   private readonly formBuilder = inject(FormBuilder);
-
-  public readonly currentStage = signal<FormStage>(FormStage.firstStage);
-
-  public readonly isReserving = signal<boolean>(false);
-
-  public canNavigateForward = signal<boolean>(false);
-
   public readonly eventsService = inject(EventService);
   public readonly addressService = inject(AddressService);
+
+  private readonly defaultPrice = 50;
+  public readonly discount = signal<number>(0);
+  public readonly subtotal = signal<number>(0);
+  public readonly currentStage = signal<FormStage>(FormStage.firstStage);
+  public readonly isReserving = signal<boolean>(false);
+  public canNavigateForward = signal<boolean>(false);
   public guests = Array.from({ length: 300 }, (_, i) => i + 1);
 
-  public customer = signal<Customer>({
+  public defaultCustomer = signal<Customer>({
     name: '',
     mail: '',
     phone: '',
   });
-
   public defaultAddress = signal<Address>(
     this.addressService.getAddressById(1)
   );
-
   // public initialEvent = signal<Event>({})
 
-  // Fecha mínima permitida (hoy)
   public today = new Date();
-
-  // Fecha seleccionada
   public selectedDate = signal<Date | undefined>(undefined);
-
-  // Estado del popover
   public isPopoverOpen = signal<boolean>(false);
+  public timeSlots = FormUtils.generateTimeSlots();
 
-  public readonly discount = signal<number>(0);
-
-  public readonly subtotal = signal<number>(0);
-
-  public timeSlots = this.generateTimeSlots();
+  // Control de direcciones disponibles según el evento seleccionado
+  public availableAddresses = signal<Address[]>(
+    this.addressService.getAllAddress()
+  );
+  public selectedEventName = signal<string>('');
 
   // Valores por defecto para el reset
   private readonly defaultFormValues = {
@@ -201,47 +196,10 @@ export class ReservationFormComponent {
     numberOfGuests: 0 as SeatNumbers,
     address: this.defaultAddress(),
     price: 0,
-    customer: {
-      name: '',
-      mail: '',
-      phone: '',
-    },
+    customer: this.defaultCustomer(),
     paymentType: 'cash' as PaymentType,
     comments: '',
   };
-
-  // Función para deshabilitar domingos
-  public isSunday = (date: Date): boolean => {
-    return date.getDay() === 0;
-  };
-
-  // Formato de fecha para mostrar
-  public formatDisplayDate(date: Date | undefined): string {
-    if (!date) return '';
-
-    const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-    const meses = [
-      'Ene',
-      'Feb',
-      'Mar',
-      'Abr',
-      'May',
-      'Jun',
-      'Jul',
-      'Ago',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dic',
-    ];
-
-    const dia = dias[date.getDay()];
-    const mes = meses[date.getMonth()];
-    const numDia = date.getDate();
-    const año = date.getFullYear();
-
-    return `${dia} ${numDia} ${mes} ${año}`;
-  }
 
   public customerForm: FormGroup<CustomerForm> = this.formBuilder.group({
     name: ['', Validators.required],
@@ -268,22 +226,20 @@ export class ReservationFormComponent {
   });
 
   constructor() {
-    // Suscribirse a cambios del formulario y actualizar canNavigateForward
     this.reserveForm.valueChanges.subscribe(() => {
       const fields = this.getFieldsForStage(this.currentStage());
-      const currentForm =
-        this.currentStage() === 4
-          ? this.reserveForm.controls.customer
-          : this.reserveForm;
-
-      const isValid = this.formUtils.checkNavigation(currentForm, fields);
+      const isValid = this.formUtils.updateNavigationState(
+        this.reserveForm,
+        this.currentStage(),
+        fields
+      );
       this.canNavigateForward.set(isValid);
     });
 
-    // Evaluar inmediatamente al cargar
     const initialFields = this.getFieldsForStage(this.currentStage());
-    const initialValid = this.formUtils.checkNavigation(
+    const initialValid = this.formUtils.updateNavigationState(
       this.reserveForm,
+      this.currentStage(),
       initialFields
     );
     this.canNavigateForward.set(initialValid);
@@ -296,13 +252,14 @@ export class ReservationFormComponent {
 
     // Re-evaluar validación cuando cambia la etapa
     const fields = this.getFieldsForStage(stage);
-    const isValid = this.formUtils.checkNavigation(this.reserveForm, fields);
+    const isValid = this.formUtils.updateNavigationState(
+      this.reserveForm,
+      stage,
+      fields
+    );
     this.canNavigateForward.set(isValid);
-
-    console.log({ formStage: this.currentStage() });
   }
 
-  // Retorna los campos a validar según la etapa actual
   getFieldsForStage(stage: FormStage): string[] {
     switch (stage) {
       case FormStage.firstStage:
@@ -329,7 +286,6 @@ export class ReservationFormComponent {
   onReserve() {
     this.isReserving.set(true);
 
-    // Generar tiempo aleatorio entre 1 y 4 segundos (1000ms - 4000ms)
     const randomDelay = Math.floor(Math.random() * 3000) + 1000;
 
     setTimeout(() => {
@@ -341,120 +297,75 @@ export class ReservationFormComponent {
       this.discount.set(0);
       this.subtotal.set(0);
       this.selectedDate.set(undefined);
-      this.timeSlots = this.generateTimeSlots();
+      this.timeSlots = FormUtils.generateTimeSlots();
     }, randomDelay);
   }
 
-  generateTimeSlots(): string[] {
-    const slots: string[] = [];
-    const now = new Date();
-    const today = new Date();
+  onEventSelect(selectedEvent: string) {
+    this.selectedEventName.set(selectedEvent);
 
-    // Verificar si estamos generando para hoy
-    const isToday =
-      this.selectedDate() &&
-      this.selectedDate()!.getDate() === today.getDate() &&
-      this.selectedDate()!.getMonth() === today.getMonth() &&
-      this.selectedDate()!.getFullYear() === today.getFullYear();
+    // Obtener todos los eventos que coinciden con el evento seleccionado
+    const events = this.eventsService.getAllEvents();
+    const matchingEvent = events.find(
+      (event) =>
+        event.title.replaceAll(' ', '-').toLowerCase() === selectedEvent
+    );
 
-    let startHour = 10;
-    let startMinutes = 0;
-    const endHour = 20;
+    // Si se seleccionó un evento específico, filtrar direcciones disponibles
+    if (matchingEvent) {
+      // Solo mostrar la dirección asociada al evento
+      this.availableAddresses.set([matchingEvent.address]);
 
-    // Si es hoy, calcular la siguiente hora válida
-    if (isToday) {
-      const currentHour = now.getHours();
-      const currentMinutes = now.getMinutes();
-
-      startHour = currentHour;
-      startMinutes = currentMinutes <= 30 ? 30 : 0;
-
-      // Si ya pasamos el minuto 30, la siguiente hora válida es la hora siguiente
-      if (currentMinutes > 30) {
-        startHour++;
-        startMinutes = 0;
+      // Si la dirección actualmente seleccionada no está disponible, resetearla
+      const currentAddress = this.reserveForm.controls.address.value;
+      if (currentAddress?.id !== matchingEvent.address.id) {
+        this.reserveForm.controls.address.setValue(matchingEvent.address);
       }
-
-      // Si la hora de inicio ya es mayor o igual a las 8pm, no hay slots disponibles
-      if (startHour >= endHour) {
-        return [];
-      }
+    } else {
+      // Para eventos genéricos (almuerzo-cena, boda, etc.), mostrar todas las direcciones
+      this.availableAddresses.set(this.addressService.getAllAddress());
     }
-
-    for (let hour = startHour; hour <= endHour; hour++) {
-      const minutesToIterate =
-        hour === startHour && isToday && startMinutes === 30 ? [30] : [0, 30];
-
-      for (const minutes of minutesToIterate) {
-        if (hour === endHour && minutes > 0) break;
-
-        const period = hour < 12 ? 'AM' : 'PM';
-        const displayHour = hour > 12 ? hour - 12 : hour;
-        const timeString = `${displayHour}:${minutes
-          .toString()
-          .padStart(2, '0')} ${period}`;
-        slots.push(timeString);
-      }
-    }
-
-    return slots;
   }
 
-  onEventSelect(selectedEvent: string) {
-    //! DELETE LOG
-    console.log({
-      selectedEvent,
-      formEvent: this.reserveForm.controls.event.value,
-    });
+  onAddressSelect(selectedAddress: Address) {
+    // Comprobar que, si existe un evento seleccionado, ese evento esté disponible en la dirección seleccionada
+    const selectedEvent = this.selectedEventName();
+
+    if (selectedEvent) {
+      const events = this.eventsService.getAllEvents();
+      const matchingEvent = events.find(
+        (event) =>
+          event.title.replaceAll(' ', '-').toLowerCase() === selectedEvent
+      );
+
+      // Si hay un evento específico seleccionado, validar que esté en esta dirección
+      if (matchingEvent && matchingEvent.address.id !== selectedAddress.id) {
+        // Resetear la dirección a la correcta
+        this.reserveForm.controls.address.setValue(matchingEvent.address);
+      }
+    }
   }
 
   onTimeSelect(selectedTime: string) {
     this.reserveForm.controls.time.setValue(selectedTime);
-
-    console.log({
-      formTime: this.reserveForm.controls.time.value,
-      selectedTime,
-    });
   }
 
   onDateSelect(selectedDate: Date | undefined) {
     if (!selectedDate) return;
 
     this.reserveForm.controls.time.reset();
-
     this.selectedDate.set(selectedDate);
 
-    // Regenerar timeSlots basándose en la fecha seleccionada
-    this.timeSlots = this.generateTimeSlots();
+    this.timeSlots = FormUtils.generateTimeSlots(selectedDate);
 
-    // Convertir Date a string en formato ISO
     const dateString = selectedDate.toISOString().split('T')[0]; // YYYY-MM-DD
     this.reserveForm.controls.date.setValue(dateString);
 
-    // Cerrar el popover
     this.isPopoverOpen.set(false);
-
-    console.log({
-      formDate: this.reserveForm.controls.date.value,
-      selectedDate,
-      dateString,
-      availableSlots: this.timeSlots.length,
-    });
-  }
-
-  onAddressSelect(selectedAddress: Address) {
-    setTimeout(() => {
-      console.log({
-        selectedAddress,
-        formAddress: this.reserveForm.controls.address.value,
-      });
-    }, 100);
   }
 
   onGuestsSelect(guests: number) {
     if (guests < 1) return;
-
-    this.discount.set(0);
 
     this.subtotal.set(this.defaultPrice * guests);
 
@@ -467,55 +378,11 @@ export class ReservationFormComponent {
     const reservePrice = this.subtotal() * (1 - this.discount());
 
     this.reserveForm.controls.price.setValue(reservePrice);
-
-    setTimeout(() => {
-      console.log({
-        guests,
-        formGuests: this.reserveForm.controls.numberOfGuests.value,
-      });
-    }, 100);
   }
 
   selectedAddress(): Address {
     const address = this.reserveForm.controls.address.value;
 
     return address ? address : ({} as Address);
-  }
-
-  // Formateo de número de tarjeta: 1234 5678 9012 3456
-  formatCardNumber(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    let value = input.value.replace(/\s/g, ''); // Quitar espacios
-    value = value.replace(/\D/g, ''); // Solo números
-
-    // Agrupar en bloques de 4
-    const formatted = value.match(/.{1,4}/g)?.join(' ') || value;
-    input.value = formatted;
-  }
-
-  // Formateo de fecha de expiración: MM/AA
-  formatExpiry(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    let value = input.value.replace(/\D/g, ''); // Solo números
-
-    if (value.length >= 2) {
-      value = value.slice(0, 2) + '/' + value.slice(2, 4);
-    }
-
-    input.value = value;
-  }
-
-  // Formateo de CVC: solo números, máximo 4 dígitos
-  formatCvc(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    input.value = input.value.replace(/\D/g, ''); // Solo números
-  }
-
-  // Formateo de teléfono: solo números, máximo 10 dígitos
-  formatPhone(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    let value = input.value.replace(/\D/g, ''); // Solo números
-    value = value.slice(0, 10); // Máximo 10 dígitos
-    input.value = value;
   }
 }
