@@ -188,6 +188,11 @@ export class ReservationFormComponent {
   );
   public selectedEventName = signal<string>('');
 
+  // Control de fecha/hora fija para eventos específicos
+  public isEventDateFixed = signal<boolean>(false);
+  public fixedEventDate = signal<Date | undefined>(undefined);
+  public fixedEventTime = signal<string>('');
+
   // Valores por defecto para el reset
   private readonly defaultFormValues = {
     event: '',
@@ -321,9 +326,45 @@ export class ReservationFormComponent {
       if (currentAddress?.id !== matchingEvent.address.id) {
         this.reserveForm.controls.address.setValue(matchingEvent.address);
       }
+
+      // Configurar fecha y hora fijas del evento
+      this.isEventDateFixed.set(true);
+
+      // Convertir fecha del evento (formato: 'MM-DD-YYYY') a Date
+      const [month, day, year] = matchingEvent.date.split('-');
+      const eventDate = new Date(
+        parseInt(year),
+        parseInt(month) - 1,
+        parseInt(day)
+      );
+
+      this.fixedEventDate.set(eventDate);
+      this.fixedEventTime.set(matchingEvent.time || '');
+
+      // Establecer automáticamente la fecha y hora en el formulario
+      this.reserveForm.controls.date.setValue(matchingEvent.date);
+      this.selectedDate.set(eventDate);
+
+      if (matchingEvent.time) {
+        this.reserveForm.controls.time.setValue(matchingEvent.time);
+      } else {
+        // Si no hay hora específica, regenerar slots para esa fecha
+        this.timeSlots = FormUtils.generateTimeSlots(eventDate);
+      }
     } else {
       // Para eventos genéricos (almuerzo-cena, boda, etc.), mostrar todas las direcciones
       this.availableAddresses.set(this.addressService.getAllAddress());
+
+      // Resetear restricciones de fecha/hora
+      this.isEventDateFixed.set(false);
+      this.fixedEventDate.set(undefined);
+      this.fixedEventTime.set('');
+
+      // Resetear fecha y hora para permitir selección libre
+      this.reserveForm.controls.date.reset();
+      this.reserveForm.controls.time.reset();
+      this.selectedDate.set(undefined);
+      this.timeSlots = FormUtils.generateTimeSlots();
     }
   }
 

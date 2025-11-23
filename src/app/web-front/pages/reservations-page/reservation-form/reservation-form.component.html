@@ -115,6 +115,7 @@
           type="button"
           class="font-jakarta cursor-pointer ring-offset-background border-input bg-background hover:text-accent-foreground inline-flex h-10 w-full items-center justify-between gap-2 rounded-xl border py-2 px-3 text-left text-sm font-normal whitespace-nowrap transition-all focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
           brnPopoverTrigger
+          [disabled]="isEventDateFixed()"
         >
           <span class="truncate">
             @if (selectedDate(); as date) {
@@ -139,6 +140,22 @@
         </div>
       </brn-popover>
 
+      @if (isEventDateFixed()) {
+      <div class="flex flex-col gap-2">
+        <span class="font-bold text-xs" for="address-select">{{
+          "Hora del evento" | uppercase
+        }}</span>
+        <span>{{ reserveForm.controls.time.value }}</span>
+      </div>
+      }
+      <!--  -->
+      @if (isEventDateFixed()) {
+      <p class="text-sm text-muted-foreground text-center">
+        La fecha y hora están establecidas por el evento seleccionado
+      </p>
+      }
+      <!--  -->
+      @if (!isEventDateFixed()) {
       <div class="grid grid-cols-3 gap-3">
         @for (timeSlot of timeSlots; track timeSlot) {
         <button
@@ -155,6 +172,7 @@
         </button>
         }
       </div>
+      }
 
       <div class="grid grid-cols-2 gap-3 pt-4">
         <button
@@ -661,7 +679,7 @@
   </form>
 </div>
 
-@if (false) {
+@if (true) {
 <!-- Debug info -->
 <div class="mt-8 p-6 bg-secondary/30 rounded-xl">
   <h3 class="font-bold text-lg mb-4">Debug - Estado del Formulario</h3>
