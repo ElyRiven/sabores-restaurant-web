@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Event } from '@front/interfaces/event.interface';
+
+import type { Event } from '@front/interfaces/event.interface';
 import { AddressService } from './address.service';
 
 const addressService = new AddressService();
@@ -38,7 +39,7 @@ const eventsArray: Event[] = [
   {
     title: 'Degustación del Chef',
     description:
-      'Disfruta de un menú exclusivo de pasos diseñado por nuestro chef ejecutivo, que destaca lo mejor de la temporada con técnica y presentación impecables.',
+      'Disfruta de un menú exclusivo de platos diseñado por nuestro chef ejecutivo, que destaca lo mejor de la temporada con técnica y presentación impecables.',
     image: 'assets/photos/events/event4.webp',
     date: '07-12-2025',
     time: '1:30 PM',

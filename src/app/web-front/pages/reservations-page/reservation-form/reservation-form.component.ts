@@ -1,7 +1,6 @@
 import {
   DatePipe,
   DecimalPipe,
-  JsonPipe,
   LowerCasePipe,
   NgClass,
   TitleCasePipe,
@@ -9,7 +8,6 @@ import {
 } from '@angular/common';
 import {
   Component,
-  computed,
   effect,
   ElementRef,
   inject,
@@ -22,7 +20,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
 
+import { map } from 'rxjs';
 import { provideBrnCalendarI18n } from '@spartan-ng/brain/calendar';
 import {
   BrnPopover,
@@ -41,21 +42,18 @@ import { HlmRadioGroupImports } from '@spartan-ng/helm/radio-group';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown, lucideCreditCard } from '@ng-icons/lucide';
 
-import {
+import type {
   Customer,
   CustomerForm,
-  FormStage,
   PaymentType,
   ReservationForm,
   SeatNumbers,
 } from '@front/interfaces/reservation.interface';
+import { FormStage } from '@front/interfaces/reservation.interface';
 import type { Address } from '@front/interfaces/address.interface';
 import { EventService } from '@front/services/event.service';
 import { AddressService } from '@front/services/address.service';
 import { FormUtils } from '@front/utils/form-utils';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'reservation-form',
@@ -80,7 +78,6 @@ import { map } from 'rxjs';
     LowerCasePipe,
     DecimalPipe,
     DatePipe,
-    JsonPipe,
   ],
   providers: [
     provideIcons({ lucideChevronDown, lucideCreditCard }),

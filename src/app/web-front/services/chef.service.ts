@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Chef } from '@front/interfaces/chef.interface';
+
+import type { Chef } from '@front/interfaces/chef.interface';
 
 const chefsArray: Chef[] = [
   {
