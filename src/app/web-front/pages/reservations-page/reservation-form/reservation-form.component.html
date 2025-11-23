@@ -1,4 +1,5 @@
 <div
+  #reserveFormElement
   class="relative flex items-center bg-accent p-10 min-h-75 before:absolute before:top-0 before:left-0 before:w-full before:h-2 before:bg-primary overflow-x-hidden"
 >
   <form class="flex-1 overflow-x-hidden" [formGroup]="reserveForm">
@@ -77,8 +78,8 @@
           "Dirección" | uppercase
         }}</span>
 
-        @if (selectedAddress().streets) {
-        <span>{{ selectedAddress().streets }}</span>
+        @if (formUtils.getSelectedAddress(reserveForm).streets) {
+        <span>{{ formUtils.getSelectedAddress(reserveForm).streets }}</span>
         }
         <!--  -->
         @else {
@@ -257,13 +258,13 @@
             <span class="font-bold text-xs" for="address-select">{{
               "Restaurante" | uppercase
             }}</span>
-            <span>{{ selectedAddress().name }}</span>
+            <span>{{ formUtils.getSelectedAddress(reserveForm).name }}</span>
           </div>
           <div class="flex flex-col gap-2">
             <span class="font-bold text-xs" for="address-select">{{
               "Dirección" | uppercase
             }}</span>
-            <span>{{ selectedAddress().streets }}</span>
+            <span>{{ formUtils.getSelectedAddress(reserveForm).streets }}</span>
           </div>
           <div class="grid grid-cols-2">
             <div class="flex flex-col gap-2">
@@ -494,11 +495,7 @@
               </hlm-radio>
               <label class="font-bold" hlmLabel for="card">Tarjeta</label>
             </div>
-            <p>
-              Pago con trajeta de crédito o débito. Usa el número 4242 4242 4242
-              4242 con CVC 123 y una fecha de caducidad válida para realizar el
-              pago.
-            </p>
+            <p>Pago con trajeta de crédito o débito.</p>
           </div>
         </hlm-radio-group>
 
@@ -679,7 +676,7 @@
   </form>
 </div>
 
-@if (true) {
+@if (false) {
 <!-- Debug info -->
 <div class="mt-8 p-6 bg-secondary/30 rounded-xl">
   <h3 class="font-bold text-lg mb-4">Debug - Estado del Formulario</h3>

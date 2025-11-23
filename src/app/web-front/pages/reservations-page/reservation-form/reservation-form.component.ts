@@ -7,7 +7,15 @@ import {
   TitleCasePipe,
   UpperCasePipe,
 } from '@angular/common';
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -45,6 +53,9 @@ import type { Address } from '@front/interfaces/address.interface';
 import { EventService } from '@front/services/event.service';
 import { AddressService } from '@front/services/address.service';
 import { FormUtils } from '@front/utils/form-utils';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'reservation-form',
@@ -155,6 +166,7 @@ import { FormUtils } from '@front/utils/form-utils';
 export class ReservationFormComponent {
   formUtils = FormUtils;
 
+  private route = inject(ActivatedRoute);
   private readonly formBuilder = inject(FormBuilder);
   public readonly eventsService = inject(EventService);
   public readonly addressService = inject(AddressService);
@@ -165,6 +177,7 @@ export class ReservationFormComponent {
   public readonly currentStage = signal<FormStage>(FormStage.firstStage);
   public readonly isReserving = signal<boolean>(false);
   public canNavigateForward = signal<boolean>(false);
+  public reserveFormElement = viewChild<ElementRef>('reserveFormElement');
   public guests = Array.from({ length: 300 }, (_, i) => i + 1);
 
   public defaultCustomer = signal<Customer>({
@@ -175,14 +188,15 @@ export class ReservationFormComponent {
   public defaultAddress = signal<Address>(
     this.addressService.getAddressById(1)
   );
-  // public initialEvent = signal<Event>({})
+  public initialEvent = toSignal<string>(
+    this.route.queryParams.pipe(map(({ event }) => event))
+  );
 
   public today = new Date();
   public selectedDate = signal<Date | undefined>(undefined);
   public isPopoverOpen = signal<boolean>(false);
   public timeSlots = FormUtils.generateTimeSlots();
 
-  // Control de direcciones disponibles según el evento seleccionado
   public availableAddresses = signal<Address[]>(
     this.addressService.getAllAddress()
   );
@@ -193,7 +207,6 @@ export class ReservationFormComponent {
   public fixedEventDate = signal<Date | undefined>(undefined);
   public fixedEventTime = signal<string>('');
 
-  // Valores por defecto para el reset
   private readonly defaultFormValues = {
     event: '',
     date: '',
@@ -250,12 +263,42 @@ export class ReservationFormComponent {
     this.canNavigateForward.set(initialValid);
   }
 
+  initialEventEffect = effect(() => {
+    const eventSlug = this.initialEvent();
+
+    if (!eventSlug) return;
+
+    const events = this.eventsService.getAllEvents();
+    const matchingEvent = events.find(
+      (event) =>
+        event.title.replaceAll(' ', '-').toLowerCase() ===
+        eventSlug.toLowerCase()
+    );
+
+    if (!matchingEvent) return;
+
+    this.reserveForm.controls.event.setValue(eventSlug.toLowerCase());
+
+    this.onEventSelect(eventSlug.toLowerCase());
+
+    this.setFormStage(FormStage.thirdStage);
+
+    setTimeout(() => {
+      const formElement = this.reserveFormElement();
+      if (formElement) {
+        formElement.nativeElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    }, 100);
+  });
+
   setFormStage(stage: FormStage): void {
     if (!(stage in FormStage)) return;
 
     this.currentStage.set(stage);
 
-    // Re-evaluar validación cuando cambia la etapa
     const fields = this.getFieldsForStage(stage);
     const isValid = this.formUtils.updateNavigationState(
       this.reserveForm,
@@ -343,14 +386,8 @@ export class ReservationFormComponent {
 
       // Establecer automáticamente la fecha y hora en el formulario
       this.reserveForm.controls.date.setValue(matchingEvent.date);
+      this.reserveForm.controls.time.setValue(matchingEvent.time);
       this.selectedDate.set(eventDate);
-
-      if (matchingEvent.time) {
-        this.reserveForm.controls.time.setValue(matchingEvent.time);
-      } else {
-        // Si no hay hora específica, regenerar slots para esa fecha
-        this.timeSlots = FormUtils.generateTimeSlots(eventDate);
-      }
     } else {
       // Para eventos genéricos (almuerzo-cena, boda, etc.), mostrar todas las direcciones
       this.availableAddresses.set(this.addressService.getAllAddress());
@@ -399,7 +436,7 @@ export class ReservationFormComponent {
 
     this.timeSlots = FormUtils.generateTimeSlots(selectedDate);
 
-    const dateString = selectedDate.toISOString().split('T')[0]; // YYYY-MM-DD
+    const dateString = selectedDate.toISOString().split('T')[0];
     this.reserveForm.controls.date.setValue(dateString);
 
     this.isPopoverOpen.set(false);
@@ -419,11 +456,5 @@ export class ReservationFormComponent {
     const reservePrice = this.subtotal() * (1 - this.discount());
 
     this.reserveForm.controls.price.setValue(reservePrice);
-  }
-
-  selectedAddress(): Address {
-    const address = this.reserveForm.controls.address.value;
-
-    return address ? address : ({} as Address);
   }
 }

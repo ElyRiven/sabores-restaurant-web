@@ -1,4 +1,5 @@
 import { FormGroup, ValidationErrors } from '@angular/forms';
+import { ReservationForm } from '@front/interfaces/reservation.interface';
 
 export class FormUtils {
   static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
@@ -42,10 +43,6 @@ export class FormUtils {
 
       // Si el control no existe, considerarlo como inválido
       if (!control) return false;
-
-      // El campo es válido si no tiene errores
-
-      console.log({ controlName: fieldName, isValid: control.valid });
 
       return control.valid;
     });
@@ -192,5 +189,11 @@ export class FormUtils {
     }
 
     return slots;
+  }
+
+  // Obtener la dirección seleccionada del formulario
+  static getSelectedAddress(reserveForm: FormGroup<ReservationForm>): any {
+    const address = reserveForm.controls.address.value;
+    return address ? address : {};
   }
 }
