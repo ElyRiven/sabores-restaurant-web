@@ -1,3 +1,5 @@
+import { Address } from './address.interface';
+
 export type CategoryValues =
   | 'degustación'
   | 'gourmet'
@@ -11,5 +13,7 @@ export interface Event {
   description: string;
   image: string;
   date: string;
+  time: string;
   categories: CategoryValues[];
+  address: Address;
 }
