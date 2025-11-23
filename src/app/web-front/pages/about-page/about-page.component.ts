@@ -9,18 +9,17 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import Autoplay from 'embla-carousel-autoplay';
 import mapboxgl, { LngLatLike, Marker } from 'mapbox-gl';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmCarouselImports } from '@spartan-ng/helm/carousel';
 
 import type { Address } from '@front/interfaces/address.interface';
 import { AddressService } from '@front/services/address.service';
 import { ReviewsService } from '@front/services/reviews.service';
 import { HeroSection } from '@front/components/hero-section/hero-section.component';
 import { CheftsSectionComponent } from './chefts-section/chefts-section.component';
-import { HlmCarouselImports } from '@spartan-ng/helm/carousel';
 import { environment } from 'src/environments/environment';
-
-import Autoplay from 'embla-carousel-autoplay';
-import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 mapboxgl.accessToken = environment.mapboxkey;
 

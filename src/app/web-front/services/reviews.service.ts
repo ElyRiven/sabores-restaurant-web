@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import type { Review } from '@front/interfaces/review.interface';
 
 const reviews: Review[] = [

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Address } from '@front/interfaces/address.interface';
+
+import type { Address } from '@front/interfaces/address.interface';
 
 const addressArray: Address[] = [
   {

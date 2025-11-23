@@ -1,5 +1,6 @@
 import { FormGroup, ValidationErrors } from '@angular/forms';
-import { ReservationForm } from '@front/interfaces/reservation.interface';
+
+import type { ReservationForm } from '@front/interfaces/reservation.interface';
 
 export class FormUtils {
   static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';

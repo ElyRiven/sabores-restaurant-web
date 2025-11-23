@@ -226,7 +226,6 @@
             <label class="font-bold text-xs" for="guests-select">{{
               "Número de Invitados" | uppercase
             }}</label>
-            <!-- !  DELETE (valueChange) -->
             <brn-select
               #guestsSelect
               class="w-full max-w-full inline-block"
@@ -675,45 +674,3 @@
     }
   </form>
 </div>
-
-@if (false) {
-<!-- Debug info -->
-<div class="mt-8 p-6 bg-secondary/30 rounded-xl">
-  <h3 class="font-bold text-lg mb-4">Debug - Estado del Formulario</h3>
-  <div class="grid gap-4">
-    <div>
-      <p class="font-semibold text-sm mb-2">Válido:</p>
-      <pre class="bg-background p-3 rounded text-xs overflow-x-auto">{{
-        reserveForm.valid
-      }}</pre>
-    </div>
-    <div>
-      <p class="font-semibold text-sm mb-2">Errores:</p>
-      <pre class="bg-background p-3 rounded text-xs overflow-x-auto">{{
-        {
-          event: reserveForm.controls.event.errors,
-          date: reserveForm.controls.date.errors,
-          time: reserveForm.controls.time.errors,
-          numberOfGuests: reserveForm.controls.numberOfGuests.errors,
-          address: reserveForm.controls.address.errors,
-          price: reserveForm.controls.price.errors,
-          customer: {
-            group: reserveForm.controls.customer.errors,
-            name: reserveForm.controls.customer.controls.name.errors,
-            mail: reserveForm.controls.customer.controls.mail.errors,
-            phone: reserveForm.controls.customer.controls.phone.errors
-          },
-          paymentType: reserveForm.controls.paymentType.errors,
-          comments: reserveForm.controls.comments.errors
-        } | json
-      }}</pre>
-    </div>
-    <div>
-      <p class="font-semibold text-sm mb-2">Valores:</p>
-      <pre class="bg-background p-3 rounded text-xs overflow-x-auto">{{
-        reserveForm.value | json
-      }}</pre>
-    </div>
-  </div>
-</div>
-}
