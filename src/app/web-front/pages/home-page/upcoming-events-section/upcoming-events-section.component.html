@@ -18,8 +18,7 @@
         <div class="border-y border-primary py-3">
           <ul>
             <!--  -->
-            @for (event of eventsService.getAllEvents(); track $index; let first
-            = $first) {
+            @for (event of eventsService.getAllEvents(); track $index) {
             <!--  -->
             @if ( $index < 3 ) {
             <li
@@ -30,6 +29,7 @@
             >
               <a
                 routerLink="events"
+                [fragment]="event.title.replaceAll(' ', '-').toLowerCase()"
                 class="block rounded-full transition-all ease-in-out duration-500 hover:bg-secondary hover:-translate-y-1.5"
               >
                 <p class="text-lg font-bold">
