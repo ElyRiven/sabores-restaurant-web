@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { Address } from './address.interface';
 
@@ -21,6 +21,12 @@ export interface Customer {
   phone: string;
 }
 
+export interface CustomerForm {
+  name: FormControl<string | null>;
+  mail: FormControl<string | null>;
+  phone: FormControl<string | null>;
+}
+
 export interface ReservationForm {
   event: FormControl<string | null>;
   date: FormControl<string | null>;
@@ -28,7 +34,7 @@ export interface ReservationForm {
   numberOfGuests: FormControl<SeatNumbers | null>;
   address: FormControl<Address | null>;
   price: FormControl<number | null>;
-  customer: FormControl<Customer | null>;
+  customer: FormGroup<CustomerForm>;
   paymentType: FormControl<PaymentType | null>;
   comments: FormControl<string | null>;
 }

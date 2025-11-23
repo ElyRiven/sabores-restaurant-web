@@ -1,5 +1,12 @@
-import { JsonPipe, NgClass, UpperCasePipe } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import {
+  DatePipe,
+  JsonPipe,
+  LowerCasePipe,
+  NgClass,
+  TitleCasePipe,
+  UpperCasePipe,
+} from '@angular/common';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -27,6 +34,7 @@ import { lucideChevronDown, lucideCreditCard } from '@ng-icons/lucide';
 
 import {
   Customer,
+  CustomerForm,
   FormStage,
   PaymentType,
   ReservationForm,
@@ -35,7 +43,7 @@ import {
 import type { Address } from '@front/interfaces/address.interface';
 import { EventService } from '@front/services/event.service';
 import { AddressService } from '@front/services/address.service';
-import { HlmCarouselImports } from '@spartan-ng/helm/carousel';
+import { FormUtils } from '@front/utils/form-utils';
 
 @Component({
   selector: 'reservation-form',
@@ -56,6 +64,9 @@ import { HlmCarouselImports } from '@spartan-ng/helm/carousel';
     HlmIcon,
     NgIcon,
     UpperCasePipe,
+    TitleCasePipe,
+    LowerCasePipe,
+    DatePipe,
     JsonPipe,
   ],
   providers: [
@@ -141,20 +152,15 @@ import { HlmCarouselImports } from '@spartan-ng/helm/carousel';
 })
 export class ReservationFormComponent {
   private readonly defaultPrice = 50;
+  formUtils = FormUtils;
 
   private readonly formBuilder = inject(FormBuilder);
 
   public readonly currentStage = signal<FormStage>(FormStage.firstStage);
 
-  public readonly navigationRight = signal<'rightEnter' | 'rightLeave'>(
-    'rightLeave'
-  );
+  public readonly isReserving = signal<boolean>(false);
 
-  public readonly navigationLeft = signal<'leftLeave' | 'leftEnter'>(
-    'leftLeave'
-  );
-
-  public readonly isNextStage = signal<boolean>(true);
+  public canNavigateForward = signal<boolean>(false);
 
   public readonly eventsService = inject(EventService);
   public readonly addressService = inject(AddressService);
@@ -165,6 +171,12 @@ export class ReservationFormComponent {
     mail: '',
     phone: '',
   });
+
+  public defaultAddress = signal<Address>(
+    this.addressService.getAddressById(1)
+  );
+
+  // public initialEvent = signal<Event>({})
 
   // Fecha mínima permitida (hoy)
   public today = new Date();
@@ -177,10 +189,26 @@ export class ReservationFormComponent {
 
   public readonly discount = signal<number>(0);
 
+  public readonly subtotal = signal<number>(0);
+
   public timeSlots = this.generateTimeSlots();
 
-  // ID de dirección seleccionada (inicializado con el primer restaurante)
-  public selectedAddressId = 1;
+  // Valores por defecto para el reset
+  private readonly defaultFormValues = {
+    event: '',
+    date: '',
+    time: '',
+    numberOfGuests: 0 as SeatNumbers,
+    address: this.defaultAddress(),
+    price: 0,
+    customer: {
+      name: '',
+      mail: '',
+      phone: '',
+    },
+    paymentType: 'cash' as PaymentType,
+    comments: '',
+  };
 
   // Función para deshabilitar domingos
   public isSunday = (date: Date): boolean => {
@@ -215,36 +243,106 @@ export class ReservationFormComponent {
     return `${dia} ${numDia} ${mes} ${año}`;
   }
 
+  public customerForm: FormGroup<CustomerForm> = this.formBuilder.group({
+    name: ['', Validators.required],
+    mail: [
+      '',
+      [Validators.required, Validators.pattern(this.formUtils.emailPattern)],
+    ],
+    phone: ['', [Validators.required, Validators.minLength(10)]],
+  });
+
   public reserveForm: FormGroup<ReservationForm> = this.formBuilder.group({
     event: ['', Validators.required],
     date: ['', Validators.required],
     time: ['', Validators.required],
-    numberOfGuests: [0 as SeatNumbers, Validators.required],
-    address: [{} as Address, Validators.required],
-    price: [0, Validators.required],
-    customer: [this.customer(), Validators.required],
+    numberOfGuests: [
+      0 as SeatNumbers,
+      [Validators.required, Validators.min(1)],
+    ],
+    address: [this.defaultAddress(), Validators.required],
+    price: [0, [Validators.required, Validators.min(1)]],
+    customer: this.customerForm,
     paymentType: ['cash' as PaymentType, Validators.required],
     comments: [''],
   });
+
+  constructor() {
+    // Suscribirse a cambios del formulario y actualizar canNavigateForward
+    this.reserveForm.valueChanges.subscribe(() => {
+      const fields = this.getFieldsForStage(this.currentStage());
+      const currentForm =
+        this.currentStage() === 4
+          ? this.reserveForm.controls.customer
+          : this.reserveForm;
+
+      const isValid = this.formUtils.checkNavigation(currentForm, fields);
+      this.canNavigateForward.set(isValid);
+    });
+
+    // Evaluar inmediatamente al cargar
+    const initialFields = this.getFieldsForStage(this.currentStage());
+    const initialValid = this.formUtils.checkNavigation(
+      this.reserveForm,
+      initialFields
+    );
+    this.canNavigateForward.set(initialValid);
+  }
 
   setFormStage(stage: FormStage): void {
     if (!(stage in FormStage)) return;
 
     this.currentStage.set(stage);
 
+    // Re-evaluar validación cuando cambia la etapa
+    const fields = this.getFieldsForStage(stage);
+    const isValid = this.formUtils.checkNavigation(this.reserveForm, fields);
+    this.canNavigateForward.set(isValid);
+
     console.log({ formStage: this.currentStage() });
   }
 
-  nextStage(): void {
-    this.isNextStage.set(true);
-    this.navigationLeft.set('leftLeave');
-    this.navigationRight.set('rightEnter');
+  // Retorna los campos a validar según la etapa actual
+  getFieldsForStage(stage: FormStage): string[] {
+    switch (stage) {
+      case FormStage.firstStage:
+        return ['event', 'address'];
+      case FormStage.secondStage:
+        return ['date', 'time'];
+      case FormStage.thirdStage:
+        return ['numberOfGuests', 'price'];
+      case FormStage.fourthStage:
+        return ['name', 'mail', 'phone'];
+      case FormStage.fifthStage:
+        return ['paymentType'];
+      default:
+        return [];
+    }
   }
 
-  previousStage(): void {
-    this.isNextStage.set(false);
-    this.navigationLeft.set('leftEnter');
-    this.navigationRight.set('rightLeave');
+  canReserve(form: FormGroup): boolean {
+    if (!form.valid) return false;
+
+    return true;
+  }
+
+  onReserve() {
+    this.isReserving.set(true);
+
+    // Generar tiempo aleatorio entre 1 y 4 segundos (1000ms - 4000ms)
+    const randomDelay = Math.floor(Math.random() * 3000) + 1000;
+
+    setTimeout(() => {
+      this.isReserving.set(false);
+
+      this.currentStage.set(FormStage.sixthStage);
+
+      this.reserveForm.reset(this.defaultFormValues);
+      this.discount.set(0);
+      this.subtotal.set(0);
+      this.selectedDate.set(undefined);
+      this.timeSlots = this.generateTimeSlots();
+    }, randomDelay);
   }
 
   generateTimeSlots(): string[] {
@@ -322,6 +420,8 @@ export class ReservationFormComponent {
   onDateSelect(selectedDate: Date | undefined) {
     if (!selectedDate) return;
 
+    this.reserveForm.controls.time.reset();
+
     this.selectedDate.set(selectedDate);
 
     // Regenerar timeSlots basándose en la fecha seleccionada
@@ -343,9 +443,6 @@ export class ReservationFormComponent {
   }
 
   onAddressSelect(selectedAddress: Address) {
-    // if (!selectedAddress) return;
-    // this.reserveForm.controls.address.setValue(selectedAddress);
-
     setTimeout(() => {
       console.log({
         selectedAddress,
@@ -359,13 +456,15 @@ export class ReservationFormComponent {
 
     this.discount.set(0);
 
+    this.subtotal.set(this.defaultPrice * guests);
+
     if (guests > 5) this.discount.set(0.1);
 
     if (guests > 50) this.discount.set(0.15);
 
     if (guests > 125) this.discount.set(0.2);
 
-    const reservePrice = this.defaultPrice * guests * (1 - this.discount());
+    const reservePrice = this.subtotal() * (1 - this.discount());
 
     this.reserveForm.controls.price.setValue(reservePrice);
 
@@ -377,10 +476,10 @@ export class ReservationFormComponent {
     }, 100);
   }
 
-  selectedAddress(): string {
-    const selectedAddress = this.reserveForm.controls.address.value?.streets;
+  selectedAddress(): Address {
+    const address = this.reserveForm.controls.address.value;
 
-    return selectedAddress ? selectedAddress : '';
+    return address ? address : ({} as Address);
   }
 
   // Formateo de número de tarjeta: 1234 5678 9012 3456
@@ -412,22 +511,11 @@ export class ReservationFormComponent {
     input.value = input.value.replace(/\D/g, ''); // Solo números
   }
 
-  constructor() {
-    this.reserveForm.valueChanges.subscribe(() => {
-      console.log({
-        formValue: this.reserveForm.value,
-        isFormValid: this.reserveForm.valid,
-        errors: {
-          event: this.reserveForm.controls.event.errors,
-          date: this.reserveForm.controls.date.errors,
-          time: this.reserveForm.controls.time.errors,
-          numberOfGuests: this.reserveForm.controls.numberOfGuests.errors,
-          address: this.reserveForm.controls.address.errors,
-          price: this.reserveForm.controls.price.errors,
-          customer: this.reserveForm.controls.customer.errors,
-          paymentType: this.reserveForm.controls.paymentType.errors,
-        },
-      });
-    });
+  // Formateo de teléfono: solo números, máximo 10 dígitos
+  formatPhone(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.replace(/\D/g, ''); // Solo números
+    value = value.slice(0, 10); // Máximo 10 dígitos
+    input.value = value;
   }
 }
