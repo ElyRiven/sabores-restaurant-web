@@ -35,7 +35,9 @@
                 <p class="text-lg font-bold">
                   {{ event.title }}
                 </p>
-                <span class="italic">{{ event.date | eventDate }}</span>
+                <span class="italic">{{
+                  event.date | date : "MMMM d" | titlecase
+                }}</span>
               </a>
             </li>
             }}
