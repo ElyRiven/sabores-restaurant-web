@@ -1,0 +1,719 @@
+<div
+  #reserveFormElement
+  class="relative flex items-center bg-accent p-10 min-h-75 before:absolute before:top-0 before:left-0 before:w-full before:h-2 before:bg-primary overflow-x-hidden"
+>
+  <form class="flex-1 overflow-x-hidden" [formGroup]="reserveForm">
+    <!-- First Stage -->
+    @if ( currentStage() === 1 ) {
+    <div class="flex flex-col justify-center gap-4">
+      <label class="font-semibold text-lg" for="event-select"
+        >Seleccionar Evento</label
+      >
+
+      <div>
+        <brn-select
+          #eventSelect
+          id="event-select"
+          name="event-select"
+          class="w-full max-w-full inline-block"
+          placeholder="Seleccionar Evento"
+          formControlName="event"
+          (valueChange)="onEventSelect(eventSelect.value())"
+        >
+          <hlm-select-trigger
+            class="w-full max-w-full bg-background rounded-xl cursor-pointer"
+          >
+            <hlm-select-value />
+          </hlm-select-trigger>
+          <hlm-select-content class="w-full max-w-full">
+            <hlm-option value="almuerzo-cena">Almuerzo o Cena</hlm-option>
+            <hlm-option value="boda">Boda</hlm-option>
+            <hlm-option value="evento-formal">Evento Formal</hlm-option>
+            <hlm-option value="cumpleaños">Cumpleaños</hlm-option>
+
+            @for (event of eventsService.getAllEvents(); track event) {
+            <hlm-option
+              [value]="event.title.replaceAll(' ', '-').toLowerCase()"
+              >{{ event.title }}</hlm-option
+            >
+            }
+          </hlm-select-content>
+        </brn-select>
+        @if ( formUtils.isValidField( reserveForm, 'event' ) ) {
+        <hlm-error>{{
+          formUtils.getFieldError(reserveForm, "event")
+        }}</hlm-error>
+        }
+      </div>
+
+      <label class="font-semibold text-lg" for="address-select"
+        >Seleccionar Restaurante</label
+      >
+
+      <div>
+        <brn-select
+          #addressSelect
+          id="address-select"
+          name="address-select"
+          class="w-full max-w-full inline-block"
+          placeholder="Seleccionar Restaurante"
+          formControlName="address"
+          (valueChange)="onAddressSelect(addressSelect.value())"
+        >
+          <hlm-select-trigger
+            class="w-full max-w-full bg-background rounded-xl cursor-pointer"
+          >
+            <hlm-select-value />
+          </hlm-select-trigger>
+          <hlm-select-content class="w-full max-w-full">
+            @for (address of availableAddresses(); track address) {
+            <hlm-option [value]="address">{{ address.name }}</hlm-option>
+            }
+          </hlm-select-content>
+        </brn-select>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="font-bold text-xs" for="address-select">{{
+          "Dirección" | uppercase
+        }}</span>
+
+        @if (formUtils.getSelectedAddress(reserveForm).streets) {
+        <span>{{ formUtils.getSelectedAddress(reserveForm).streets }}</span>
+        }
+        <!--  -->
+        @else {
+        <span>——————————</span>
+        }
+      </div>
+
+      <button
+        class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary disabled:cursor-default disabled:bg-secondary/30"
+        (click)="setFormStage(2)"
+        [disabled]="!canNavigateForward()"
+      >
+        <span
+          class="font-bold text-foreground group-hover:text-background group-disabled:text-foreground/30"
+          >Siguiente</span
+        >
+      </button>
+    </div>
+    }
+
+    <!-- Second Stage -->
+    @if ( currentStage() === 2 ) {
+    <div class="flex flex-col justify-center gap-4">
+      <label class="font-semibold text-3xl text-center py-4" for="date-picker"
+        >Seleccionar Fecha y Hora</label
+      >
+
+      <brn-popover
+        sideOffset="5"
+        [state]="isPopoverOpen() ? 'open' : 'closed'"
+        (stateChanged)="isPopoverOpen.set($event === 'open')"
+      >
+        <button
+          type="button"
+          class="font-jakarta cursor-pointer ring-offset-background border-input bg-background hover:text-accent-foreground inline-flex h-10 w-full items-center justify-between gap-2 rounded-xl border py-2 px-3 text-left text-sm font-normal whitespace-nowrap transition-all focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+          brnPopoverTrigger
+          [disabled]="isEventDateFixed()"
+        >
+          <span class="truncate">
+            @if (selectedDate(); as date) {
+            {{ formUtils.formatDisplayDate(date) }}
+            }
+            <!--  -->
+            @else {
+            <span class="text-base">Fechas Disponibles</span>
+            }
+          </span>
+          <ng-icon hlm size="sm" name="lucideChevronDown" />
+        </button>
+
+        <div hlmPopoverContent class="w-auto p-0" *brnPopoverContent>
+          <hlm-calendar
+            calendarClass="border-0 rounded-none"
+            [date]="selectedDate()"
+            [min]="today"
+            [dateDisabled]="formUtils.isSunday"
+            (dateChange)="onDateSelect($event)"
+          />
+        </div>
+      </brn-popover>
+
+      @if (isEventDateFixed()) {
+      <div class="flex flex-col gap-2">
+        <span class="font-bold text-xs" for="address-select">{{
+          "Hora del evento" | uppercase
+        }}</span>
+        <span>{{ reserveForm.controls.time.value }}</span>
+      </div>
+      }
+      <!--  -->
+      @if (isEventDateFixed()) {
+      <p class="text-sm text-muted-foreground text-center">
+        La fecha y hora están establecidas por el evento seleccionado
+      </p>
+      }
+      <!--  -->
+      @if (!isEventDateFixed()) {
+      <div class="grid grid-cols-3 gap-3">
+        @for (timeSlot of timeSlots; track timeSlot) {
+        <button
+          type="button"
+          class="py-2 px-3 text-sm md:text-base min-w-18 border-2 rounded-xl cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:border-secondary"
+          [ngClass]="
+            reserveForm.controls.time.value === timeSlot
+              ? 'bg-primary text-primary-foreground border-secondary'
+              : 'bg-secondary border-secondary'
+          "
+          (click)="onTimeSelect(timeSlot)"
+        >
+          {{ timeSlot }}
+        </button>
+        }
+      </div>
+      }
+
+      <div class="grid grid-cols-2 gap-3 pt-4">
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary disabled:cursor-default disabled:bg-secondary/30"
+          (click)="setFormStage(1)"
+        >
+          <span
+            class="font-bold text-foreground group-hover:text-background group-disabled:text-foreground/30"
+            >Atrás</span
+          >
+        </button>
+
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary disabled:cursor-default disabled:bg-secondary/30"
+          (click)="setFormStage(3)"
+          [disabled]="!canNavigateForward()"
+        >
+          <span
+            class="font-bold text-foreground group-hover:text-background group-disabled:text-foreground/30"
+            >Siguiente</span
+          >
+        </button>
+      </div>
+    </div>
+    }
+
+    <!-- Third Stage -->
+    @if ( currentStage() === 3 ) {
+    <div class="flex flex-col justify-center gap-4">
+      <h2 class="font-semibold text-3xl text-center py-4">Tu Reserva</h2>
+      <div class="flex flex-col gap-10 bg-secondary/30 px-6 py-10">
+        <div>
+          <h3 class="text-2xl font-bold">
+            {{
+              reserveForm.controls.event.value?.replaceAll("-", " ") | titlecase
+            }}
+          </h3>
+          <div>
+            <span class="text-lg font-bold"
+              >{{
+                reserveForm.controls.date.value
+                  | date : "MMMM d, y"
+                  | titlecase
+              }}, {{ reserveForm.controls.time.value | lowercase }}</span
+            >
+          </div>
+        </div>
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-2">
+            <label class="font-bold text-xs" for="guests-select">{{
+              "Número de Invitados" | uppercase
+            }}</label>
+            <!-- !  DELETE (valueChange) -->
+            <brn-select
+              #guestsSelect
+              class="w-full max-w-full inline-block"
+              placeholder="Seleccionar Invitados"
+              formControlName="numberOfGuests"
+              (valueChange)="onGuestsSelect(guestsSelect.value())"
+            >
+              <hlm-select-trigger
+                class="w-full max-w-full bg-background rounded-xl cursor-pointer"
+              >
+                <hlm-select-value />
+              </hlm-select-trigger>
+              <hlm-select-content
+                class="w-full max-w-full max-h-60 overflow-y-auto"
+              >
+                @for (num of guests; track num) {
+                <hlm-option [value]="num">{{ num }}</hlm-option>
+                }
+              </hlm-select-content>
+            </brn-select>
+            @if ( formUtils.isValidField( reserveForm, 'numberOfGuests' ) ) {
+            <hlm-error>{{
+              formUtils.getFieldError(reserveForm, "numberOfGuests")
+            }}</hlm-error>
+
+            }
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="font-bold text-xs" for="address-select">{{
+              "Restaurante" | uppercase
+            }}</span>
+            <span>{{ formUtils.getSelectedAddress(reserveForm).name }}</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="font-bold text-xs" for="address-select">{{
+              "Dirección" | uppercase
+            }}</span>
+            <span>{{ formUtils.getSelectedAddress(reserveForm).streets }}</span>
+          </div>
+          <div class="grid grid-cols-2">
+            <div class="flex flex-col gap-2">
+              <h4 class="font-bold text-xs">{{ "Subtotal" | uppercase }}</h4>
+              <span>$ {{ subtotal() | number : "1.2-2" }}</span>
+            </div>
+            @if ( discount() > 0 ) {
+            <div class="flex flex-col gap-2">
+              <h4 class="font-bold text-xs">{{ "Descuento" | uppercase }}</h4>
+              <span>{{ discount() * 100 }} %</span>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 pt-4">
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary disabled:cursor-default disabled:bg-secondary/30"
+          (click)="setFormStage(2)"
+        >
+          <span
+            class="font-bold text-foreground group-hover:text-background group-disabled:text-foreground/30"
+            >Atrás</span
+          >
+        </button>
+
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary disabled:cursor-default disabled:bg-secondary/30"
+          (click)="setFormStage(4)"
+          [disabled]="!canNavigateForward()"
+        >
+          <span
+            class="font-bold text-foreground group-hover:text-background group-disabled:text-foreground/30"
+            >Siguiente</span
+          >
+        </button>
+      </div>
+    </div>
+    }
+
+    <!-- Fourth Stage -->
+    @if ( currentStage() === 4 ) {
+    <div
+      class="flex flex-col justify-center gap-4 overflow-x-hidden max-w-full"
+    >
+      <label class="font-semibold text-3xl text-center pt-4" for="date-picker"
+        >Tu Información
+      </label>
+      <div
+        class="flex flex-col gap-4 p-6 overflow-x-hidden max-w-full"
+        formGroupName="customer"
+      >
+        <div class="flex flex-col gap-2">
+          <label for="name-input">Nombre *</label>
+          <hlm-form-field>
+            <input
+              id="name-input"
+              class="w-full bg-background py-2 px-3 rounded-xl"
+              type="text"
+              placeholder="Nombre"
+              formControlName="name"
+              hlmInput
+            />
+            <hlm-error>{{
+              formUtils.getFieldError(reserveForm.controls.customer, "name")
+            }}</hlm-error>
+          </hlm-form-field>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="email-input">Email *</label>
+          <hlm-form-field>
+            <input
+              id="email-input"
+              class="w-full bg-background py-2 px-3 rounded-xl"
+              type="email"
+              placeholder="Email"
+              formControlName="mail"
+              hlmInput
+            />
+            <hlm-error>{{
+              formUtils.getFieldError(reserveForm.controls.customer, "mail")
+            }}</hlm-error>
+          </hlm-form-field>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="phone-input">Teléfono *</label>
+          <hlm-form-field class="appearance-none">
+            <input
+              id="phone-input"
+              class="w-full bg-background py-2 px-3 rounded-xl"
+              type="text"
+              placeholder="Teléfono"
+              formControlName="phone"
+              maxlength="10"
+              (input)="formUtils.formatPhone($event)"
+              hlmInput
+            />
+            <hlm-error>{{
+              formUtils.getFieldError(reserveForm.controls.customer, "phone")
+            }}</hlm-error>
+          </hlm-form-field>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2 max-w-full overflow-x-hidden px-6">
+        <label for="comment-input">Notas</label>
+        <textarea
+          id="comment-input"
+          formControlName="comments"
+          maxlength="300"
+          class="w-full max-w-137 bg-background py-2 px-3 rounded-xl resize-none min-h-40 overflow-y-auto whitespace-pre-wrap"
+          hlmTextarea
+        ></textarea>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 pt-4">
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary disabled:cursor-default disabled:bg-secondary/30"
+          (click)="setFormStage(3)"
+        >
+          <span
+            class="font-bold text-foreground group-hover:text-background group-disabled:text-foreground/30"
+            >Atrás</span
+          >
+        </button>
+
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary disabled:cursor-default disabled:bg-secondary/30"
+          (click)="setFormStage(5)"
+          [disabled]="!canNavigateForward()"
+        >
+          <span
+            class="font-bold text-foreground group-hover:text-background group-disabled:text-foreground/30"
+            >Siguiente</span
+          >
+        </button>
+      </div>
+    </div>
+    }
+
+    <!-- Fifth Stage -->
+    @if ( currentStage() === 5 && !isReserving() ) {
+    <div class="flex flex-col justify-center gap-4">
+      <h2 class="font-semibold text-3xl text-center py-4">Tu Orden</h2>
+      <div class="flex flex-col gap-10 px-6">
+        <div class="flex flex-col">
+          <div
+            class="relative grid grid-cols-2 items-center after:absolute after:bottom-0 after:left-0 after:w-full after:border-t after:border-primary"
+          >
+            <div class="flex flex-col p-5">
+              <span>{{
+                reserveForm.controls.event.value?.replaceAll("-", " ")
+                  | titlecase
+              }}</span>
+              @if ( reserveForm.controls.numberOfGuests.value! > 1 ) {
+              <span
+                >{{ reserveForm.controls.numberOfGuests.value }} Invitados</span
+              >
+              }
+              <!--  -->
+              @else {
+              <span
+                >{{ reserveForm.controls.numberOfGuests.value }} Invitado</span
+              >
+              }
+            </div>
+            <span class="p-5 text-right"
+              >$ {{ subtotal() | number : "1.2-2" }}</span
+            >
+          </div>
+          @if( discount() > 0 ) {
+          <div
+            class="relative font-bold grid grid-cols-2 after:absolute after:bottom-0 after:left-0 after:w-full after:border-t after:border-primary"
+          >
+            <span class="p-5">Descuento</span>
+            <span class="p-5 text-right">{{ discount() * 100 }} %</span>
+          </div>
+          }
+          <div
+            class="relative font-bold grid grid-cols-2 after:absolute after:bottom-0 after:left-0 after:w-full after:border-t after:border-primary"
+          >
+            <span class="p-5">{{ "Total" | uppercase }}</span>
+            <span class="p-5 text-right"
+              >$ {{ reserveForm.controls.price.value | number : "1.2-2" }}</span
+            >
+          </div>
+        </div>
+
+        <hlm-radio-group
+          formControlName="paymentType"
+          class="flex flex-col gap-8"
+        >
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <hlm-radio class="cursor-pointer" value="cash" id="cash">
+                <hlm-radio-indicator class="bg-background" indicator />
+              </hlm-radio>
+              <label class="font-bold" hlmLabel for="cash"
+                >Pago en Efectivo</label
+              >
+            </div>
+            <p>
+              Cancela el valor de tu reserva presencialmente al llegar al
+              restaurante.
+              <br />
+              (El pago debe ser realizado para recibir el servicio)
+            </p>
+          </div>
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <hlm-radio class="cursor-pointer" value="transfer" id="transfer">
+                <hlm-radio-indicator class="bg-background" indicator />
+              </hlm-radio>
+              <label class="font-bold" hlmLabel for="transfer"
+                >Transferencia bancaria</label
+              >
+            </div>
+            <p>
+              Realiza el pago de tu reserva directamente a nuestra cuenta
+              bancaria.
+            </p>
+          </div>
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <hlm-radio class="cursor-pointer" value="card" id="card">
+                <hlm-radio-indicator class="bg-background" indicator />
+              </hlm-radio>
+              <label class="font-bold" hlmLabel for="card">Tarjeta</label>
+            </div>
+            <p>Pago con trajeta de crédito o débito.</p>
+          </div>
+        </hlm-radio-group>
+
+        <!-- Campo de tarjeta estilo Stripe -->
+        @if ( reserveForm.controls.paymentType.value === 'card' ) {
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm">Crédito o Débito</label>
+          <div
+            class="relative flex items-center gap-2 md:gap-3 w-full bg-background border border-input rounded-xl px-3 md:px-4 py-3 focus-within:ring-2 focus-within:ring-ring/50 transition-all overflow-hidden"
+          >
+            <!-- Número de tarjeta con ícono -->
+            <div class="flex items-center gap-2 flex-1 min-w-0">
+              <ng-icon
+                hlm
+                name="lucideCreditCard"
+                size="sm"
+                class="text-muted-foreground shrink-0"
+              />
+              <input
+                #cardNumber
+                type="text"
+                placeholder="Número de tarjeta"
+                maxlength="19"
+                class="flex-1 bg-transparent outline-none text-sm min-w-0 w-full"
+                (input)="formUtils.formatCardNumber($event)"
+              />
+            </div>
+
+            <!-- Fecha y CVC: se muestran solo cuando hay contenido o en pantallas grandes -->
+            <ng-container>
+              <!-- Separador -->
+              <div
+                class="h-4 md:h-6 w-px bg-border shrink-0 hidden lg:block"
+              ></div>
+
+              <!-- Fecha de expiración -->
+              <input
+                #cardExpiry
+                type="text"
+                placeholder="MM/AA"
+                maxlength="5"
+                class="hidden lg:block w-16 bg-transparent outline-none text-sm text-center shrink-0"
+                (input)="formUtils.formatExpiry($event)"
+              />
+
+              <!-- Separador -->
+              <div
+                class="h-4 md:h-6 w-px bg-border shrink-0 hidden lg:block"
+              ></div>
+
+              <!-- CVC -->
+              <input
+                #cardCvc
+                type="text"
+                placeholder="CVC"
+                maxlength="4"
+                class="hidden lg:block w-12 bg-transparent outline-none text-sm text-center shrink-0"
+                (input)="formUtils.formatCvc($event)"
+              />
+            </ng-container>
+          </div>
+
+          <!-- Campos adicionales en móvil: mostrar debajo -->
+          <div class="grid grid-cols-2 gap-2 lg:hidden">
+            <div
+              class="flex items-center gap-2 bg-background border border-input rounded-xl px-3 py-3"
+            >
+              <input
+                type="text"
+                placeholder="MM/AA"
+                maxlength="5"
+                class="flex-1 bg-transparent outline-none text-sm"
+                (input)="formUtils.formatExpiry($event)"
+              />
+            </div>
+            <div
+              class="flex items-center gap-2 bg-background border border-input rounded-xl px-3 py-3"
+            >
+              <input
+                type="text"
+                placeholder="CVC"
+                maxlength="4"
+                class="flex-1 bg-transparent outline-none text-sm"
+                (input)="formUtils.formatCvc($event)"
+              />
+            </div>
+          </div>
+
+          <p class="text-xs text-muted-foreground">
+            Usa 4242 4242 4242 4242 con CVC 123 y fecha válida para probar
+          </p>
+        </div>
+        }
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 pt-4">
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary disabled:cursor-default disabled:bg-secondary/30"
+          (click)="setFormStage(4)"
+        >
+          <span
+            class="font-bold text-foreground group-hover:text-background group-disabled:text-foreground/30"
+            >Atrás</span
+          >
+        </button>
+
+        <button
+          class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary disabled:cursor-default disabled:bg-secondary/30"
+          (click)="onReserve()"
+          [disabled]="!canReserve(reserveForm)"
+        >
+          <span
+            class="font-bold text-foreground group-hover:text-background group-disabled:text-foreground/30"
+            >Reservar</span
+          >
+        </button>
+      </div>
+    </div>
+    }
+
+    <!-- Reserve Loading -->
+    @if ( isReserving() ) {
+
+    <div
+      class="flex flex-col items-center justify-center gap-8 overflow-hidden"
+    >
+      <h2 class="font-semibold text-3xl text-center">Confirmando Reserva</h2>
+
+      <div class="size-30">
+        <img
+          class="size-25 text-center animate-ping"
+          src="orange-icon.webp"
+          alt="icono sabores restaurante"
+        />
+      </div>
+    </div>
+    }
+
+    <!-- Sixth Stage -->
+    @if ( currentStage() === 6 ) {
+    <div class="flex flex-col items-center justify-center gap-8">
+      <h2 class="font-semibold text-3xl text-center">¡Reserva Confirmada!</h2>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="75"
+        height="75"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-badge-check-icon lucide-badge-check text-primary"
+      >
+        <path
+          d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"
+        />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+
+      <p class="px-6 text-center">
+        Tu reserva se ha confirmado exitosamente.
+        <br />
+        ¡Muchas gracias por tu preferencia!
+      </p>
+
+      <button
+        class="w-full group bg-secondary text-center py-2 rounded-xl border-2 border-secondary cursor-pointer transition-all duration-200 hover:bg-primary hover:border-secondary"
+        (click)="setFormStage(1)"
+      >
+        <span class="font-bold text-foreground group-hover:text-background"
+          >Nueva Reserva</span
+        >
+      </button>
+    </div>
+    }
+  </form>
+</div>
+
+@if (false) {
+<!-- Debug info -->
+<div class="mt-8 p-6 bg-secondary/30 rounded-xl">
+  <h3 class="font-bold text-lg mb-4">Debug - Estado del Formulario</h3>
+  <div class="grid gap-4">
+    <div>
+      <p class="font-semibold text-sm mb-2">Válido:</p>
+      <pre class="bg-background p-3 rounded text-xs overflow-x-auto">{{
+        reserveForm.valid
+      }}</pre>
+    </div>
+    <div>
+      <p class="font-semibold text-sm mb-2">Errores:</p>
+      <pre class="bg-background p-3 rounded text-xs overflow-x-auto">{{
+        {
+          event: reserveForm.controls.event.errors,
+          date: reserveForm.controls.date.errors,
+          time: reserveForm.controls.time.errors,
+          numberOfGuests: reserveForm.controls.numberOfGuests.errors,
+          address: reserveForm.controls.address.errors,
+          price: reserveForm.controls.price.errors,
+          customer: {
+            group: reserveForm.controls.customer.errors,
+            name: reserveForm.controls.customer.controls.name.errors,
+            mail: reserveForm.controls.customer.controls.mail.errors,
+            phone: reserveForm.controls.customer.controls.phone.errors
+          },
+          paymentType: reserveForm.controls.paymentType.errors,
+          comments: reserveForm.controls.comments.errors
+        } | json
+      }}</pre>
+    </div>
+    <div>
+      <p class="font-semibold text-sm mb-2">Valores:</p>
+      <pre class="bg-background p-3 rounded text-xs overflow-x-auto">{{
+        reserveForm.value | json
+      }}</pre>
+    </div>
+  </div>
+</div>
+}
