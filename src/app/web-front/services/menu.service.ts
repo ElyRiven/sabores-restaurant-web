@@ -44,7 +44,7 @@ const menu: Menu = {
       {
         name: 'Ensalada de aguacate y frijoles negros',
         description:
-          'Una ensalada refrescante con aguacate cremoso, frijoles negros, maíz y una vinagreta de lima picante',
+          'Ensalada con aguacate cremoso, frijoles negros, maíz y una vinagreta de lima picante',
         image: 'assets/photos/menu/entries/avocado-salad.webp',
         price: 8,
       },
@@ -77,49 +77,49 @@ const menu: Menu = {
       {
         name: 'Solomillo de Cerdo Glaseado',
         description:
-          'Solomillo de cerdo cocido a baja temperatura y glaseado con salsa de naranja y miel. Acompañado de un cremoso puré de patatas y brócoli asado',
+          'Solomillo de cerdo (glaseado naranja y miel), puré de patatas cremoso, brócoli asado',
         image: 'assets/photos/menu/dishes/pig-solomillo.webp',
         price: 19.99,
       },
       {
         name: 'Tournedó Rossini',
         description:
-          'Filete de lomo de res envuelto en tocineta, cubierto con una lasca de foie gras a la plancha. Bañado con salsa de trufa negra y servido con patatas gratinadas',
+          'Lomo de res envuelto en tocineta, foie gras, salsa de trufa negra y patatas gratinadas',
         image: 'assets/photos/menu/dishes/tournedo-rossini.webp',
         price: 23,
       },
       {
         name: 'Brochetas de Langostino',
         description:
-          'Brochetas de langostinos gigantes marinados y salteados, acompañados de verduras orientales, aderezado con salsa de la casa',
+          'Brochetas de langostinos gigantes, salteado de verduras orientales y salsa de la casa',
         image: 'assets/photos/menu/dishes/prawn-skewers.webp',
         price: 25.5,
       },
       {
         name: 'Ossobuco al jugo',
         description:
-          'Ossobuco de ternera cocido lentamente hasta la ternura, bañado en su jugo y un toque de ralladura de limón. Servido sobre un lecho de cremoso risotto al azafrán',
+          'Ossobuco de ternera (cocción lenta), toque de limón. Acompañado de risotto cremoso al azafrán',
         image: 'assets/photos/menu/dishes/ossobuco.webp',
         price: 20.99,
       },
       {
         name: 'Lasaña de Osobuco',
         description:
-          'Capas de pasta fresca de lasaña rellenas de un rico osobuco de ternera cocido a fuego lento, con una cremosa salsa bechamel de trufa y queso parmesano',
+          'Lasaña de ossobuco de ternera. Gratinada con bechamel cremosa de trufa y queso parmesano',
         image: 'assets/photos/menu/dishes/ossobuco-lasagna.webp',
         price: 22.5,
       },
       {
         name: 'Rigatoni Bistecca',
         description:
-          'Rigatoni cocido al dente, mezclado con tiras de bistec de solomillo de res y una rica salsa cremosa de champiñones',
+          'Rigatoni al dente con tiras de solomillo de res y una rica salsa cremosa de champiñones',
         image: 'assets/photos/menu/dishes/rigatoni-bistecca.webp',
         price: 19.99,
       },
       {
         name: 'Spaghetti con Ragú de Pato',
         description:
-          'Spaghetti servido con un ragú de pato desmenuzado y cocido a fuego lento, con salsa de tomate y un toque de oregano. Finalizado con queso rallado',
+          'Spaghetti con ragú de pato y salsa de tomate, orégano y queso rallado',
         image: 'assets/photos/menu/dishes/spaghetti.webp',
         price: 22.5,
       },
@@ -130,7 +130,8 @@ const menu: Menu = {
     dishes: [
       {
         name: 'Cheesecake de vainilla',
-        description: 'Un postre fresco y delicioso con un toque de limón',
+        description:
+          'Fresco Cheesecake de vainilla con un toque de salsa de limón',
         image: 'assets/photos/menu/desserts/vanilla-cheesecake.webp',
         price: 6.99,
       },
@@ -149,14 +150,14 @@ const menu: Menu = {
       {
         name: 'Esfera dulce',
         description:
-          'Postre en forma de esfera, compuesto por un bizcocho de avellana, un corazón líquido de caramelo y una cobertura de glaze de chocolate con leche',
+          'Esfera de postre: bizcocho de avellana, corazón líquido de caramelo y glaze de chocolate con leche',
         image: 'assets/photos/menu/desserts/sweet-sphere.webp',
         price: 12,
       },
       {
         name: 'Volcán esmeralda',
         description:
-          'Base crujiente de galleta de almendra, rellena de una crema de lima dulce. Terminada con merengue ligeramente tostado y ralladura de chocolate',
+          'Tarta de lima dulce terminada con merengue ligeramente tostado y chocolate',
         image: 'assets/photos/menu/desserts/emerald-volcano.webp',
         price: 10.5,
       },
@@ -164,7 +165,7 @@ const menu: Menu = {
         name: 'Milhojas de Vainilla',
 
         description:
-          'Hojaldre caramelizado y crujiente en capas, crema pastelera de vainilla negra. Acompañado de frambuesas y moras',
+          'Hojaldre crujiente y crema pastelera de vainilla negra. Servido con frambuesas y moras',
         image: 'assets/photos/menu/desserts/berries-millefeuille.webp',
         price: 12,
       },
