@@ -131,42 +131,42 @@ const menu: Menu = {
       {
         name: 'Cheesecake de vainilla',
         description: 'Un postre fresco y delicioso con un toque de limón',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 53.3,
+        image: 'assets/photos/menu/desserts/vanilla-cheesecake.webp',
+        price: 6.99,
       },
       {
         name: 'Brownie de chocolate',
         description: 'Delicioso brownie con relleno líquido de chocolate',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 90.526,
+        image: 'assets/photos/menu/desserts/brownie.webp',
+        price: 9.99,
       },
       {
         name: 'Cupcake de frutas',
         description: 'Un cupcake con relleno y sabor a frutas',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 45.8,
+        image: 'assets/photos/menu/desserts/fruit-cupcake.webp',
+        price: 5,
       },
       {
         name: 'Esfera dulce',
         description:
           'Postre en forma de esfera, compuesto por un bizcocho de avellana, un corazón líquido de caramelo y una cobertura de glaze de chocolate con leche',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 53.3,
+        image: 'assets/photos/menu/desserts/sweet-sphere.webp',
+        price: 12,
       },
       {
         name: 'Volcán esmeralda',
         description:
           'Base crujiente de galleta de almendra, rellena de una crema de lima dulce. Terminada con merengue ligeramente tostado y ralladura de chocolate',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 90.526,
+        image: 'assets/photos/menu/desserts/emerald-volcano.webp',
+        price: 10.5,
       },
       {
         name: 'Milhojas de Vainilla',
 
         description:
           'Hojaldre caramelizado y crujiente en capas, crema pastelera de vainilla negra. Acompañado de frambuesas y moras',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 45.8,
+        image: 'assets/photos/menu/desserts/berries-millefeuille.webp',
+        price: 12,
       },
     ],
   },
