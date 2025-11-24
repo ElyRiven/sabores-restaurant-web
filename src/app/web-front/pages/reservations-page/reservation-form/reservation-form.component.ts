@@ -442,6 +442,8 @@ export class ReservationFormComponent {
   onGuestsSelect(guests: number) {
     if (guests < 1) return;
 
+    this.discount.set(0);
+
     this.subtotal.set(this.defaultPrice * guests);
 
     if (guests > 5) this.discount.set(0.1);
