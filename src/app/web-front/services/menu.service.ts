@@ -4,7 +4,7 @@ import type { Menu } from '@front/interfaces/plate.interface';
 
 const menu: Menu = {
   entries: {
-    image: '/assets/photos/front/menu-hero.webp',
+    image: '/assets/photos/front/entries-section.webp',
     dishes: [
       {
         name: 'Bocado de la casa',
@@ -72,7 +72,7 @@ const menu: Menu = {
     ],
   },
   dishes: {
-    image: '/assets/photos/front/menu-hero.webp',
+    image: '/assets/photos/front/dishes-section.webp',
     dishes: [
       {
         name: 'Pollo al Horno',
@@ -97,7 +97,7 @@ const menu: Menu = {
     ],
   },
   desserts: {
-    image: '/assets/photos/front/menu-hero.webp',
+    image: '/assets/photos/front/desserts-section.webp',
     dishes: [
       {
         name: 'Cheesecake de vainilla',
@@ -120,7 +120,7 @@ const menu: Menu = {
     ],
   },
   drinks: {
-    image: '/assets/photos/front/menu-hero.webp',
+    image: '/assets/photos/front/drinks-section.webp',
     dishes: [
       {
         name: 'Vino blanco serenetta',
