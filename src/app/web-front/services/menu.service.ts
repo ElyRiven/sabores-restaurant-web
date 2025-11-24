@@ -10,43 +10,43 @@ const menu: Menu = {
         name: 'Bocado de la casa',
         description:
           'Filete sellado con especias, acompañado de papas asadas y brotes frescos',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 40.99,
+        image: 'assets/photos/menu/entries/bocado.webp',
+        price: 9.99,
       },
       {
         name: 'Tesoro del mar',
         description:
           'Selección premium de mariscos frescos servidos en su punto perfecto',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 30.147,
+        image: 'assets/photos/menu/entries/sea-treasure.webp',
+        price: 12.5,
       },
       {
         name: 'Nido al pomodoro',
         description:
           'Pasta artesanal al dente con salsa de tomate confitado y albahaca fresca',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 50.025,
+        image: 'assets/photos/menu/entries/pomodoro-nest.webp',
+        price: 8,
       },
       {
         name: 'Rissoto de champiñones',
         description:
           'Rissoto cremoso con champiñones y un toque de queso parmesano',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 2.2,
+        image: 'assets/photos/menu/entries/rissoto-mushrooms.webp',
+        price: 8,
       },
       {
         name: 'Paella de verduras',
         description:
           'Un vibrante plato de arroz español relleno de una mezcla de verduras de temporada',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 4.8,
+        image: 'assets/photos/menu/entries/vegetable-paella.webp',
+        price: 9.99,
       },
       {
         name: 'Ensalada de aguacate y frijoles negros',
         description:
           'Una ensalada refrescante con aguacate cremoso, frijoles negros, maíz y una vinagreta de lima picante',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 53.251,
+        image: 'assets/photos/menu/entries/avocado-salad.webp',
+        price: 8,
       },
     ],
   },
