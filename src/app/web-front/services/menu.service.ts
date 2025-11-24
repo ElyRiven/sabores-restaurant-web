@@ -57,71 +57,71 @@ const menu: Menu = {
         name: 'Pollo al Horno',
         description:
           'Delicioso pollo al horno con especias para un toque de sabor único',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 10.0,
+        image: 'assets/photos/menu/dishes/rice-chicken.webp',
+        price: 15.99,
       },
       {
         name: 'Salmón a la parrilla',
         description:
           'Filete de salmón a la parrilla con arroz, verduras y salsa especial de la casa',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 20.89556,
+        image: 'assets/photos/menu/dishes/grilled-salmon.webp',
+        price: 25,
       },
       {
         name: 'Pollo con Mole',
         description:
           'Una presa de pollo horneado acompañado de una porción de mole',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 95.1,
+        image: 'assets/photos/menu/dishes/potato-chicken.webp',
+        price: 15.99,
       },
       {
         name: 'Solomillo de Cerdo Glaseado',
         description:
           'Solomillo de cerdo cocido a baja temperatura y glaseado con salsa de naranja y miel. Acompañado de un cremoso puré de patatas y brócoli asado',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 43.2,
+        image: 'assets/photos/menu/dishes/pig-solomillo.webp',
+        price: 19.99,
       },
       {
         name: 'Tournedó Rossini',
         description:
           'Filete de lomo de res envuelto en tocineta, cubierto con una lasca de foie gras a la plancha. Bañado con salsa de trufa negra y servido con patatas gratinadas',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 43.2,
+        image: 'assets/photos/menu/dishes/tournedo-rossini.webp',
+        price: 23,
       },
       {
         name: 'Brochetas de Langostino',
         description:
           'Brochetas de langostinos gigantes marinados y salteados, acompañados de verduras orientales, aderezado con salsa de la casa',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 43.2,
+        image: 'assets/photos/menu/dishes/prawn-skewers.webp',
+        price: 25.5,
       },
       {
         name: 'Ossobuco al jugo',
         description:
           'Ossobuco de ternera cocido lentamente hasta la ternura, bañado en su jugo y un toque de ralladura de limón. Servido sobre un lecho de cremoso risotto al azafrán',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 43.2,
+        image: 'assets/photos/menu/dishes/ossobuco.webp',
+        price: 20.99,
       },
       {
         name: 'Lasaña de Osobuco',
         description:
           'Capas de pasta fresca de lasaña rellenas de un rico osobuco de ternera cocido a fuego lento, con una cremosa salsa bechamel de trufa y queso parmesano',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 43.2,
+        image: 'assets/photos/menu/dishes/ossobuco-lasagna.webp',
+        price: 22.5,
       },
       {
         name: 'Rigatoni Bistecca',
         description:
           'Rigatoni cocido al dente, mezclado con tiras de bistec de solomillo de res y una rica salsa cremosa de champiñones',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 43.2,
+        image: 'assets/photos/menu/dishes/rigatoni-bistecca.webp',
+        price: 19.99,
       },
       {
         name: 'Spaghetti con Ragú de Pato',
         description:
           'Spaghetti servido con un ragú de pato desmenuzado y cocido a fuego lento, con salsa de tomate y un toque de oregano. Finalizado con queso rallado',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 43.2,
+        image: 'assets/photos/menu/dishes/spaghetti.webp',
+        price: 22.5,
       },
     ],
   },
