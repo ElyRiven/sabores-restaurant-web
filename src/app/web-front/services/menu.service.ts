@@ -35,13 +35,6 @@ const menu: Menu = {
         price: 2.2,
       },
       {
-        name: 'Tofu salteado con sésamo y jengibre',
-        description:
-          'Tofu crujiente salteado con verduras en un sabroso glaseado de sésamo y jengibre, servido sobre arroz al vapor',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 3.25898,
-      },
-      {
         name: 'Paella de verduras',
         description:
           'Un vibrante plato de arroz español relleno de una mezcla de verduras de temporada',
@@ -54,20 +47,6 @@ const menu: Menu = {
           'Una ensalada refrescante con aguacate cremoso, frijoles negros, maíz y una vinagreta de lima picante',
         image: 'assets/photos/menu/entries/placeholder-dish.webp',
         price: 53.251,
-      },
-      {
-        name: 'Salmón a la parrilla con salsa de limón',
-        description:
-          'Filete de salmón recién asado con una salsa picante de limón y hierbas, acompañado de espárragos asados',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 9.64556,
-      },
-      {
-        name: 'Sopa de Lentejas con pan crujiente',
-        description:
-          'Suculenta sopa de lentejas cocinada a fuego lento con verduras aromáticas y especias, servida con pan crujiente',
-        image: 'assets/photos/menu/entries/placeholder-dish.webp',
-        price: 43.2,
       },
     ],
   },
@@ -82,8 +61,9 @@ const menu: Menu = {
         price: 10.0,
       },
       {
-        name: 'Salmón a las parrilla',
-        description: 'Filete de salmón a la parrilla con un toque de verduras',
+        name: 'Salmón a la parrilla',
+        description:
+          'Filete de salmón a la parrilla con arroz, verduras y salsa especial de la casa',
         image: 'assets/photos/menu/entries/placeholder-dish.webp',
         price: 20.89556,
       },
@@ -93,6 +73,55 @@ const menu: Menu = {
           'Una presa de pollo horneado acompañado de una porción de mole',
         image: 'assets/photos/menu/entries/placeholder-dish.webp',
         price: 95.1,
+      },
+      {
+        name: 'Solomillo de Cerdo Glaseado',
+        description:
+          'Solomillo de cerdo cocido a baja temperatura y glaseado con salsa de naranja y miel. Acompañado de un cremoso puré de patatas y brócoli asado',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 43.2,
+      },
+      {
+        name: 'Tournedó Rossini',
+        description:
+          'Filete de lomo de res envuelto en tocineta, cubierto con una lasca de foie gras a la plancha. Bañado con salsa de trufa negra y servido con patatas gratinadas',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 43.2,
+      },
+      {
+        name: 'Brochetas de Langostino',
+        description:
+          'Brochetas de langostinos gigantes marinados y salteados, acompañados de verduras orientales, aderezado con salsa de la casa',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 43.2,
+      },
+      {
+        name: 'Ossobuco al jugo',
+        description:
+          'Ossobuco de ternera cocido lentamente hasta la ternura, bañado en su jugo y un toque de ralladura de limón. Servido sobre un lecho de cremoso risotto al azafrán',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 43.2,
+      },
+      {
+        name: 'Lasaña de Osobuco',
+        description:
+          'Capas de pasta fresca de lasaña rellenas de un rico osobuco de ternera cocido a fuego lento, con una cremosa salsa bechamel de trufa y queso parmesano',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 43.2,
+      },
+      {
+        name: 'Rigatoni Bistecca',
+        description:
+          'Rigatoni cocido al dente, mezclado con tiras de bistec de solomillo de res y una rica salsa cremosa de champiñones',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 43.2,
+      },
+      {
+        name: 'Spaghetti con Ragú de Pato',
+        description:
+          'Spaghetti servido con un ragú de pato desmenuzado y cocido a fuego lento, con salsa de tomate y un toque de oregano. Finalizado con queso rallado',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 43.2,
       },
     ],
   },
@@ -117,6 +146,28 @@ const menu: Menu = {
         image: 'assets/photos/menu/entries/placeholder-dish.webp',
         price: 45.8,
       },
+      {
+        name: 'Esfera dulce',
+        description:
+          'Postre en forma de esfera, compuesto por un bizcocho de avellana, un corazón líquido de caramelo y una cobertura de glaze de chocolate con leche',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 53.3,
+      },
+      {
+        name: 'Volcán esmeralda',
+        description:
+          'Base crujiente de galleta de almendra, rellena de una crema de lima dulce. Terminada con merengue ligeramente tostado y ralladura de chocolate',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 90.526,
+      },
+      {
+        name: 'Milhojas de Vainilla',
+
+        description:
+          'Hojaldre caramelizado y crujiente en capas, crema pastelera de vainilla negra. Acompañado de frambuesas y moras',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 45.8,
+      },
     ],
   },
   drinks: {
@@ -124,22 +175,39 @@ const menu: Menu = {
     dishes: [
       {
         name: 'Vino blanco serenetta',
-        description:
-          'Refrescante y equilibrado, ideal para acompañar platos ligeros y entradas gourmet',
+        description: 'Refrescante y equilibrado vino blanco',
         image: 'assets/photos/menu/entries/placeholder-dish.webp',
         price: 10.85,
       },
       {
-        name: 'Champagne brut espumante',
-        description:
-          'Elegancia en cada burbuja. Perfecto para brindar o acompañar celebraciones especiales',
+        name: 'Diamante Negro',
+        description: 'Cóctel de vodka y licor de café con un toque ahumado',
         image: 'assets/photos/menu/entries/placeholder-dish.webp',
         price: 9.6558,
       },
       {
         name: 'Vino tinto nuitte',
         description:
-          'Un vino tinto intenso, con cuerpo y notas profundas de frutas maduras',
+          'Vino tinto intenso, con cuerpo y notas profundas de frutas maduras',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 62.15,
+      },
+      {
+        name: 'Oro Tostado',
+        description:
+          'Ron oscuro, jarabe de caramelo y un toque de crema de coco',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 10.85,
+      },
+      {
+        name: 'Naranja Fizz',
+        description: 'Suave mezcla de jugo de naranja con agua mineral',
+        image: 'assets/photos/menu/entries/placeholder-dish.webp',
+        price: 9.6558,
+      },
+      {
+        name: 'Mora Carmesí',
+        description: 'Vibrante mezcla de jugo de mora dulce con agua mineral',
         image: 'assets/photos/menu/entries/placeholder-dish.webp',
         price: 62.15,
       },
