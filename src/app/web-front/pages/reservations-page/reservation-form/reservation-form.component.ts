@@ -302,7 +302,13 @@ export class ReservationFormComponent {
       stage,
       fields
     );
+    const formElement = this.reserveFormElement();
+
     this.canNavigateForward.set(isValid);
+
+    if (formElement) {
+      this.scrollToForm(formElement);
+    }
   }
 
   getFieldsForStage(stage: FormStage): string[] {
@@ -329,9 +335,14 @@ export class ReservationFormComponent {
   }
 
   onReserve() {
+    const formElement = this.reserveFormElement();
+    const randomDelay = Math.floor(Math.random() * 3000) + 1000;
+
     this.isReserving.set(true);
 
-    const randomDelay = Math.floor(Math.random() * 3000) + 1000;
+    if (formElement) {
+      this.scrollToForm(formElement);
+    }
 
     setTimeout(() => {
       this.isReserving.set(false);
@@ -450,5 +461,18 @@ export class ReservationFormComponent {
     const reservePrice = this.subtotal() * (1 - this.discount());
 
     this.reserveForm.controls.price.setValue(reservePrice);
+  }
+
+  scrollToForm(formSection: ElementRef) {
+    if (!formSection) return;
+
+    const elementPosition =
+      formSection.nativeElement.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - 120;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    });
   }
 }
