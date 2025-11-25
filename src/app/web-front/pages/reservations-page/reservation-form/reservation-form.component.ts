@@ -370,13 +370,8 @@ export class ReservationFormComponent {
       // Configurar fecha y hora fijas del evento
       this.isEventDateFixed.set(true);
 
-      // Convertir fecha del evento (formato: 'MM-DD-YYYY') a Date
-      const [month, day, year] = matchingEvent.date.split('-');
-      const eventDate = new Date(
-        parseInt(year),
-        parseInt(month) - 1,
-        parseInt(day)
-      );
+      // Convertir fecha del evento (formato ISO: 'YYYY-MM-DD') a Date
+      const eventDate = new Date(matchingEvent.date);
 
       this.fixedEventDate.set(eventDate);
       this.fixedEventTime.set(matchingEvent.time || '');
