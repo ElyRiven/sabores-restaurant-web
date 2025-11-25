@@ -1,9 +1,19 @@
-export type Category = 'bebida' | 'comida';
+import { Address } from './address.interface';
+
+export type CategoryValues =
+  | 'degustación'
+  | 'gourmet'
+  | 'aniversario'
+  | 'gala'
+  | 'invitado'
+  | 'coctel';
 
 export interface Event {
   title: string;
   description: string;
   image: string;
-  date: string; // MM-dd | 12-25
-  category: Category;
+  date: string;
+  time: string;
+  categories: CategoryValues[];
+  address: Address;
 }

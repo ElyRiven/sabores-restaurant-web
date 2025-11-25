@@ -1,215 +1,283 @@
-<!-- Hero Section -->
-<div class="relative w-full h-(--hero-size)">
-  <img
-    class="w-full h-full object-cover object-top"
-    src="/assets/photos/front/about-hero.webp"
-    alt="Home Page Hero"
-    loading="eager"
-  />
-  <div class="absolute inset-0 bg-base-content opacity-60"></div>
-</div>
-<!-- End Hero Section -->
+<hero-section [heroImage]="'/assets/photos/front/about-hero.webp'" />
+
 <!-- About Section -->
 <div
-  class="flex flex-col items-center gap-18 my-15 p-4 w-full h-full text-base-content md:flex-row md:p-10 lg:p-20"
+  class="flex flex-col gap-10 w-full min-h-screen pt-30 pb-52 px-[7%] font-jakarta md:px-0 md:flex-row"
 >
-  <div class="max-h-90 max-w-140">
+  <div class="pl-0 w-full md:pl-15 md:w-1/2 lg:pl-[8%]">
     <img
-      class="object-cover md:min-w-80 md:min-h-100 shadow-2xl rounded-lg"
-      src="/assets/photos/front/misc2.webp"
-      alt="Home Page Hero"
+      class="h-full w-full object-cover rounded-tl-[30%] rounded-br-[30%]"
+      src="/assets/photos/front/about1.webp"
+      alt="about us image 1"
     />
   </div>
-  <div>
-    <h2
-      class="font-merriweather text-primary text-center text-3xl underline underline-offset-8 md:text-left"
+  <div
+    class="w-full md:w-1/2 flex flex-col justify-between gap-7 md:pr-15 lg:pr-[8%]"
+  >
+    <div
+      class="flex flex-col items-center gap-3 bg-accent shadow-2xl rounded-lg text-center p-10 md:ml-[10%] lg:mt-25"
     >
-      Quienes somos
-    </h2>
-    <p class="font-jakarta text-lg text-center mt-8 md:text-left">
-      En <span class="font-lobster font-bold italic">Sabores</span>, creemos que
-      la gastronomía va más allá del plato: es una experiencia que se vive con
-      los cinco sentidos. Nuestro compromiso es ofrecer cocina con ingredientes
-      frescos, técnicas refinadas y presentaciones que despiertan emociones.
-      Cada detalle está cuidadosamente pensado para la velada inolvidable.
-    </p>
-    <p class="font-jakarta text-lg text-center mt-5 md:text-left">
-      Nos apasiona ofrecer un servicio cálido y personalizado, creando un
-      ambiente donde cada cliente se sienta especial. Cada visita es una
-      oportunidad para disfrutar de sabor, elegancia y momentos inolvidables.
-    </p>
+      <h2 class="font-lobster text-5xl">Nuestra Historia</h2>
+      <svg
+        viewBox="70 104 360 15"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-fit text-primary"
+      >
+        <path
+          d="M70.002 111.5L100.002 112.5C100.002 112.5 244.502 112.5 246.502 112.5C248.502 112.5 250.002 118.5 250.002 118.5C250.002 118.5 251.502 112.5 253.502 112.5C255.502 112.5 400.002 112.5 400.002 112.5L429.998 111.5L400.002 110.5C400.002 110.5 255.502 110.5 253.502 110.5C251.502 110.5 250.002 104.5 250.002 104.5C250.002 104.5 248.502 110.5 246.502 110.5C244.502 110.5 100.002 110.5 100.002 110.5L70.002 111.5Z"
+          fill="currentColor"
+        />
+      </svg>
+      <p class="py-5 w-8/10">
+        En Sabores creemos que la gastronomía va más allá del plato: es una
+        experiencia que se vive con los cinco sentidos, ofreciendo platos con
+        técnicas refinadas y presentaciones que despiertan emociones.
+      </p>
+    </div>
+    <div class="flex flex-col gap-5 sm:flex-row">
+      <div class="w-full sm:w-1/2">
+        <img
+          class="rounded-t-full object-cover"
+          src="/assets/photos/front/about2.webp"
+          alt="about us image 2"
+        />
+      </div>
+      <div class="flex flex-col gap-4 w-full sm:w-1/2">
+        <h5 class="font-semibold text-xl">Horario de Atención</h5>
+        <ul>
+          <li>Lun - Sáb: 10am - 20pm</li>
+          <li>Dom: Cerrado</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 <!-- End About Section -->
-<!-- Highlights Section -->
-<div class="flex items-center justify-center w-full h-full bg-primary md:h-50">
+
+<!-- Gastronomy Section -->
+<div class="flex flex-col items-center justify-between md:flex-row bg-accent">
   <div
-    class="flex flex-col items-center justify-between w-full p-10 m-5 gap-5 md:flex-row"
+    class="flex flex-col items-center justify-center md:justify-between gap-5 md:w-3/10 lg:w-4/10 px-8 lg:px-20 py-10 order-2 md:order-0"
   >
-    <div
-      class="flex flex-col items-center font-merriweather text-primary-content text-center md:flex-row gap-3 md:text-left"
+    <div class="text-center md:text-right font-jakarta">
+      <h2 class="font-lobster text-5xl md:max-lg:text-3xl">
+        Nuestra Gastronomía
+      </h2>
+      <br />
+      <p class="text-base md:max-lg:text-sm">
+        Inspirados en la cocina moderna, reinterpretamos sabores clásicos con
+        creatividad y equilibrio. Cada plato refleja nuestra pasión por la
+        excelencia y el placer de compartir.
+      </p>
+    </div>
+    <a
+      class="w-fit p-3 font-bold hover:text-primary-foreground hover:bg-primary hover:-translate-y-2 transition-all ease-in-out duration-500 rounded-full"
+      routerLink="/reservations"
+      >Reservar Mesa</a
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="90"
-        height="90"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
+  </div>
+  <div class="relative flex w-full md:w-7/10 lg:w-6/10 order-1">
+    <img
+      class="h-full w-1/2 object-cover"
+      src="/assets/photos/front/about3.webp"
+      alt="about us image 1"
+    />
+    <img
+      class="absolute -top-15 left-1/2 h-full w-1/2 object-cover"
+      src="/assets/photos/front/about4.webp"
+      alt="about us image 1"
+    />
+  </div>
+</div>
+<!-- End Gastronomy Section -->
+
+<!-- Highlights Section -->
+<div
+  class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-4 gap-5 w-full h-fit sm:bg-primary px-10 py-5 font-jakarta text-center place-items-center"
+>
+  <div
+    class="flex items-center justify-center gap-10 sm:gap-3 w-full md:max-w-35 bg-primary sm:bg-transparent text-background px-3 py-5 sm:p-0 rounded-xl md:rounded-none"
+  >
+    <svg
+      version="1.1"
+      id="_x32_"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 512 512"
+      xml:space="preserve"
+      fill="currentColor"
+      class="shrink-0 size-10 md:size-15"
+    >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path
-          d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3"
-        />
-      </svg>
-      <span class="text-xl w-40 md:w-30 lg:w-auto"
-        >Platos con sabores únicos
-      </span>
-    </div>
-    <div
-      class="flex flex-col items-center font-merriweather text-primary-content text-center md:flex-row gap-3 md:text-left"
-    >
-      <svg
-        height="90"
-        width="90"
-        version="1.1"
-        id="_x32_"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 512 512"
-        xml:space="preserve"
-        fill="currentColor"
-      >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g
-          id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></g>
-        <g id="SVGRepo_iconCarrier">
-          <g>
-            <path
-              class="st0"
-              d="M430.126,237.978H81.874c-15.456,0-27.984,12.528-27.984,27.984c0,15.456,12.528,27.984,27.984,27.984h348.252 c15.456,0,27.984-12.528,27.984-27.984C458.111,250.507,445.582,237.978,430.126,237.978z"
-            ></path>
-            <path
-              class="st0"
-              d="M273.934,50.479c6.398-5.229,10.567-13.075,10.567-21.978C284.501,12.76,271.738,0,256,0 c-15.738,0-28.5,12.76-28.5,28.501c0,8.903,4.169,16.75,10.567,21.978c-86.018,8.964-153.083,81.689-153.083,170.075h342.033 C427.017,132.168,359.952,59.443,273.934,50.479z M184.083,192.57h-55.568c0-55.793,42.001-101.705,96.094-108.021L184.083,192.57z "
-            ></path>
-            <path
-              class="st0"
-              d="M365.369,380.852l-8.575-6.061c-8.56-6.036-14.126-15.474-15.292-25.896l-3.924-35.102 c0.122-3.996,0.161-9.596-2.644-12.449c-2.806-2.854-6.657-4.446-10.662-4.398v0.049c-4.782,0.054-10.789-0.407-15.918,6.407 l-14.654,26.278c-9.711,16.184-22.188,16.16-35.218,11.666l-102.16-44.844c-5.6-1.925-11.8,0.037-15.277,4.828l-0.139,0.195 c-4.206,5.794-3.128,13.87,2.45,18.365l117.614,97.903l66.205,33.268l-10.944,20.12L389.27,512l58.756-107.997l-73.043-40.817 L365.369,380.852z M422.823,411.29L381.9,486.511l-40.465-22.616l40.92-75.221L422.823,411.29z"
-            ></path>
-            <circle class="st0" cx="395.522" cy="421.433" r="10.105"></circle>
-          </g>
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <g>
+          <path
+            class="st0"
+            d="M430.126,237.978H81.874c-15.456,0-27.984,12.528-27.984,27.984c0,15.456,12.528,27.984,27.984,27.984h348.252 c15.456,0,27.984-12.528,27.984-27.984C458.111,250.507,445.582,237.978,430.126,237.978z"
+          ></path>
+          <path
+            class="st0"
+            d="M273.934,50.479c6.398-5.229,10.567-13.075,10.567-21.978C284.501,12.76,271.738,0,256,0 c-15.738,0-28.5,12.76-28.5,28.501c0,8.903,4.169,16.75,10.567,21.978c-86.018,8.964-153.083,81.689-153.083,170.075h342.033 C427.017,132.168,359.952,59.443,273.934,50.479z M184.083,192.57h-55.568c0-55.793,42.001-101.705,96.094-108.021L184.083,192.57z "
+          ></path>
+          <path
+            class="st0"
+            d="M365.369,380.852l-8.575-6.061c-8.56-6.036-14.126-15.474-15.292-25.896l-3.924-35.102 c0.122-3.996,0.161-9.596-2.644-12.449c-2.806-2.854-6.657-4.446-10.662-4.398v0.049c-4.782,0.054-10.789-0.407-15.918,6.407 l-14.654,26.278c-9.711,16.184-22.188,16.16-35.218,11.666l-102.16-44.844c-5.6-1.925-11.8,0.037-15.277,4.828l-0.139,0.195 c-4.206,5.794-3.128,13.87,2.45,18.365l117.614,97.903l66.205,33.268l-10.944,20.12L389.27,512l58.756-107.997l-73.043-40.817 L365.369,380.852z M422.823,411.29L381.9,486.511l-40.465-22.616l40.92-75.221L422.823,411.29z"
+          ></path>
+          <circle class="st0" cx="395.522" cy="421.433" r="10.105"></circle>
         </g>
-      </svg>
-      <span class="text-xl w-40 md:w-30 lg:w-auto">Servicio profesional</span>
+      </g>
+    </svg>
+    <div class="flex flex-col items-center justify-center md:text-lg">
+      <span class="font-bold italic">+50</span>
+      <span>Platos únicos</span>
     </div>
-    <div
-      class="flex flex-col items-center font-merriweather text-primary-content text-center md:flex-row gap-3 md:text-left"
+  </div>
+  <div
+    class="flex items-center justify-center gap-10 sm:gap-3 w-full md:max-w-35 bg-primary sm:bg-transparent text-background px-3 py-5 sm:p-0 rounded-xl md:rounded-none"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-circle-star-icon lucide-circle-star shrink-0 size-10 md:size-15"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="90"
-        height="90"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-check"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path
-          d="M11.5 21h-5.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v6"
-        />
-        <path d="M16 3v4" />
-        <path d="M8 3v4" />
-        <path d="M4 11h16" />
-        <path d="M15 19l2 2l4 -4" />
-      </svg>
-      <span class="text-xl w-40 md:w-30 lg:w-auto">Eventos exclusivos</span>
+      <path
+        d="M11.051 7.616a1 1 0 0 1 1.909.024l.737 1.452a1 1 0 0 0 .737.535l1.634.256a1 1 0 0 1 .588 1.806l-1.172 1.168a1 1 0 0 0-.282.866l.259 1.613a1 1 0 0 1-1.541 1.134l-1.465-.75a1 1 0 0 0-.912 0l-1.465.75a1 1 0 0 1-1.539-1.133l.258-1.613a1 1 0 0 0-.282-.867l-1.156-1.152a1 1 0 0 1 .572-1.822l1.633-.256a1 1 0 0 0 .737-.535z"
+      />
+      <circle cx="12" cy="12" r="10" />
+    </svg>
+    <div class="flex flex-col items-center justify-center md:text-lg">
+      <span class="font-bold italic">+10</span>
+      <span>Años de experiencia</span>
+    </div>
+  </div>
+  <div
+    class="flex items-center justify-center gap-10 sm:gap-3 w-full md:max-w-35 bg-primary sm:bg-transparent text-background px-3 py-5 sm:p-0 rounded-xl md:rounded-none"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-users-round-icon lucide-users-round shrink-0 size-10 md:size-15"
+    >
+      <path d="M18 21a8 8 0 0 0-16 0" />
+      <circle cx="10" cy="8" r="5" />
+      <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" />
+    </svg>
+    <div class="flex flex-col items-center justify-center md:text-lg">
+      <span class="font-bold italic">+500</span>
+      <span>Clientes satisfechos</span>
+    </div>
+  </div>
+  <div
+    class="flex items-center justify-center gap-10 sm:gap-3 w-full md:max-w-35 bg-primary sm:bg-transparent text-background px-3 py-5 sm:p-0 rounded-xl md:rounded-none"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      class="icon icon-tabler icons-tabler-filled icon-tabler-glass-full shrink-0 size-10 md:size-15"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path
+        d="M5.004 10.229l-.003 -.186l.001 -.113l.008 -.071l1 -7a1 1 0 0 1 .877 -.853l.113 -.006h10a1 1 0 0 1 .968 .747l.022 .112l1.006 7.05l.004 .091c0 3.226 -2.56 5.564 -6 5.945v4.055h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-4.055c-3.358 -.371 -5.878 -2.609 -5.996 -5.716zm11.129 -6.229h-8.267l-.607 4.258a6.001 6.001 0 0 1 5.125 .787l.216 .155a4 4 0 0 0 4.32 .31l-.787 -5.51z"
+      />
+    </svg>
+    <div class="flex flex-col items-center justify-center md:text-lg">
+      <span class="font-bold italic">+25</span>
+      <span>Eventos exclusivos</span>
     </div>
   </div>
 </div>
 <!-- End Highlights Section -->
-<!-- Chefs Section -->
-<div
-  class="flex items-center py-10 px-4 w-full h-full text-base-content md:px-10 lg:px-20"
->
-  <div class="flex flex-col w-full items-center gap-7 justify-center">
-    <h2 class="font-merriweather text-3xl">Nuestros Chefs</h2>
-    <div
-      class="grid grid-cols-1 gap-6 justify-items-center w-full md:grid-cols-2 lg:grid-cols-3"
+
+<chefts-section />
+
+<!-- Reviews Carousel -->
+<div class="flex w-full items-center justify-center p-4 bg-accent">
+  <div class="flex flex-col items-center justify-center gap-7 sm:gap-0">
+    <h2 class="font-lobster text-5xl pt-[3%] text-center">Nuestros Clientes</h2>
+    <hlm-carousel
+      class="w-full max-w-70 sm:max-w-sm"
+      [plugins]="plugins"
+      [options]="{ loop: true }"
     >
-      @for (chef of chefsArray; track $index) {
-      <div
-        class="w-70 rounded-xl overflow-hidden shadow bg-cream-50 border border-secondary-content/50 flex flex-col items-center"
-      >
-        <img
-          [src]="chef.image"
-          [alt]="chef.name"
-          class="w-full h-60 object-cover"
-        />
-        <div class="p-4 w-full bg-accent flex flex-col items-center">
-          <h3 class="font-merriweather font-bold text-lg mb-1">
-            {{ chef.name }}
-          </h3>
-          <span class="text-sm text-gray-700 mb-2">{{ chef.role }}</span>
-          <p class="text-center text-base-content text-sm font-jakarta">
-            "{{ chef.quote }}"
-          </p>
-        </div>
-      </div>
-      }
-    </div>
+      <hlm-carousel-content>
+        <!--  -->
+        @for (review of reviewsService.getAllReviews(); track review) {
+        <hlm-carousel-item>
+          <div class="p-1">
+            <div
+              class="flex flex-col gap-8 aspect-square items-center justify-center text-center font-jakarta"
+            >
+              <p class="font-semibold italic">
+                {{ review.text }}
+              </p>
+              <svg
+                viewBox="70 104 360 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-fit text-primary"
+              >
+                <path
+                  d="M70.002 111.5L100.002 112.5C100.002 112.5 244.502 112.5 246.502 112.5C248.502 112.5 250.002 118.5 250.002 118.5C250.002 118.5 251.502 112.5 253.502 112.5C255.502 112.5 400.002 112.5 400.002 112.5L429.998 111.5L400.002 110.5C400.002 110.5 255.502 110.5 253.502 110.5C251.502 110.5 250.002 104.5 250.002 104.5C250.002 104.5 248.502 110.5 246.502 110.5C244.502 110.5 100.002 110.5 100.002 110.5L70.002 111.5Z"
+                  fill="currentColor"
+                />
+              </svg>
+              <div class="flex flex-col items-center justify-center">
+                <span class="text-lg">{{ review.author }}</span>
+                <span class="text-sm text-secondary-foreground">{{
+                  review.title
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </hlm-carousel-item>
+        }
+        <!--  -->
+      </hlm-carousel-content>
+      <button
+        class="hidden md:inline-flex -left-11/20 lg:-left-9/10 border-none shadow-none text-secondary size-fit bg-transparent hover:bg-transparent hover:text-primary hover:cursor-pointer"
+        hlm-carousel-previous
+      ></button>
+      <button
+        class="hidden md:inline-flex -right-11/20 lg:-right-9/10 border-none shadow-none text-secondary size-fit bg-transparent hover:bg-transparent hover:text-primary hover:cursor-pointer"
+        hlm-carousel-next
+      ></button>
+    </hlm-carousel>
   </div>
 </div>
-<!-- End Chefs Section -->
-<!-- Image Carousel -->
-<div
-  class="flex items-center py-10 w-full h-full text-base-content relative pointer-events-none"
->
-  <div class="swiper relative w-full" #swiperDiv>
-    <div
-      class="absolute inset-0 w-full h-full bg-black/50 pointer-events-none z-10"
-    ></div>
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper ease-linear">
-      <!-- Slides -->
-      @for (image of aboutImages; track $index) {
-      <div class="swiper-slide">
-        <img
-          [src]="image"
-          alt="Plato"
-          class="w-full h-[300px] object-cover"
-          loading="lazy"
-        />
-      </div>
-      }
-    </div>
-  </div>
-</div>
-<!-- End Image Carousel -->
+<!-- End Reviews Carousel -->
+
 <!-- Sección Visítanos -->
 <section
-  class="w-full pb-10 !pt-0 flex flex-col items-center p-4 md:p-10 lg:p-20"
+  class="w-full pb-10 pt-0! flex flex-col items-center p-4 md:p-10 lg:p-20"
 >
-  <h2 class="font-merriweather text-3xl text-center my-5">Visítanos</h2>
+  <h2 class="font-lobster text-5xl text-center py-[5%]">Visítanos</h2>
   <div
     class="flex flex-col gap-4 justify-center mb-8 w-full md:flex-row md:gap-10"
   >
     @defer ( on viewport ) {
-    <a class="cursor-pointer" (click)="locationChange(1)">
+    <!--  -->
+    @for (address of addressArray(); track address) {
+    <a class="cursor-pointer" (click)="locationChange(address.id)">
       <div
-        class="group flex flex-row items-center justify-center gap-5 border border-base-content/60 bg-accent rounded-xl px-6 py-4 hover:bg-primary transition-all duration-200"
-        [class]="{ 'bg-primary': selectedAddress()?.id === 1 }"
+        class="group flex flex-row items-center justify-center gap-5 border border-secondary-foreground/40 bg-accent rounded-xl px-6 py-4 hover:bg-primary transition-all duration-200"
+        [class]="{ 'bg-primary': selectedAddress()?.id === address.id }"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -221,8 +289,10 @@
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="text-primary group-hover:text-primary-content"
-          [class]="{ 'text-primary-content': selectedAddress()?.id === 1 }"
+          class="text-primary group-hover:text-primary-foreground"
+          [class]="{
+            'text-primary-foreground': selectedAddress()?.id === address.id
+          }"
         >
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M3 21l18 0" />
@@ -233,141 +303,41 @@
           <path d="M19 21l0 -10.15" />
           <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
         </svg>
-        <div class="flex flex-col">
+        <div class="flex flex-col transition-all duration-200">
           <span
-            class="text-sm mb-1 group-hover:text-primary-content group-hover:font-bold"
+            class="text-sm mb-1 group-hover:text-primary-foreground group-hover:font-bold"
             [class]="
-              selectedAddress()?.id === 1
-                ? 'text-primary-content font-bold'
-                : 'text-base-content'
+              selectedAddress()?.id === address.id
+                ? 'text-primary-foreground font-bold'
+                : 'text-foreground'
             "
-            >Restaurante Norte</span
+            >{{ address.name }}</span
           >
           <span
-            class="text-sm text-base-content group-hover:text-primary-content"
+            class="text-sm group-hover:text-primary-foreground"
             [class]="
-              selectedAddress()?.id === 1
-                ? 'text-primary-content'
-                : 'text-base-content'
+              selectedAddress()?.id === address.id
+                ? 'text-primary-foreground'
+                : 'text-foreground'
             "
-            >Av. Sol Naciente 1457, Barrio El Encino</span
-          >
-        </div>
-      </div>
-    </a>
-
-    <a class="cursor-pointer" (click)="locationChange(2)">
-      <div
-        class="group flex flex-row items-center justify-center gap-5 border border-base-content/60 bg-accent rounded-xl px-6 py-4 hover:bg-primary transition-all duration-200"
-        [class]="{ 'bg-primary': selectedAddress()?.id === 2 }"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="text-primary group-hover:text-primary-content"
-          [class]="{ 'text-primary-content': selectedAddress()?.id === 2 }"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M3 21l18 0" />
-          <path
-            d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4"
-          />
-          <path d="M5 21l0 -10.15" />
-          <path d="M19 21l0 -10.15" />
-          <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
-        </svg>
-        <div class="flex flex-col">
-          <span
-            class="text-sm mb-1 group-hover:text-primary-content group-hover:font-bold"
-            [class]="
-              selectedAddress()?.id === 2
-                ? 'text-primary-content font-bold'
-                : 'text-base-content'
-            "
-            >Restaurante Centro</span
-          >
-          <span
-            class="text-sm text-base-content group-hover:text-primary-content"
-            [class]="
-              selectedAddress()?.id === 2
-                ? 'text-primary-content'
-                : 'text-base-content'
-            "
-            >Av. Del Olivo 309, Sector Monte Claro</span
-          >
-        </div>
-      </div>
-    </a>
-
-    <a class="cursor-pointer" (click)="locationChange(3)">
-      <div
-        class="group flex flex-row items-center justify-center gap-5 border border-base-content/60 bg-accent rounded-xl px-6 py-4 hover:bg-primary transition-all duration-200"
-        [class]="{ 'bg-primary': selectedAddress()?.id === 3 }"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="text-primary group-hover:text-primary-content"
-          [class]="{ 'text-primary-content': selectedAddress()?.id === 3 }"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M3 21l18 0" />
-          <path
-            d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4"
-          />
-          <path d="M5 21l0 -10.15" />
-          <path d="M19 21l0 -10.15" />
-          <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
-        </svg>
-        <div class="flex flex-col">
-          <span
-            class="text-sm mb-1 group-hover:text-primary-content group-hover:font-bold"
-            [class]="
-              selectedAddress()?.id === 3
-                ? 'text-primary-content font-bold'
-                : 'text-base-content'
-            "
-            >Restaurante Sur</span
-          >
-          <span
-            class="text-sm text-base-content group-hover:text-primary-content"
-            [class]="
-              selectedAddress()?.id === 3
-                ? 'text-primary-content'
-                : 'text-base-content'
-            "
-            >Av. Horizonte Azul 880, Zona Mirador Norte</span
+            >{{ address.streets }}</span
           >
         </div>
       </div>
     </a>
     }
     <!--  -->
+    }
+    <!--  -->
     @placeholder ( minimum 1.5s) {
-    <div
-      class="group flex flex-row items-center justify-center gap-5 px-6 py-4"
-    >
+    <div class="flex flex-row items-center justify-center gap-5 px-6 py-4">
       <div class="flex-1 loading loading-spinner text-primary"></div>
     </div>
     }
   </div>
   @defer ( on viewport ) {
   <div
-    class="w-full h-64 p-10 rounded-xl border border-base-content/60 md:h-100"
+    class="w-full h-64 p-10 rounded-xl border border-foreground/40 md:h-100"
     #mapDiv
   ></div>
   }
