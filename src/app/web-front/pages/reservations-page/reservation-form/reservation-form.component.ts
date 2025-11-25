@@ -335,18 +335,20 @@ export class ReservationFormComponent {
   }
 
   onReserve() {
-    const formElement = this.reserveFormElement();
-    const randomDelay = Math.floor(Math.random() * 3000) + 1000;
-
     this.isReserving.set(true);
 
-    if (formElement) {
-      this.scrollToForm(formElement);
-    }
+    const randomDelay = Math.floor(Math.random() * 3000) + 1000;
+
+    // Scroll inicial al activar loading
+    setTimeout(() => {
+      const formElement = this.reserveFormElement();
+      if (formElement) {
+        this.scrollToForm(formElement);
+      }
+    }, 50);
 
     setTimeout(() => {
       this.isReserving.set(false);
-
       this.currentStage.set(FormStage.sixthStage);
 
       this.reserveForm.reset(this.defaultFormValues);
@@ -354,6 +356,14 @@ export class ReservationFormComponent {
       this.subtotal.set(0);
       this.selectedDate.set(undefined);
       this.timeSlots = FormUtils.generateTimeSlots();
+
+      // Scroll después de cambiar al stage 6
+      setTimeout(() => {
+        const formElement = this.reserveFormElement();
+        if (formElement) {
+          this.scrollToForm(formElement);
+        }
+      }, 100);
     }, randomDelay);
   }
 
@@ -466,13 +476,18 @@ export class ReservationFormComponent {
   scrollToForm(formSection: ElementRef) {
     if (!formSection) return;
 
-    const elementPosition =
-      formSection.nativeElement.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - 120;
+    // Usar requestAnimationFrame para asegurar que el DOM esté actualizado (importante para WebKit)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const elementPosition =
+          formSection.nativeElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - 120;
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth',
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      });
     });
   }
 }
