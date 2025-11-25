@@ -302,7 +302,13 @@ export class ReservationFormComponent {
       stage,
       fields
     );
+    const formElement = this.reserveFormElement();
+
     this.canNavigateForward.set(isValid);
+
+    if (formElement) {
+      this.scrollToForm(formElement);
+    }
   }
 
   getFieldsForStage(stage: FormStage): string[] {
@@ -333,9 +339,16 @@ export class ReservationFormComponent {
 
     const randomDelay = Math.floor(Math.random() * 3000) + 1000;
 
+    // Scroll inicial al activar loading
+    setTimeout(() => {
+      const formElement = this.reserveFormElement();
+      if (formElement) {
+        this.scrollToForm(formElement);
+      }
+    }, 50);
+
     setTimeout(() => {
       this.isReserving.set(false);
-
       this.currentStage.set(FormStage.sixthStage);
 
       this.reserveForm.reset(this.defaultFormValues);
@@ -343,6 +356,14 @@ export class ReservationFormComponent {
       this.subtotal.set(0);
       this.selectedDate.set(undefined);
       this.timeSlots = FormUtils.generateTimeSlots();
+
+      // Scroll después de cambiar al stage 6
+      setTimeout(() => {
+        const formElement = this.reserveFormElement();
+        if (formElement) {
+          this.scrollToForm(formElement);
+        }
+      }, 100);
     }, randomDelay);
   }
 
@@ -450,5 +471,23 @@ export class ReservationFormComponent {
     const reservePrice = this.subtotal() * (1 - this.discount());
 
     this.reserveForm.controls.price.setValue(reservePrice);
+  }
+
+  scrollToForm(formSection: ElementRef) {
+    if (!formSection) return;
+
+    // Usar requestAnimationFrame para asegurar que el DOM esté actualizado (importante para WebKit)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const elementPosition =
+          formSection.nativeElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - 120;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      });
+    });
   }
 }

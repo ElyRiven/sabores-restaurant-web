@@ -1,6 +1,6 @@
 <div
   #reserveFormElement
-  class="relative flex items-center bg-accent p-10 min-h-75 before:absolute before:top-0 before:left-0 before:w-full before:h-2 before:bg-primary overflow-x-hidden"
+  class="relative flex items-center bg-accent p-4 md:p-10 min-h-75 before:absolute before:top-0 before:left-0 before:w-full before:h-2 before:bg-primary overflow-x-hidden"
 >
   <form class="flex-1 overflow-x-hidden" [formGroup]="reserveForm">
     <!-- First Stage -->
@@ -268,7 +268,9 @@
           <div class="grid grid-cols-2">
             <div class="flex flex-col gap-2">
               <h4 class="font-bold text-xs">{{ "Subtotal" | uppercase }}</h4>
-              <span>$ {{ subtotal() | number : "1.2-2" }}</span>
+              <span class="whitespace-nowrap"
+                >$ {{ subtotal() | number : "1.2-2" }}</span
+              >
             </div>
             @if ( discount() > 0 ) {
             <div class="flex flex-col gap-2">
@@ -414,24 +416,32 @@
           <div
             class="relative grid grid-cols-2 items-center after:absolute after:bottom-0 after:left-0 after:w-full after:border-t after:border-primary"
           >
-            <div class="flex flex-col p-5">
+            <div class="flex flex-col p-5 gap-3">
               <span>{{
                 reserveForm.controls.event.value?.replaceAll("-", " ")
                   | titlecase
               }}</span>
-              @if ( reserveForm.controls.numberOfGuests.value! > 1 ) {
-              <span
-                >{{ reserveForm.controls.numberOfGuests.value }} Invitados</span
-              >
-              }
-              <!--  -->
-              @else {
-              <span
-                >{{ reserveForm.controls.numberOfGuests.value }} Invitado</span
-              >
-              }
+              <div>
+                @if ( reserveForm.controls.numberOfGuests.value! > 1 ) {
+                <span
+                  >{{
+                    reserveForm.controls.numberOfGuests.value
+                  }}
+                  Invitados</span
+                >
+                }
+                <!--  -->
+                @else {
+                <span
+                  >{{
+                    reserveForm.controls.numberOfGuests.value
+                  }}
+                  Invitado</span
+                >
+                }
+              </div>
             </div>
-            <span class="p-5 text-right"
+            <span class="pl-0 p-5 text-right whitespace-nowrap"
               >$ {{ subtotal() | number : "1.2-2" }}</span
             >
           </div>
@@ -447,7 +457,7 @@
             class="relative font-bold grid grid-cols-2 after:absolute after:bottom-0 after:left-0 after:w-full after:border-t after:border-primary"
           >
             <span class="p-5">{{ "Total" | uppercase }}</span>
-            <span class="p-5 text-right"
+            <span class="pl-0 p-5 text-right whitespace-nowrap"
               >$ {{ reserveForm.controls.price.value | number : "1.2-2" }}</span
             >
           </div>
@@ -550,7 +560,7 @@
                 #cardCvc
                 type="text"
                 placeholder="CVC"
-                maxlength="4"
+                maxlength="3"
                 class="hidden lg:block w-12 bg-transparent outline-none text-sm text-center shrink-0"
                 (input)="formUtils.formatCvc($event)"
               />
@@ -576,7 +586,7 @@
               <input
                 type="text"
                 placeholder="CVC"
-                maxlength="4"
+                maxlength="3"
                 class="flex-1 bg-transparent outline-none text-sm"
                 (input)="formUtils.formatCvc($event)"
               />
